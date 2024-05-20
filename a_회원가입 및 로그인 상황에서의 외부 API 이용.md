@@ -1,6 +1,6 @@
 ### 1. 사용자(비회원)가 앱을 처음 실행했을 경우
 
-![[imgs/a1.png]]
+![](https://github.com/hyunbin1/NAWA_Android/blob/docs/imgs/a1.png?raw=true)
 
 1. 사용자가 앱을 실행하면 메인 화면인 클럽 조회 레이아웃에 접근하게 된다.
 2. 이 페이지에서는 dp api에 접근하여 db에 있는 클럽들을 보여준다.
@@ -9,7 +9,7 @@
 
 ### 2. 마이페이지로 접근한 경우
 
-![[imgs/a2.png]]
+![](https://github.com/hyunbin1/NAWA_Android/blob/docs/imgs/a2.png?raw=true)
 
 1. 사용자는 비회원이기 때문에 마이페이지 접속시 로그인 및 회원가입을 권유하는 레이아웃을 보여준다.
 2. 회원가입 버튼을 누르면 회원가입에 필요한 정보를 입력할 수 있는 페이지를 보여준다.
@@ -18,7 +18,7 @@
 
 ### 3. 회원가입 후 로그인
 
-![[imgs/a3.png]]
+![](https://github.com/hyunbin1/NAWA_Android/blob/docs/imgs/a3.png?raw=true)
 
 1. 로그인 후 메인페이지인 클럽 조회 페이지를 보여준다.
 2. 참여한 클럽 및 주변 클럽 정보를 조회할 수 있다.
