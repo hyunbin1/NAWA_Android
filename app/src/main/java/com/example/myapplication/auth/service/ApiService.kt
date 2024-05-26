@@ -9,6 +9,6 @@ data class LoginRequest(val username: String, val password: String)
 data class LoginResponse(val token: String)
 
 interface ApiService {
-    @POST("/auth/login")
+    @POST("api/v1/auth/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 }
