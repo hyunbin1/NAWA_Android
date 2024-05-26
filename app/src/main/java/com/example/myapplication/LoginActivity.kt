@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.auth.request.LoginRequest
-import com.example.myapplication.auth.service.LoginResponse
 import com.example.myapplication.auth.service.RetrofitClient
+import com.example.myapplication.auth.service.LoginResponse
 import com.example.myapplication.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.Log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -37,11 +38,14 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Login Successful, Token: ${loginResponse?.token}", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_LONG).show()
+                    Log.e("LoginActivity", "Login failed with response code: ${response.code()}")
+                    Log.e("LoginActivity", "Error body: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                Log.e("LoginActivity", "API call failed", t)
             }
         })
     }
