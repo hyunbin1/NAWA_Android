@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NAWA</string>
+    <string name="login">로그인</string>
+    <string name="idHnt">이메일을 입력해주세요</string>
+    <string name="pwHnt">비밀번호를 입력해주세요</string>
+    <string name="findIdPw">아이디/비밀번호 찾기</string>
+    <string name="partition">|</string>
+    <string name="joinMem">회원가입</string>
 </resources>
