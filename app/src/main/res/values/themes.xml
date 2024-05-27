@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.NAWA" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.NAWA" parent="Theme.AppCompat.DayNight">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/orange</item>
-    </style>
+        <item name="colorPrimary">@color/background</item>
 
+<!--        <item name="colorPrimary">@color/orange</item>-->
+    </style>
+    <style name="ActionBarTextColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Theme.NAWA" parent="Base.Theme.NAWA" />
 </resources>
