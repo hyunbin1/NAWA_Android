@@ -12,11 +12,11 @@
         android:gravity="center_horizontal"
         android:layout_weight="1">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:paddingTop="10dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/nawa_logo"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,20 +41,15 @@
             android:padding="12sp"
             android:textSize="15sp"
             android:hint="@string/idHnt"/>
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round"
-                android:layout_marginTop="5dp"
-                android:padding="12sp"
-                android:textSize="15sp"
-                android:hint="@string/pwHnt"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:background="@drawable/textview_round"
+            android:layout_marginTop="5dp"
+            android:padding="12sp"
+            android:textSize="15sp"
+            android:hint="@string/pwHnt"/>
         <TextView
             android:id="@+id/loginErr"
             android:layout_width="match_parent"
