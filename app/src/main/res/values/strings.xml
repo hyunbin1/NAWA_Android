@@ -12,4 +12,6 @@
     <string name="pw">비밀번호</string>
     <string name="pwChk">비밀번호 확인</string>
     <string name="next">다음</string>
+    <string name="wrongemail">이메일을 다시 입력해주세요</string>
+    <string name="invalidemail">유효하지 않은 이메일입니다</string>
 </resources>

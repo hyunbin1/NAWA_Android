@@ -55,6 +55,8 @@
             android:id="@+id/loginErr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="@string/wrongemail"
             android:textColor="@color/warn"
             android:paddingBottom="20dp"/>
         <Button
