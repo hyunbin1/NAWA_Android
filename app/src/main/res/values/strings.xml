@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NAWA</string>
     <string name="login">로그인</string>
+    <string name="join">회원가입</string>
     <string name="idHnt">이메일을 입력해주세요</string>
     <string name="pwHnt">비밀번호를 입력해주세요</string>
     <string name="pwChkHnt">비밀번호를 재입력해주세요</string>
