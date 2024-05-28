@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.auth.request.LoginRequest
+import com.example.myapplication.auth.response.LoginResponse
 import com.example.myapplication.auth.service.RetrofitClient
-import com.example.myapplication.auth.service.LoginResponse
 import com.example.myapplication.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,19 +28,21 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        val request = LoginRequest(email, password)
+        val request = LoginRequest(emailId = email, password = password)
         val call = RetrofitClient.apiService.login(request)
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
-                    Toast.makeText(this@LoginActivity, "Login Successful, Token: ${loginResponse?.token}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity, "Login Successful, Token: ${loginResponse?.data?.accessToken}", Toast.LENGTH_LONG).show()
                 } else {
+                    val errorBody = response.errorBody()?.string()
                     Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_LONG).show()
                     Log.e("LoginActivity", "Login failed with response code: ${response.code()}")
-                    Log.e("LoginActivity", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("LoginActivity", "Error body: $errorBody")
                 }
+                Toast.makeText(this@LoginActivity, "Login Successful, Token: ${response.body()?.data?.accessToken}", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
