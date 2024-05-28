@@ -1,4 +1,5 @@
-package com.example.myapplication.auth.response
+
+package com.example.myapplication.data.model
 
 data class LoginResponse(
     val data: Data
