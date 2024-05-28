@@ -3,7 +3,12 @@
     <string name="login">로그인</string>
     <string name="idHnt">이메일을 입력해주세요</string>
     <string name="pwHnt">비밀번호를 입력해주세요</string>
+    <string name="pwChkHnt">비밀번호를 재입력해주세요</string>
     <string name="findIdPw">아이디/비밀번호 찾기</string>
     <string name="partition">|</string>
     <string name="joinMem">회원가입</string>
+    <string name="id">아이디</string>
+    <string name="pw">비밀번호</string>
+    <string name="pwChk">비밀번호 확인</string>
+    <string name="next">다음</string>
 </resources>
