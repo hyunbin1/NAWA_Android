@@ -16,4 +16,12 @@
     <string name="invalidemail">유효하지 않은 이메일입니다</string>
     <string name="nickname">닉네임</string>
     <string name="nickHnt">닉네임을 입력해주세요</string>
+    <string name="male">남자</string>
+    <string name="female">여자</string>
+    <string name="noneage">나이를 입력해주세요</string>
+    <string name="nonejob">직업을 입력해주세요</string>
+    <string name="noneaddress">거주지를 입력해주세요</string>
+    <string name="nonedetailadd">상세주소를 입력해주세요</string>
+    <string name="nonearea">활동지를 입력해주세요</string>
+    <string name="invalidMBTI">MBTI를 제대로 입력했는지 확인해주세요</string>
 </resources>
