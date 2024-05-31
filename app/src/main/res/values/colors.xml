@@ -5,4 +5,5 @@
     <color name="orange">#F6963E</color>
     <color name="background">#F8F8F8</color>
     <color name="warn">#EF2424</color>
+    <color name="nonselect">#727174</color>
 </resources>
