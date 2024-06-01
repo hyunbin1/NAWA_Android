@@ -27,14 +27,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="최종 제출이 완료되었습니다"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="이제 나와 함께 할 클럽을 찾아볼까요?"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:textColor="@color/black"/>
     </LinearLayout>
     <Button
