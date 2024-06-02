@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Nawa" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Nawa" parent="Base.Theme.Nawa" />
+
+    <!-- Custom Button Style -->
+    <style name="CustomButtonStyle">
+        <item name="android:background">@drawable/complete_button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
+

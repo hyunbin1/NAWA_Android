@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Nawa</string>
+    <string name="info">- 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.</string>
+    <string name="complete">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
+    <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
+</resources>
