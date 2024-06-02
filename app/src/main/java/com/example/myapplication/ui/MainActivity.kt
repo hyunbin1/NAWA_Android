@@ -1,4 +1,3 @@
-
 package com.example.myapplication.ui
 
 import android.content.Intent
@@ -37,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = clubAdapter
+            isNestedScrollingEnabled = false
         }
     }
 
@@ -45,8 +45,15 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        clubAdapter.setClubs(it)
+                    response.body()?.let { clubs ->
+                        val limitedClubs = if (clubs.size > 5) clubs.take(5) else clubs
+
+                        // 로그 출력
+                        limitedClubs.forEach { club ->
+                            Log.d("MainActivity", "Club Name: ${club.clubName}")
+                        }
+
+                        clubAdapter.setClubs(limitedClubs)
                     }
                 } else {
                     Log.e("MainActivity", "Failed to fetch clubs: ${response.code()} - ${response.message()}")
