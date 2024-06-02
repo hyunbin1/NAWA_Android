@@ -1,34 +1,111 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
-    <EditText
-        android:id="@+id/emailEditText"
+    android:background="@color/background"
+    android:gravity="center_vertical">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/passwordEditText"
+        android:gravity="center_horizontal"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:src="@drawable/nawa_logo"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/loginButton"
+        android:layout_margin="15dp"
+        android:padding="20dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_round"
+            android:layout_marginTop="5dp"
+            android:padding="12sp"
+            android:textSize="15sp"
+            android:hint="@string/idHnt"
+            android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_round"
+            android:layout_marginTop="5dp"
+            android:padding="12sp"
+            android:textSize="15sp"
+            android:hint="@string/pwHnt"
+            android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/loginErr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="@string/wrongemail"
+            android:textColor="@color/warn"
+            android:paddingBottom="20dp"/>
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round"
+            android:text="@string/login"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/guestButton"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_round"
+            android:text="비회원으로 시작(임시버튼)"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
-
-    <Button
-        android:id="@+id/guestButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continue as Guest"
-        android:layout_marginTop="16dp" />
+        android:layout_weight="2"
+        android:gravity="top|center">
+        <TextView
+            android:id="@+id/findIdPw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/findIdPw"
+            android:paddingRight="16dp"/>
+        <TextView
+            android:id="@+id/partition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/findIdPw"
+            android:text="@string/partition"
+            android:paddingRight="16dp"/>
+        <TextView
+            android:id="@+id/joinMem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/partition"
+            android:text="@string/joinMem"
+            android:paddingRight="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/joinMem"
+            android:text="@string/partition"/>
+    </RelativeLayout>
 </LinearLayout>
