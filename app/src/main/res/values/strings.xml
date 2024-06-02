@@ -14,6 +14,7 @@
     <string name="next">다음</string>
     <string name="wrongemail">이메일을 다시 입력해주세요</string>
     <string name="invalidemail">유효하지 않은 이메일입니다</string>
+    <string name="wrongpw">비밀번호가 다릅니다</string>
     <string name="nickname">닉네임</string>
     <string name="nickHnt">닉네임을 입력해주세요</string>
     <string name="male">남자</string>
