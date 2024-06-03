@@ -52,7 +52,7 @@
             android:textSize="15sp"
             android:hint="@string/pwHnt"/>
         <TextView
-            android:id="@+id/loginErr"
+            android:id="@+id/loginError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"
@@ -60,12 +60,18 @@
             android:textColor="@color/warn"
             android:paddingBottom="20dp"/>
         <Button
-            android:id="@+id/loginbtn"
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round"
             android:text="@string/login"
             android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/kakaologinButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/kakao_login_medium_wide"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -93,10 +99,5 @@
             android:layout_toRightOf="@id/partition"
             android:text="@string/joinMem"
             android:paddingRight="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/joinMem"
-            android:text="@string/partition"/>
     </RelativeLayout>
 </LinearLayout>
