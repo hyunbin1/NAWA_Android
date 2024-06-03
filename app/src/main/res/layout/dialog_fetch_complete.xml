@@ -10,20 +10,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="최종제출 완료"
         android:gravity="center"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:padding="20dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="40dp"
-        android:text="최종 제출이 완료되었습니다\n 이제 나와 함께 할 클럽을 찾아볼까요?"
-        android:textSize="17sp"
+        android:paddingVertical="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="프로필 수정이 왼료되었습니다"
+        android:textSize="18sp"
         android:textColor="@color/black"/>
     <Button
         android:id="@+id/okButton"

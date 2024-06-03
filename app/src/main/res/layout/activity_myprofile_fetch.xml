@@ -24,7 +24,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"/>
         <Button
-            android:id="@+id/fetchNickname"
+            android:id="@+id/fetchNicknameButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
@@ -38,12 +38,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/basicinfo"
+            android:id="@+id/basicinfoFetch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/basicinfo"/>
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/introduce"
+            android:id="@+id/introduceFetch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/introduce"/>
