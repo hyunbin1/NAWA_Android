@@ -5,6 +5,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
+    
+    // api baseurl 설정
     private const val BASE_URL = "https://nawakr.com/"
 
     val apiService: ApiService by lazy {

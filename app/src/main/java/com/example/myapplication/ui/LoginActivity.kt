@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
+            // 이메일, 패스워드가 입력된 상태로 로그인 버튼 클릭 시에 login 메서드로 넘김
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 login(email, password)
             } else {
@@ -40,8 +41,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /** edit text에 작성된 email, password를 로그인 외부 api를 이용하여 post 요청 후 
+     * 로그인 성공시에 토큰을 발급받고 메인화먄으로 이동 */
     private fun login(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
+        
+        // 이곳에서 api 호충
         val call = RetrofitClient.apiService.login(loginRequest)
 
         call.enqueue(object : Callback<LoginResponse> {

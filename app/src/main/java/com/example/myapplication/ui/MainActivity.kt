@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // activity_login 페이지로 이동
         binding.loginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** 외부 api GET 요청을 통해서 club 리스트를 가져오는데, 5개만 가져오도록함. */
     private fun fetchClubs() {
+        // 이곳에서 클럽 리스트를 가져오는 api 호출
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
