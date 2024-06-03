@@ -89,6 +89,39 @@
                 android:paddingVertical="17dp"
                 android:textSize="15sp"
                 android:hint="@string/pwHnt"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="10dp">
+                <TextView
+                    android:id="@+id/passwordCheck1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:paddingLeft="7dp"
+                    android:layout_marginVertical="5dp"
+                    android:text="✓    8자 이상 16자 이하"
+                    android:textColor="@color/invalid"/>
+                <TextView
+                    android:id="@+id/passwordCheck2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:paddingLeft="7dp"
+                    android:layout_marginVertical="5dp"
+                    android:text="✓    영문 대소문자, 숫자"
+                    android:textColor="@color/invalid"/>
+                <TextView
+                    android:id="@+id/passwordCheck3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:paddingLeft="7dp"
+                    android:layout_marginVertical="5dp"
+                    android:text="✓    !@#$%^&amp;*()_+"
+                    android:textColor="@color/invalid"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,7 +137,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
             <EditText
-                android:id="@+id/pwcheck"
+                android:id="@+id/passwordAgain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/textview_round"
@@ -114,7 +147,7 @@
                 android:textSize="15sp"
                 android:hint="@string/pwChkHnt"/>
             <TextView
-                android:id="@+id/pwcheckErr"
+                android:id="@+id/passwordAgainErr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -124,6 +157,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_round_cntclick"
