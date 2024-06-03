@@ -60,6 +60,7 @@
             android:textColor="@color/warn"
             android:paddingBottom="20dp"/>
         <Button
+            android:id="@+id/loginbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_round"
