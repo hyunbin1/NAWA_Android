@@ -27,4 +27,5 @@
     <string name="invalidMBTI">MBTI를 제대로 입력했는지 확인해주세요</string>
     <string name="basicinfo">기본 정보</string>
     <string name="introduce">자기 소개</string>
+    <string name="introducequestion">· 모임을 통해 어떤 사람을 만나고 싶나요?</string>
 </resources>

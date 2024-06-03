@@ -3,24 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="나와에 온걸"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="환영해요 :)"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-    </LinearLayout>
+        android:padding="10dp"
+        android:text="나와에 온걸\n환영해요 :)"
+        android:textSize="25sp"
+        android:textColor="@color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
