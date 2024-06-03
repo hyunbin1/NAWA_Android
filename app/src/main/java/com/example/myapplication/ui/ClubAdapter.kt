@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.data.model.Club
 import com.example.myapplication.databinding.ItemClubBinding
 
@@ -32,8 +33,10 @@ class ClubAdapter : RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
     inner class ClubViewHolder(private val binding: ItemClubBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(club: Club) {
             binding.clubName.text = club.clubName
+            // Glide를 사용하여 이미지를 원형으로 로드
             Glide.with(binding.clubLogo.context)
                 .load(club.clubLogo)
+                .apply(RequestOptions.circleCropTransform())
                 .into(binding.clubLogo)
 
             binding.root.setOnClickListener {
