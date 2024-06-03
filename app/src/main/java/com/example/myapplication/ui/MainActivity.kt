@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.model.Club
+import com.example.myapplication.data.model.Notice
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var clubAdapter: ClubAdapter
+    private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var loginButton: Button
     private var isLoggedIn = false
 
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         fetchClubs()
+        fetchNotices()
 
         checkLoginStatus()
 
@@ -45,9 +49,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         clubAdapter = ClubAdapter()
+        noticeAdapter = NoticeAdapter()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = clubAdapter
+            isNestedScrollingEnabled = false
+        }
+        binding.noticeRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = noticeAdapter
             isNestedScrollingEnabled = false
         }
     }
@@ -62,19 +72,51 @@ class MainActivity : AppCompatActivity() {
 
                         // 로그 출력
                         limitedClubs.forEach { club ->
-                            Log.d("MainActivity", "Club Name: ${club.clubName}")
+                            Log.d("MainActivity", "클럽 이름: ${club.clubName}, ID: ${club.clubUUID}")
                         }
 
                         clubAdapter.setClubs(limitedClubs)
+                    } ?: run {
+                        Log.e("MainActivity", "클럽 응답이 없습니다.")
                     }
                 } else {
-                    Log.e("MainActivity", "Failed to fetch clubs: ${response.code()} - ${response.message()}")
-                    Log.e("MainActivity", "Error body: ${response.errorBody()?.string()}")
+                    Log.e("MainActivity", "클럽을 가져오지 못했습니다: ${response.code()} - ${response.message()}")
+                    Log.e("MainActivity", "오류 내용: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<List<Club>>, t: Throwable) {
-                Log.e("MainActivity", "Error: ${t.message}")
+                Log.e("MainActivity", "클럽을 가져오는 중 오류가 발생했습니다: ${t.message}")
+            }
+        })
+    }
+
+    private fun fetchNotices() {
+        val call = RetrofitClient.apiService.getNotices()
+        call.enqueue(object : Callback<List<Notice>> {
+            override fun onResponse(call: Call<List<Notice>>, response: Response<List<Notice>>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { notices ->
+                        val limitedNotices = if (notices.size > 5) notices.take(5) else notices
+
+                        // 로그 출력
+                        limitedNotices.forEach { notice ->
+                            Log.d("MainActivity", "공지사항 ID: ${notice.id}")
+                        }
+
+                        noticeAdapter.setNotices(limitedNotices)
+                    } ?: run {
+                        Log.e("MainActivity", "공지사항 응답이 없습니다.")
+                    }
+                } else {
+                    Log.e("MainActivity", "공지사항을 가져오지 못했습니다: ${response.code()} - ${response.message()}")
+                    Toast.makeText(this@MainActivity, "공지사항을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Notice>>, t: Throwable) {
+                Log.e("MainActivity", "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}")
+                Toast.makeText(this@MainActivity, "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

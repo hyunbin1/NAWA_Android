@@ -1,10 +1,10 @@
-
 package com.example.myapplication.data.remote
 
 import com.example.myapplication.data.model.Club
 import com.example.myapplication.data.model.ClubDetail
 import com.example.myapplication.data.model.LoginRequest
 import com.example.myapplication.data.model.LoginResponse
+import com.example.myapplication.data.model.Notice
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,4 +24,12 @@ interface ApiService {
     // 클럽의 자세한 정보를 가져오는 api
     @GET("api/v1/clubs/{clubUUID}")
     fun getClubDetail(@Path("clubUUID") clubUUID: String): Call<ClubDetail>
+
+    // 공지사항을 가져오는 api
+    @GET("api/v1/notice")
+    fun getNotices(): Call<List<Notice>>
+
+    // 공지사항 세부 정보를 가져오는 api
+    @GET("api/v1/notice/{noticeId}")
+    fun getNoticeDetail(@Path("noticeId") noticeId: Int): Call<Notice>
 }

@@ -73,13 +73,13 @@
                 android:text="공지사항"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-            <ListView
-                android:id="@+id/noticeEntireList"
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/noticeRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/announcement_title"
                 android:layout_marginTop="8dp"
-                android:padding="16dp" />
+                android:nestedScrollingEnabled="false" />
 
             <Button
                 android:id="@+id/noticeBtn"
@@ -91,6 +91,7 @@
                 android:gravity="center"
                 android:text="공지 더보기"
                 android:textColor="@color/black" />
+
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="wrap_content"
