@@ -11,6 +11,8 @@ package="com.example.myapplication">
     android:supportsRtl="true"
     android:theme="@style/Theme.NAWA">
 
+    <activity android:name=".ui.ClubListActivity"
+        android:exported="true"/>
     <activity android:name=".ui.ClubDetailActivity"
         android:exported="true" />
     <activity android:name=".ui.LoginActivity"

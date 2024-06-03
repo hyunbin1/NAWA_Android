@@ -46,6 +46,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.moreBtn.setOnClickListener {
+            val intent = Intent(this, ClubListActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.noticeBtn.setOnClickListener {
             val intent = Intent(this, NoticeListActivity::class.java)
             startActivity(intent)
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
                         // 로그 출력
                         limitedClubs.forEach { club ->
-                            Log.d("MainActivity", "클럽 이름: ${club.clubName}, ID: ${club.clubUUID}")
+                            Log.d("MainActivity", "클럽 이름: ${club.clubName}")
                         }
 
                         clubAdapter.setClubs(limitedClubs)
