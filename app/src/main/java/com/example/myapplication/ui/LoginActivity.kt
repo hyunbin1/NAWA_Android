@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -41,12 +42,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    /** edit text에 작성된 email, password를 로그인 외부 api를 이용하여 post 요청 후 
-     * 로그인 성공시에 토큰을 발급받고 메인화먄으로 이동 */
+    /** edit text에 작성된 email, password를 로그인 외부 api를 이용하여 post 요청 후
+     * 로그인 성공시에 토큰을 발급받고 메인화면으로 이동 */
     private fun login(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
-        
-        // 이곳에서 api 호충
+
+        // 이곳에서 api 호출
         val call = RetrofitClient.apiService.login(loginRequest)
 
         call.enqueue(object : Callback<LoginResponse> {
@@ -56,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
                     loginResponse?.data?.let {
                         // 로그인 성공 처리
                         Log.d("LoginActivity", "Access Token: ${it.accessToken}")
+                        saveAccessToken(it.accessToken)
                         // 메인 액티비티로 이동
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
@@ -73,5 +75,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Login error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun saveAccessToken(token: String) {
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("ACCESS_TOKEN", token)
+        editor.apply()
     }
 }

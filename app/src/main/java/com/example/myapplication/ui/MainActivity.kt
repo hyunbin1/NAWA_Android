@@ -1,8 +1,10 @@
 package com.example.myapplication.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.model.Club
@@ -16,20 +18,29 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var clubAdapter: ClubAdapter
+    private lateinit var loginButton: Button
+    private var isLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // activity_login 페이지로 이동
-        binding.loginButton.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+        loginButton = binding.loginButton
 
         setupRecyclerView()
         fetchClubs()
+
+        checkLoginStatus()
+
+        loginButton.setOnClickListener {
+            if (isLoggedIn) {
+                logout()
+            } else {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -41,9 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** 외부 api GET 요청을 통해서 club 리스트를 가져오는데, 5개만 가져오도록함. */
     private fun fetchClubs() {
-        // 이곳에서 클럽 리스트를 가져오는 api 호출
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
@@ -68,5 +77,27 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "Error: ${t.message}")
             }
         })
+    }
+
+    private fun checkLoginStatus() {
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
+        isLoggedIn = !accessToken.isNullOrEmpty()
+
+        updateLoginButtonText()
+    }
+
+    private fun updateLoginButtonText() {
+        loginButton.text = if (isLoggedIn) "로그아웃" else "로그인(임시)"
+    }
+
+    private fun logout() {
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("ACCESS_TOKEN")
+        editor.apply()
+
+        isLoggedIn = false
+        updateLoginButtonText()
     }
 }
