@@ -30,7 +30,8 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
     inner class NoticeViewHolder(private val binding: ItemNoticeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(notice: Notice) {
             binding.title.text = if (notice.title.length > 20) notice.title.substring(0, 20) + "..." else notice.title
-            binding.content.text = if (notice.content.length > 40) notice.content.substring(0, 40) + "..." else notice.content
+            binding.createDate.text = notice.createAt.substring(0, 10) // Assuming the date format is "yyyy-MM-dd"
+            binding.viewCount.text = "조회수: ${notice.viewCount}"
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

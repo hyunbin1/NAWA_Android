@@ -45,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        binding.noticeBtn.setOnClickListener {
+            val intent = Intent(this, NoticeListActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {
