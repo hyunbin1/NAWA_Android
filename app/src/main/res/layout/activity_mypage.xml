@@ -24,7 +24,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"/>
         <Button
-            android:id="@+id/myprofilebtn"
+            android:id="@+id/myprofileButton"
             android:layout_width="90dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
