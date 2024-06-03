@@ -82,7 +82,7 @@
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_round_cntclick"
+        android:background="@drawable/button_round_cantclick"
         android:layout_margin="15dp"
         android:text="제출하기"
         android:textSize="17sp"

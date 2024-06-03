@@ -53,7 +53,7 @@
             android:textSize="15sp"
             android:hint="@string/idHnt"/>
         <TextView
-            android:id="@+id/emailErr"
+            android:id="@+id/emailError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -160,7 +160,7 @@
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_round_cntclick"
+        android:background="@drawable/button_round_cantclick"
         android:layout_margin="15dp"
         android:text="@string/next"
         android:textSize="17sp"
