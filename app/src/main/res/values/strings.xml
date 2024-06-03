@@ -17,13 +17,11 @@
     <string name="wrongpw">비밀번호가 다릅니다</string>
     <string name="nickname">닉네임</string>
     <string name="nickHnt">닉네임을 입력해주세요</string>
+    <string name="usednickname">이미 사용 중인 닉네임입니다</string>
     <string name="male">남자</string>
     <string name="female">여자</string>
     <string name="noneage">나이를 입력해주세요</string>
     <string name="nonejob">직업을 입력해주세요</string>
-    <string name="noneaddress">거주지를 입력해주세요</string>
-    <string name="nonedetailadd">상세주소를 입력해주세요</string>
-    <string name="nonearea">활동지를 입력해주세요</string>
     <string name="invalidMBTI">MBTI를 제대로 입력했는지 확인해주세요</string>
     <string name="basicinfo">기본 정보</string>
     <string name="introduce">자기 소개</string>
