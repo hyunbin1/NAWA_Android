@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/userImage"
             android:layout_width="160dp"
             android:layout_height="160dp"
@@ -41,14 +41,14 @@
             android:id="@+id/nicknameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nickHnt"
+            android:hint="@string/nicknameHint"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/usedNicknameError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="@string/usednickname"
+            android:text="이미 사용 중인 닉네임입니다"
             android:textColor="@color/warn"
             android:paddingTop="7dp"/>
     </LinearLayout>

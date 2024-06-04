@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:padding="15dp"
     android:orientation="vertical">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/clubimg"
+    <ImageView
+        android:id="@+id/clubImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"/>

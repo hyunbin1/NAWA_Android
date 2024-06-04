@@ -41,7 +41,7 @@
             android:layout_marginTop="5dp"
             android:padding="12sp"
             android:textSize="15sp"
-            android:hint="@string/idHnt"/>
+            android:hint="@string/idHint"/>
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
@@ -50,13 +50,13 @@
             android:layout_marginTop="5dp"
             android:padding="12sp"
             android:textSize="15sp"
-            android:hint="@string/pwHnt"/>
+            android:hint="@string/passwordHint"/>
         <TextView
             android:id="@+id/loginError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            android:text="@string/wrongemail"
+            android:text="이메일을 다시 입력해주세요"
             android:textColor="@color/warn"
             android:paddingBottom="20dp"/>
         <Button
@@ -83,21 +83,21 @@
             android:id="@+id/findIdPw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/findIdPw"
+            android:text="아이디/비밀번호 찾기"
             android:paddingRight="16dp"/>
         <TextView
             android:id="@+id/partition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/findIdPw"
-            android:text="@string/partition"
+            android:text="|"
             android:paddingRight="16dp"/>
         <TextView
             android:id="@+id/joinMem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/partition"
-            android:text="@string/joinMem"
+            android:text="회원가입"
             android:paddingRight="16dp"/>
     </RelativeLayout>
 </LinearLayout>

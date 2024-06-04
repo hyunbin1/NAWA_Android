@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="@string/invalidMBTI"
+            android:text="MBTI를 제대로 입력했는지 확인해주세요"
             android:textColor="@color/warn"
             android:paddingTop="7dp"/>
     </LinearLayout>
@@ -125,7 +125,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/button_sex_select"
                 android:layout_marginRight="15dp"
-                android:text="@string/open"
+                android:text="보이기"
                 android:textColor="@color/white"/>
             <Button
                 android:id="@+id/hideButton"
@@ -133,14 +133,14 @@
                 android:layout_height="40dp"
                 android:background="@drawable/button_sex"
                 android:layout_marginRight="15dp"
-                android:text="@string/hide"
+                android:text="숨기기"
                 android:textColor="@color/nonselect"/>
             <Button
                 android:id="@+id/nonselectButton"
                 android:layout_width="90dp"
                 android:layout_height="40dp"
                 android:background="@drawable/button_sex"
-                android:text="@string/nonselect"
+                android:text="선택 안함"
                 android:textColor="@color/nonselect"/>
         </LinearLayout>
     </LinearLayout>

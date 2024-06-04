@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--기본 글자 색-->
     <color name="black">#FF000000</color>
+    <!--어두운 버튼 글자 색-->
     <color name="white">#FFFFFFFF</color>
+    <!--회원 정보 수정 toolbar '저장' 글자 색-->
     <color name="orange">#F6963E</color>
+    <!--앱 배경 색 / 자기소개 입력 텍스트 배경 색-->
     <color name="background">#F8F8F8</color>
+    <!--경고 문구용 빨간 색-->
     <color name="warn">#EF2424</color>
+    <!--프로필 수정 시 선택되지 않는 버튼 글자 색(dialog_fetch, profile_fetch_basicinfo.xml)-->
     <color name="nonselect">#727174</color>
+    <!--회원가입 시 비밀번호 조건 충족 못할 시 활성화되는 글자 색-->
     <color name="invalid">#C1C1C1</color>
 </resources>

@@ -1,34 +1,17 @@
 <resources>
     <string name="app_name">NAWA</string>
+    <!--activity_login.xml에 사용되는 @string-->
     <string name="login">로그인</string>
-    <string name="join">회원가입</string>
-    <string name="idHnt">이메일을 입력해주세요</string>
-    <string name="pwHnt">비밀번호를 입력해주세요</string>
-    <string name="pwChkHnt">비밀번호를 재입력해주세요</string>
-    <string name="findIdPw">아이디/비밀번호 찾기</string>
-    <string name="partition">|</string>
-    <string name="joinMem">회원가입</string>
-    <string name="id">아이디</string>
-    <string name="pw">비밀번호</string>
-    <string name="pwChk">비밀번호 확인</string>
-    <string name="next">다음</string>
-    <string name="wrongemail">이메일을 다시 입력해주세요</string>
-    <string name="invalidemail">유효하지 않은 이메일입니다</string>
-    <string name="wrongpw">비밀번호가 다릅니다</string>
+    <!--이메일 EditText 내 Hint로 사용되는 @string-->
+    <string name="idHint">이메일을 입력해주세요</string>
+    <string name="passwordHint">비밀번호를 입력해주세요</string>
     <string name="nickname">닉네임</string>
-    <string name="nickHnt">닉네임을 입력해주세요</string>
-    <string name="usednickname">이미 사용 중인 닉네임입니다</string>
+    <string name="nicknameHint">닉네임을 입력해주세요</string>
     <string name="male">남자</string>
     <string name="female">여자</string>
-    <string name="noneage">나이를 입력해주세요</string>
-    <string name="nonejob">직업을 입력해주세요</string>
-    <string name="invalidMBTI">MBTI를 제대로 입력했는지 확인해주세요</string>
     <string name="basicinfo">기본 정보</string>
     <string name="introduce">자기 소개</string>
     <string name="introducequestion">· 모임을 통해 어떤 사람을 만나고 싶나요?</string>
-    <string name="open">보이기</string>
-    <string name="hide">숨기기</string>
-    <string name="nonselect">선택 안함</string>
     <string name="fetchcomplete">수정완료</string>
     <string name="cancel">취소</string>
 </resources>
