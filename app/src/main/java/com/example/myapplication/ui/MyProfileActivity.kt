@@ -26,6 +26,8 @@ class MyProfileActivity : AppCompatActivity() {
         fetchMemberInfo()
     }
 
+    
+    /** 로그인한 사용자 정보를 불러옴 */
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)

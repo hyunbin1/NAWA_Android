@@ -27,6 +27,8 @@ class LoginDialogFragment : DialogFragment() {
             dismiss()
         }
 
+        /** goToJoin 버튼 클릭 시 activity_login 페이지로 이동.
+         * 액티비티는 LoginActivity 로 넘김 */
         binding.goToJoin.setOnClickListener {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)

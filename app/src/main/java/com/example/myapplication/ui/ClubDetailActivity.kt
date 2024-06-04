@@ -26,7 +26,8 @@ class ClubDetailActivity : AppCompatActivity() {
             fetchClubDetail(it)
         }
     }
-
+    
+    /** api 요청을 통해서 클럽의 세부 정보를 가져옴 */
     private fun fetchClubDetail(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
         call.enqueue(object : Callback<ClubDetail> {

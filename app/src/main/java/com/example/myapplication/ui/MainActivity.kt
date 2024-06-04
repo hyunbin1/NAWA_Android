@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clubAdapter: ClubAdapter
     private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var loginButton: Button
+    
+    // 로그인 여부 확인
     private var isLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         checkLoginStatus()
 
+        /** 로그인 상태에서 버튼 클릭시 로그아웃
+         * 로그인을 안했을 경우 activity_login 페이지로 넘김(액티비티는 LoginActivity 로 넘김) */
         loginButton.setOnClickListener {
             if (isLoggedIn) {
                 logout()
@@ -51,11 +55,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /** 클럽 더보기 버튼 클릭시 리스너
+         *  list_club 페이지로 넘김(액티비티는 ClubListActivity로 넘김) */
         binding.moreBtn.setOnClickListener {
             val intent = Intent(this, ClubListActivity::class.java)
             startActivity(intent)
         }
 
+        /** 공지사항 더보기 버튼 클릭시 리스너
+         *  list_notice 페이지로 넘김(액티비티는 NoticeListActivity 로 넘김) */
         binding.noticeBtn.setOnClickListener {
             val intent = Intent(this, NoticeListActivity::class.java)
             startActivity(intent)
@@ -66,15 +74,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** toolbar.xml 세팅 */
     private fun setupToolbar() {
         setSupportActionBar(binding.mainToolBar.mainToolBar)
     }
 
+    /** menu_toolbar.xml 세팅, toolbar 에서 (마이페이지를)볼 수 있음 */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
 
+    /** toolbar 의 마이페이지 클릭시 작동
+     * 로그인을 한 경우는 activity_myprofile 로 이동(액티비티는 MyProfileActivity 로 넘김)
+     * 로그인을 안했을 경우에는 activity_notice_dialog 를 띄워 로그인창으로 유도 */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.myPage -> {
@@ -90,11 +103,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** activity_notice_dialog 를 띄움 */
     private fun showLoginDialog() {
         val loginDialogFragment = LoginDialogFragment()
         loginDialogFragment.show(supportFragmentManager, "LoginDialogFragment")
     }
 
+    /** 클럽 리스트, 공지사항 리스트 리사이클 뷰를 띄움 */
     private fun setupRecyclerView() {
         clubAdapter = ClubAdapter()
         noticeAdapter = NoticeAdapter()
@@ -110,6 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** api 요청을 통해 클럽 리스트에서 5개의 클럽만 불러옴 */
     private fun fetchClubs() {
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
@@ -139,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /** api 요청을 통해 클럽 리스트에서 5개의 공지사항만 불러옴 */
     private fun fetchNotices() {
         val call = RetrofitClient.apiService.getNotices()
         call.enqueue(object : Callback<List<Notice>> {
@@ -169,6 +186,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /** 로그인을 하여 토큰이 있을 경우 유저 정보를 가져옴 */
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -198,6 +216,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** 토큰 유무를 통해서 로그인 상태를 체크함 */
     private fun checkLoginStatus() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -210,6 +229,7 @@ class MainActivity : AppCompatActivity() {
         loginButton.text = if (isLoggedIn) "로그아웃" else "로그인(임시)"
     }
 
+    /** 토큰을 제거하여 로그아웃 */
     private fun logout() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()

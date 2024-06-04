@@ -32,6 +32,7 @@ class NoticeDetailActivity : AppCompatActivity() {
         }
     }
 
+    /** api 요청을 통해서 공지사항의 세부 정보를 가져옴 */
     private fun fetchNoticeDetail(noticeId: Int) {
         val call = RetrofitClient.apiService.getNoticeDetail(noticeId)
         call.enqueue(object : Callback<Notice> {
