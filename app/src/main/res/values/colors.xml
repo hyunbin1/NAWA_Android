@@ -6,4 +6,5 @@
     <color name="background">#F8F8F8</color>
     <color name="warn">#EF2424</color>
     <color name="nonselect">#727174</color>
+    <color name="invalid">#C1C1C1</color>
 </resources>

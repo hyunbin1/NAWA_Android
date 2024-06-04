@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/myprofileBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:titleTextAppearance="@style/ActionBarTextColor"
+    app:menu="@menu/save_toolbar"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 프로필 수정"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+</androidx.appcompat.widget.Toolbar>
