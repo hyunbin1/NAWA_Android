@@ -16,4 +16,12 @@ object RetrofitClient {
             .build()
             .create(ApiService::class.java)
     }
+
+    val memberAPIService: MemberAPIService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MemberAPIService::class.java)
+    }
 }
