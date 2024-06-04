@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.guestButton.setOnClickListener {
+        binding.kakaologinButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
