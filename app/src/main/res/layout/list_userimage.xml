@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageSample"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:src="@drawable/ic_launcher_background"/>
 </LinearLayout>
