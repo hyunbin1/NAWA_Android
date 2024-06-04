@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/club"
+    android:layout_width="350dp"
+    android:layout_gravity="center"
+    android:layout_height="130dp"
+    android:background="@color/background"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/clubLogo"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/studio"
+        android:background="@drawable/circle_image"
+        android:scaleType="centerCrop"
+        android:contentDescription="Studio Image"
+        android:layout_marginEnd="10dp" />
+
+    <TextView
+        android:id="@+id/clubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:text="STUDIO"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+</LinearLayout>

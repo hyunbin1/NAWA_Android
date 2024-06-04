@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!--기본 글자 색-->
     <color name="black">#FF000000</color>
     <!--어두운 버튼 글자 색-->
@@ -14,4 +15,11 @@
     <color name="nonselect">#727174</color>
     <!--회원가입 시 비밀번호 조건 충족 못할 시 활성화되는 글자 색-->
     <color name="invalid">#C1C1C1</color>
+=======
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray1">#EDEDED</color>
+    <color name="back">#F8F8F8</color>
+    <color name="orange">#F6963E</color>
+>>>>>>> pkzi
 </resources>
