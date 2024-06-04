@@ -34,25 +34,27 @@
             android:textColor="@color/black"
             android:textStyle="bold"/>
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/textview_round"
             android:layout_marginTop="5dp"
             android:padding="12sp"
             android:textSize="15sp"
-            android:hint="@string/idHint"/>
+            android:hint="@string/idHint"
+            android:inputType="textEmailAddress"/>
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/textview_round"
             android:layout_marginTop="5dp"
             android:padding="12sp"
             android:textSize="15sp"
-            android:hint="@string/passwordHint"/>
+            android:hint="@string/passwordHint"
+            android:inputType="textPassword"/>
         <TextView
-            android:id="@+id/loginError"
+            android:id="@+id/loginErr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"
@@ -70,7 +72,7 @@
             android:id="@+id/kakaologinButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/kakao_login_medium_wide"/>
     </LinearLayout>
     <RelativeLayout
