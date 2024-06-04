@@ -7,7 +7,7 @@ data class LoginResponse(
     data class Data(
         val signUpStep: String,
         val grantType: String,
-        val accessToken: String,
+        val accessToken: String, // 저장할 토큰
         val refreshToken: String,
         val accessTokenExpiresIn: Long
     )

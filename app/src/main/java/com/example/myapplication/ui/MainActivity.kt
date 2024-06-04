@@ -78,12 +78,21 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.myPage -> {
-                val intent = Intent(this, MyProfileActivity::class.java)
-                startActivity(intent)
+                if (isLoggedIn) {
+                    val intent = Intent(this, MyProfileActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    showLoginDialog()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showLoginDialog() {
+        val loginDialogFragment = LoginDialogFragment()
+        loginDialogFragment.show(supportFragmentManager, "LoginDialogFragment")
     }
 
     private fun setupRecyclerView() {

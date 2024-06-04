@@ -3,9 +3,10 @@ package com.example.myapplication.ui
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMyprofileBinding
@@ -35,8 +36,11 @@ class MyProfileActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
-                            binding.userEmail.text = "Email: ${member.emailId}"
-                            binding.userNickname.text = "Nickname: ${member.nickname}"
+                            binding.userNickname.text = "${member.nickname}님"
+                            Glide.with(this@MyProfileActivity)
+                                .load(member.profileImage)
+                                .placeholder(R.drawable.ic_launcher_background)
+                                .into(binding.userImage)
                             // 다른 사용자 정보 설정
                         } ?: run {
                             Log.e("MyProfileActivity", "회원 정보 응답이 없습니다.")
@@ -52,6 +56,8 @@ class MyProfileActivity : AppCompatActivity() {
                     Toast.makeText(this@MyProfileActivity, "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
+        } ?: run {
+            Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
         }
     }
 }
