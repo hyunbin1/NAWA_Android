@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/clubLoo"
+        android:id="@+id/clubLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"

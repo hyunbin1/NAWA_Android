@@ -18,8 +18,15 @@
 =======
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<<<<<<< HEAD
     <color name="gray1">#EDEDED</color>
     <color name="back">#F8F8F8</color>
     <color name="orange">#F6963E</color>
 >>>>>>> pkzi
+=======
+    <color name="orange">#F6963E</color>
+    <color name="background">#F8F8F8</color>
+    <color name="warn">#EF2424</color>
+    <color name="nonselect">#727174</color>
+>>>>>>> WonDohyeon
 </resources>

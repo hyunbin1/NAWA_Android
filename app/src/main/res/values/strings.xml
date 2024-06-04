@@ -1,6 +1,7 @@
 <resources>
 <<<<<<< HEAD
     <string name="app_name">NAWA</string>
+<<<<<<< HEAD
     <!--activity_login.xml에 사용되는 @string-->
     <string name="login">로그인</string>
     <!--이메일 EditText 내 Hint로 사용되는 @string-->
@@ -30,4 +31,33 @@
     <string name="complete">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
     <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
 >>>>>>> pkzi
+=======
+    <string name="login">로그인</string>
+    <string name="join">회원가입</string>
+    <string name="idHnt">이메일을 입력해주세요</string>
+    <string name="pwHnt">비밀번호를 입력해주세요</string>
+    <string name="pwChkHnt">비밀번호를 재입력해주세요</string>
+    <string name="findIdPw">아이디/비밀번호 찾기</string>
+    <string name="partition">|</string>
+    <string name="joinMem">회원가입</string>
+    <string name="id">아이디</string>
+    <string name="pw">비밀번호</string>
+    <string name="pwChk">비밀번호 확인</string>
+    <string name="next">다음</string>
+    <string name="wrongemail">이메일을 다시 입력해주세요</string>
+    <string name="invalidemail">유효하지 않은 이메일입니다</string>
+    <string name="wrongpw">비밀번호가 다릅니다</string>
+    <string name="nickname">닉네임</string>
+    <string name="nickHnt">닉네임을 입력해주세요</string>
+    <string name="male">남자</string>
+    <string name="female">여자</string>
+    <string name="noneage">나이를 입력해주세요</string>
+    <string name="nonejob">직업을 입력해주세요</string>
+    <string name="noneaddress">거주지를 입력해주세요</string>
+    <string name="nonedetailadd">상세주소를 입력해주세요</string>
+    <string name="nonearea">활동지를 입력해주세요</string>
+    <string name="invalidMBTI">MBTI를 제대로 입력했는지 확인해주세요</string>
+    <string name="basicinfo">기본 정보</string>
+    <string name="introduce">자기 소개</string>
+>>>>>>> WonDohyeon
 </resources>
