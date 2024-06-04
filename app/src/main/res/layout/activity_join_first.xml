@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include
+        layout="@layout/toolbar_join"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="나와에 온걸\n환영해요 :)"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="@color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_marginVertical="5dp"
         android:text="아이디와 비밀번호를 입력해주세요"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textColor="@color/black"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/id"
+            android:text="아이디"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -40,110 +41,102 @@
             android:paddingHorizontal="12dp"
             android:paddingVertical="17dp"
             android:textSize="15sp"
-            android:hint="@string/idHnt"/>
+            android:hint="@string/idHint"/>
         <TextView
             android:id="@+id/emailError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="@string/invalidemail"
+            android:text="유효하지 않은 이메일입니다"
             android:textColor="@color/warn"
             android:padding="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:padding="15dp"
+        android:layout_gravity="center"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_round"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="17dp"
+            android:textSize="15sp"
+            android:hint="@string/passwordHint"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pw"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordCheck1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/textview_round"
-                android:layout_marginTop="5dp"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="17dp"
-                android:textSize="15sp"
-                android:hint="@string/pwHnt"/>
-            <LinearLayout
+                android:gravity="left|center"
+                android:paddingLeft="7dp"
+                android:text="✓    8자 이상 16자 이하"
+                android:textColor="@color/invalid"/>
+            <TextView
+                android:id="@+id/passwordCheck2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="10dp">
-                <TextView
-                    android:id="@+id/passwordCheck1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|center"
-                    android:paddingLeft="7dp"
-                    android:layout_marginVertical="5dp"
-                    android:text="✓    8자 이상 16자 이하"
-                    android:textColor="@color/invalid"/>
-                <TextView
-                    android:id="@+id/passwordCheck2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|center"
-                    android:paddingLeft="7dp"
-                    android:layout_marginVertical="5dp"
-                    android:text="✓    영문 대소문자, 숫자"
-                    android:textColor="@color/invalid"/>
-                <TextView
-                    android:id="@+id/passwordCheck3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|center"
-                    android:paddingLeft="7dp"
-                    android:layout_marginVertical="5dp"
-                    android:text="✓    !@#$%^&amp;*()_+"
-                    android:textColor="@color/invalid"/>
-            </LinearLayout>
+                android:gravity="left|center"
+                android:paddingLeft="7dp"
+                android:text="✓    영문 대소문자, 숫자"
+                android:textColor="@color/invalid"/>
+            <TextView
+                android:id="@+id/passwordCheck3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:paddingLeft="7dp"
+                android:text="✓    !@#$%^&amp;*()_+"
+                android:textColor="@color/invalid"/>
         </LinearLayout>
-        <LinearLayout
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="15dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 확인"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/passwordAgain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pwChk"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <EditText
-                android:id="@+id/passwordAgain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round"
-                android:layout_marginTop="5dp"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="17dp"
-                android:textSize="15sp"
-                android:hint="@string/pwChkHnt"/>
-            <TextView
-                android:id="@+id/passwordAgainErr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="@string/wrongpw"
-                android:textColor="@color/warn"
-                android:padding="5dp"/>
-        </LinearLayout>
+            android:background="@drawable/textview_round"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="17dp"
+            android:textSize="15sp"
+            android:hint="비밀번호를 재입력해주세요"/>
+        <TextView
+            android:id="@+id/passwordAgainErr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="비밀번호가 다릅니다"
+            android:textColor="@color/warn"
+            android:padding="5dp"/>
     </LinearLayout>
     <Button
         android:id="@+id/nextButton"
@@ -151,7 +144,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_round_cantclick"
         android:layout_margin="15dp"
-        android:text="@string/next"
+        android:text="다음"
         android:textSize="17sp"
         android:textColor="@color/white"/>
 </LinearLayout>
