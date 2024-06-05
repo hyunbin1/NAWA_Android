@@ -1,0 +1,33 @@
+package com.example.myapplication.data.DTO.Response
+
+data class MemberResponse(
+    val id: Int,
+    val memberUUID: String,
+    val emailId: String,
+    val password: String,
+    val name: String,
+    val phoneNumber: String?,
+    val nickname: String,
+    val profileImage: String?,
+    val age: Int,
+    val job: String?,
+    val address: String?,
+    val detailAddress: String?,
+    val activeAddress: String?,
+    val hobby: String?,
+    val introduce: String?,
+    val answer1: String?,
+    val answer2: String?,
+    val answer3: String?,
+    val answer4: String?,
+    val role: String,
+    val signUpStep: String,
+    val gender: String?,
+    val mbti: String?,
+    val ageGroup: String,
+    val smoking: String?,
+    val drinking: String?,
+    val religion: String?,
+    val createAt: String,
+    val updatedAt: String
+)

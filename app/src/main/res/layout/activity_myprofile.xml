@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
+    <include
+        layout="@layout/toolbar_myprofile"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="12dp">
-
         <ImageView
             android:id="@+id/userImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_launcher_background"
-            android:layout_marginRight="15dp" />
-
+            android:layout_marginRight="15dp"/>
         <TextView
             android:id="@+id/userNickname"
             android:layout_width="wrap_content"
@@ -27,8 +26,7 @@
             android:layout_gravity="center_vertical"
             android:text="{유저닉네임}님"
             android:textColor="@color/black"
-            android:textSize="20sp" />
-
+            android:textSize="20sp"/>
         <Button
             android:id="@+id/fetchProfileButton"
             android:layout_width="95dp"
@@ -37,28 +35,25 @@
             android:background="@drawable/button_mypage"
             android:text="프로필 수정 ✐"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/basicinfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/basicinfo" />
-
+            android:text="@string/basicinfo"/>
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/introduce"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/introduce" />
+            android:text="@string/introduce"/>
     </com.google.android.material.tabs.TabLayout>
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"/>
 </LinearLayout>
