@@ -15,6 +15,23 @@
         tools:targetApi="31">
         <activity
             android:name=".activity.signUp.NicknameSignUpActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.signUp.InitSignUpActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.ClubListActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.ClubDetailActivity"
+            android:exported="true" />
+        <activity android:name=".ui.LoginActivity"
+            android:exported="true" />
+        <activity android:name=".ui.MyProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.NoticeListActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.NoticeDetailActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

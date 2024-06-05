@@ -81,6 +81,8 @@ class InitSignUpActivity : AppCompatActivity() {
                 } else {
                     // TODO: 실패 처리 (예: 에러 메시지 표시)
                     Toast.makeText(this@InitSignUpActivity, "Sign up failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@InitSignUpActivity, NicknameSignUpActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
