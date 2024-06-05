@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">NAWA</string>
+    <!--activity_login.xml에 사용되는 @string-->
+    <string name="login">로그인</string>
+    <!--이메일 EditText 내 Hint로 사용되는 @string-->
+    <string name="idHint">이메일을 입력해주세요</string>
+    <!--비밀번호 EditText 내 Hint로 사용되는 @string-->
+    <string name="passwordHint">비밀번호를 입력해주세요</string>
+    <!--닉네임 관련 페이지(activity_join_second.xml, dialog_fetch_nickname.xml)에 사용되는 @string-->
+    <string name="nickname">닉네임</string>
+    <!--닉네임 EditText 내 Hint로 사용되는 @string-->
+    <string name="nicknameHint">닉네임을 입력해주세요</string>
+    <!--자기 소개 xml내 성별로 사용되는 @string-->
+    <string name="male">남자</string>
+    <string name="female">여자</string>
+    <!--기본정보 Tab에 사용되는 @string-->
+    <string name="basicinfo">기본 정보</string>
+    <!--자기소개 Tab에 사용되는 @string-->
+    <string name="introduce">자기 소개</string>
+    <!--자기소개 질문에 사용되는 @string-->
+    <string name="introducequestion">· 모임을 통해 어떤 사람을 만나고 싶나요?</string>
+    <!--수정완료 Button(profile_fetch관련 xml)에 사용되는 @string-->
+    <string name="fetchcomplete">수정완료</string>
+    <!--취소 Button(profile_fetch관련 dialog xml)에 사용되는 @string-->
+    <string name="cancel">취소</string>
+    <string name="info">- 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.</string>
+    <string name="complete">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
+    <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
 </resources>
