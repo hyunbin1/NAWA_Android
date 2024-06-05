@@ -1,12 +1,15 @@
 package com.example.myapplication.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.data.model.Club
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMypageBinding
@@ -17,17 +20,34 @@ import retrofit2.Response
 class MyPageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMypageBinding
+    private lateinit var myprofileButton: Button
+    private lateinit var clubAdapter: MyPageClubAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        myprofileButton = binding.myprofileButton
+
+        setupRecyclerView()
         fetchMemberInfo()
+        fetchClubs()
+
+        myprofileButton.setOnClickListener {
+            val intent = Intent(this, MyProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    
-    /** 로그인한 사용자 정보를 불러옴 */
+    private fun setupRecyclerView() {
+        clubAdapter = MyPageClubAdapter()
+        binding.clubRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MyPageActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = clubAdapter
+        }
+    }
+
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -43,23 +63,39 @@ class MyPageActivity : AppCompatActivity() {
                                 .load(member.profileImage)
                                 .placeholder(R.drawable.ic_launcher_background)
                                 .into(binding.userImage)
-                            // 다른 사용자 정보 설정
                         } ?: run {
-                            Log.e("MyProfileActivity", "회원 정보 응답이 없습니다.")
+                            Log.e("MyPageActivity", "회원 정보 응답이 없습니다.")
                         }
                     } else {
-                        Log.e("MyProfileActivity", "회원 정보를 가져오지 못했습니다: ${response.code()} - ${response.message()}")
-                        Toast.makeText(this@MyPageActivity, "회원 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                        Log.e("MyPageActivity", "회원 정보를 가져오지 못했습니다: ${response.code()} - ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<Member>, t: Throwable) {
-                    Log.e("MyProfileActivity", "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}")
-                    Toast.makeText(this@MyPageActivity, "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("MyPageActivity", "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}")
                 }
             })
-        } ?: run {
-            Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun fetchClubs() {
+        val call = RetrofitClient.apiService.getClubs()
+        call.enqueue(object : Callback<List<Club>> {
+            override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { clubs ->
+                        clubAdapter.setClubs(clubs)
+                    } ?: run {
+                        Log.e("MyPageActivity", "클럽 응답이 없습니다.")
+                    }
+                } else {
+                    Log.e("MyPageActivity", "클럽을 가져오지 못했습니다: ${response.code()} - ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<Club>>, t: Throwable) {
+                Log.e("MyPageActivity", "클럽을 가져오는 중 오류가 발생했습니다: ${t.message}")
+            }
+        })
     }
 }

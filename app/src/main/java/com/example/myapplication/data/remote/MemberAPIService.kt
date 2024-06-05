@@ -16,12 +16,8 @@ interface MemberAPIService {
     @POST("api/v1/auth/signup")
     fun initSignUp(@Body request: InitSignUpRequest): Call<LoginResponse>
 
+    // 회원 수정
     @PATCH("/api/v1/auth/update")
     fun updateMember(@Header("Authorization") token: String, @Body request: MemberUpdateRequest): Call<MemberResponse>
-
-
-    // 회원 수정
-
-
 
 }
