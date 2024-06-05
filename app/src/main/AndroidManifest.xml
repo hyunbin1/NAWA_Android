@@ -25,7 +25,7 @@
             android:exported="true" />
         <activity android:name=".ui.LoginActivity"
             android:exported="true" />
-        <activity android:name=".ui.MyProfileActivity"
+        <activity android:name=".ui.MyPageActivity"
             android:exported="true"/>
         <activity android:name=".ui.NoticeListActivity"
             android:exported="true"/>

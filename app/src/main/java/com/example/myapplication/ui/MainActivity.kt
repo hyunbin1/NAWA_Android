@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.myPage -> {
                 if (isLoggedIn) {
-                    val intent = Intent(this, MyProfileActivity::class.java)
+                    val intent = Intent(this, MyPageActivity::class.java)
                     startActivity(intent)
                 } else {
                     showLoginDialog()

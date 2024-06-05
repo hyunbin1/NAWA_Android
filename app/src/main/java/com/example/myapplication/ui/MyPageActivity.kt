@@ -9,18 +9,18 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
-import com.example.myapplication.databinding.ActivityMyprofileBinding
+import com.example.myapplication.databinding.ActivityMypageBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyProfileActivity : AppCompatActivity() {
+class MyPageActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMyprofileBinding
+    private lateinit var binding: ActivityMypageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyprofileBinding.inflate(layoutInflater)
+        binding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         fetchMemberInfo()
@@ -38,8 +38,8 @@ class MyProfileActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
-                            binding.userNickname.text = "${member.nickname}님"
-                            Glide.with(this@MyProfileActivity)
+                            binding.username.text = "${member.nickname}님"
+                            Glide.with(this@MyPageActivity)
                                 .load(member.profileImage)
                                 .placeholder(R.drawable.ic_launcher_background)
                                 .into(binding.userImage)
@@ -49,13 +49,13 @@ class MyProfileActivity : AppCompatActivity() {
                         }
                     } else {
                         Log.e("MyProfileActivity", "회원 정보를 가져오지 못했습니다: ${response.code()} - ${response.message()}")
-                        Toast.makeText(this@MyProfileActivity, "회원 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MyPageActivity, "회원 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<Member>, t: Throwable) {
                     Log.e("MyProfileActivity", "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}")
-                    Toast.makeText(this@MyProfileActivity, "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MyPageActivity, "회원 정보를 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
         } ?: run {
