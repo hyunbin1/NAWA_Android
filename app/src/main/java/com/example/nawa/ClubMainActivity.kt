@@ -18,13 +18,13 @@ class ClubMainActivity : AppCompatActivity() {
         binding = ActivityClubMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
-        val toolbar: Toolbar = binding.clubtoolbar
+        val toolbar: Toolbar = binding.clubMainToolbar
         setSupportActionBar(toolbar)
         
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        binding.clubjoinBtn.setOnClickListener{
+        binding.clubJoinBtn.setOnClickListener{
             showCompletionDialog()
         }
 

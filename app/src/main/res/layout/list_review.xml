@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back"
+    android:background="@color/backColor"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
@@ -31,7 +31,7 @@
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="{유저 닉네임}"
+            android:text="@string/userName"
             android:textSize="18sp"
             android:textColor="@color/black"/>
         <LinearLayout
@@ -43,60 +43,60 @@
                 android:id="@+id/userLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="강남"
+                android:text="@string/userLocation"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/darkGray" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="|"
+                android:text="@string/block"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray"/>
+                android:textColor="@color/darkGray"/>
             <TextView
                 android:id="@+id/userAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="32살"
+                android:text="@string/userAge"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/darkGray" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="|"
+                android:text="@string/block"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray"/>
+                android:textColor="@color/darkGray"/>
             <TextView
                 android:id="@+id/userGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="여"
+                android:text="@string/userGender"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/darkGray" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="|"
+                android:text="@string/block"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray"/>
+                android:textColor="@color/darkGray"/>
             <TextView
                 android:id="@+id/days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2일전"
+                android:text="@string/days"
                 android:textSize="10sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/darkGray" />
         </LinearLayout>
         <TextView
             android:id="@+id/reviewContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="댓글 내용이 들어갑니다."
+            android:text="@string/reviewText"
             android:textSize="14sp"
             android:textColor="@color/black"/>
     </LinearLayout>

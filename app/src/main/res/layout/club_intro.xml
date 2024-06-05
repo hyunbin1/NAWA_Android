@@ -15,13 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/back">
+            android:background="@color/backColor">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
-                android:text="클럽을 소개합니다!"
+                android:text="@string/introClub"
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="클럽의 소개글이 들어갑니다."
+                android:text="@string/introClubText"
                 android:textSize="16dp"/>
 
             <LinearLayout
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="가입 조건"
+                    android:text="@string/joinCondition"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="- 가입조건이 들어갑니다."
+                    android:text="@string/joinCondText"
                     android:textSize="16dp"/>
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
-                android:text="등록 절차"
+                android:text="@string/regiStep"
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="등록절차가 들어갑니다."
+                android:text="@string/regiStepText"
                 android:textSize="16dp"/>
 
             <TextView
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
-                android:text="유의사항"
+                android:text="@string/caution"
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="유의사항이 들어갑니다."
+                android:text="@string/cautionText"
                 android:textSize="16dp"/>
 
             <TextView
@@ -104,14 +104,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
-                android:text="취소/환불 요청 안내"
+                android:text="@string/refund"
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="@string/info"
+                android:text="@string/refundInfo"
                 android:textSize="14dp"/>
         </LinearLayout>
     </ScrollView>

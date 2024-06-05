@@ -19,6 +19,9 @@
             android:name=".SystemNoticeMainActivity"
             android:parentActivityName=".MainActivity"></activity>
         <activity
+            android:name=".ClubsDetailActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

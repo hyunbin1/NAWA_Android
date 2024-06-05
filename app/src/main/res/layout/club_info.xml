@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/back">
+            android:background="@color/backColor">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="가입멤버 리스트"
+                    android:text="@string/joinMemList"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
@@ -35,9 +35,9 @@
                     android:id="@+id/memMoreBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="더보기"
+                    android:text="@string/more"
                     android:textColor="@color/black"
-                    android:background="@color/back"/>
+                    android:background="@color/backColor"/>
             </LinearLayout>
 
             <HorizontalScrollView
@@ -62,8 +62,7 @@
                             android:id="@+id/clubImage1"
                             android:layout_width="110dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/studio"
-                            android:contentDescription="Studio Image" />
+                            android:src="@drawable/studio" />
                         <TextView
                             android:id="@+id/memberName1"
                             android:layout_width="100dp"
@@ -71,7 +70,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:gravity="center"
-                            android:text="{유저 닉네임}"
+                            android:text="@string/userName"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -88,8 +87,7 @@
                             android:id="@+id/clubImage2"
                             android:layout_width="110dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/studio"
-                            android:contentDescription="Studio Image" />
+                            android:src="@drawable/studio" />
                         <TextView
                             android:id="@+id/memberName2"
                             android:layout_width="100dp"
@@ -97,7 +95,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:gravity="center"
-                            android:text="{유저 닉네임}"
+                            android:text="@string/userName"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -114,8 +112,7 @@
                             android:id="@+id/clubImage3"
                             android:layout_width="110dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/studio"
-                            android:contentDescription="Studio Image" />
+                            android:src="@drawable/studio" />
                         <TextView
                             android:id="@+id/memberName3"
                             android:layout_width="100dp"
@@ -123,7 +120,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:gravity="center"
-                            android:text="{유저 닉네임}"
+                            android:text="@string/userName"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -147,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:text="클럽 활동 사진"
+                android:text="@string/clubPic"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -208,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:text="공지사항"
+                android:text="@string/notice"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <ListView

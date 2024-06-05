@@ -26,5 +26,11 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+        binding.moreClubBtn.setOnClickListener{
+            val intent:Intent = Intent(this, ClubsDetailActivity::class.java).apply{
+
+            }
+            startActivity(intent)
+        }
     }
 }
