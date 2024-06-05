@@ -34,6 +34,17 @@
                     android:src="@drawable/ad"/>
             </androidx.cardview.widget.CardView>
 
+            <!-- 클럽 생성 버튼(임시) -->
+            <Button
+                android:id="@+id/createClubButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="클럽 생성"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:visibility="gone"/> <!-- 기본적으로 보이지 않음 -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,4 +113,5 @@
                 android:text="로그인(임시)" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
