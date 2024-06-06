@@ -34,6 +34,14 @@
             android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/nicknameErr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text=""
+            android:textColor="@color/warn"
+            android:padding="5dp"/>
         <EditText
             android:id="@+id/nickname"
             android:layout_width="match_parent"
