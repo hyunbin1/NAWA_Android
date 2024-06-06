@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.activity.signUp.InitSignUpActivity
 import com.example.myapplication.data.DTO.Request.LoginRequest
 import com.example.myapplication.data.DTO.Response.LoginResponse
 import com.example.myapplication.data.remote.RetrofitClient
@@ -36,6 +37,12 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.kakaologinButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.registration.setOnClickListener{
+            val intent = Intent(this, InitSignUpActivity::class.java)
             startActivity(intent)
             finish()
         }
