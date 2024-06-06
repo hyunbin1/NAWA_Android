@@ -1,9 +1,10 @@
-package com.example.myapplication.ui
+package com.example.myapplication.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.activity.NoticeDetailActivity
 import com.example.myapplication.data.model.Notice
 import com.example.myapplication.databinding.ItemNoticeBinding
 

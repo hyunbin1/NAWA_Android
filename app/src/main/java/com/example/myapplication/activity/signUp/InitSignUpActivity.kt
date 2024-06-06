@@ -7,10 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.data.DTO.Request.InitSignUpRequest
-import com.example.myapplication.data.model.LoginResponse
+import com.example.myapplication.data.DTO.Response.LoginResponse
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityJoinFirstBinding
-import com.example.myapplication.ui.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

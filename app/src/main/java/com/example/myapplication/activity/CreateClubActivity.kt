@@ -1,10 +1,10 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.data.AppDatabase
-import com.example.myapplication.data.model.ClubDetail
+import com.example.myapplication.data.database.Club
 import com.example.myapplication.databinding.ActivityCreateClubBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ class CreateClubActivity : AppCompatActivity() {
 
     private fun createClub(clubName: String, clubDescription: String) {
         val clubUUID = UUID.randomUUID().toString()
-        val club = ClubDetail(
+        val club = Club(
             clubRegisProcess = "등록 절차",
             clubCancelIntroduction = listOf("취소 소개"),
             clubQualification = listOf("자격 요건"),

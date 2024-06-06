@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.content.Context
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.data.model.LoginRequest
-import com.example.myapplication.data.model.LoginResponse
+import com.example.myapplication.data.DTO.Request.LoginRequest
+import com.example.myapplication.data.DTO.Response.LoginResponse
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityLoginBinding
 import retrofit2.Call
