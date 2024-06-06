@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.data.DTO.Request.InitSignUpRequest
 import com.example.myapplication.data.model.LoginRequest
 import com.example.myapplication.data.model.LoginResponse
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.kakao.sdk.user.UserApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,10 +36,49 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.kakaologinButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                if (error != null) {
+                    Toast.makeText(this, "로그인 실패: ${error.message}", Toast.LENGTH_SHORT).show()
+                } else if (token != null) {
+                    // 로그인 성공 시 처리
+                    fetchKakaoUserInfo(token.accessToken)
+                }
+            }
+        }
+    }
+
+    private fun fetchKakaoUserInfo(kakaoToken: String) {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Toast.makeText(this, "사용자 정보 요청 실패: ${error.message}", Toast.LENGTH_SHORT).show()
+            } else if (user != null) {
+                // 사용자 정보 가져오기
+                val id = user.id.toString()
+                val nickname = user.kakaoAccount?.profile?.nickname ?: ""
+                val email = user.kakaoAccount?.email ?: ""
+                val memberUUID = java.util.UUID.randomUUID().toString()
+
+                // 회원가입 요청
+                val signUpRequest = InitSignUpRequest(email, "", true)
+                val call = RetrofitClient.memberAPIService.initSignUp(signUpRequest)
+
+                call.enqueue(object : Callback<LoginResponse> {
+                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                        if (response.isSuccessful) {
+                            // 회원가입 성공 시 로그인 요청
+                            login(email, "")
+                        } else {
+                            Toast.makeText(this@LoginActivity, "회원가입 실패: ${response.message()}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Toast.makeText(this@LoginActivity, "회원가입 요청 중 오류 발생: ${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
         }
     }
 
