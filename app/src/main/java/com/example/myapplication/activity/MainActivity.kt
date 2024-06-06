@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.activity.signUp.InitSignUpActivity
 import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.model.Notice
@@ -98,7 +99,9 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MyPageActivity::class.java)
                     startActivity(intent)
                 } else {
-                    showLoginDialog()
+                    val intent = Intent(this, InitSignUpActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 true
             }
