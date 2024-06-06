@@ -1,4 +1,3 @@
-
 package com.example.myapplication.ui
 
 import android.content.Intent
@@ -6,16 +5,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.example.myapplication.R
 import com.example.myapplication.data.model.Club
 import com.example.myapplication.databinding.ItemClubBinding
 
 class ClubAdapter : RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
 
-    private var clubs: List<Club> = listOf()
+    private var clubs: MutableList<Club> = mutableListOf()
 
     fun setClubs(clubs: List<Club>) {
-        this.clubs = clubs
+        this.clubs = clubs.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun addClubs(clubs: List<Club>) {
+        val currentList = this.clubs.toMutableList()
+        currentList.addAll(clubs)
+        this.clubs = currentList
         notifyDataSetChanged()
     }
 
@@ -28,16 +34,20 @@ class ClubAdapter : RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
         holder.bind(clubs[position])
     }
 
-    override fun getItemCount(): Int = clubs.size
+    override fun getItemCount(): Int {
+        return clubs.size
+    }
 
-    inner class ClubViewHolder(private val binding: ItemClubBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ClubViewHolder(private val binding: ItemClubBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(club: Club) {
             binding.clubName.text = club.clubName
-            // Glide를 사용하여 이미지를 원형으로 로드
-            Glide.with(binding.clubLogo.context)
+            Glide.with(binding.root.context)
                 .load(club.clubLogo)
-                .apply(RequestOptions.circleCropTransform())
+                .circleCrop() // 이미지 모양 원형
+                .placeholder(R.drawable.ic_launcher_background) // 기본 이미지 설정
+                .error(R.drawable.ic_launcher_background) // 오류 발생 시 기본 이미지 설정
                 .into(binding.clubLogo)
+
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

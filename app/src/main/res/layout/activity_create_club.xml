@@ -43,7 +43,7 @@
                 android:text="@string/clubName"
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/newClubTitle"
+                android:id="@+id/clubNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
@@ -56,7 +56,7 @@
                 android:text="@string/clubIntro"
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/newClubIntroduce"
+                android:id="@+id/clubDescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_margin="15dp"
@@ -76,7 +76,7 @@
                 android:background="@drawable/background_square"/>
 
             <Button
-                android:id="@+id/clubRegiBtn"
+                android:id="@+id/createClubButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

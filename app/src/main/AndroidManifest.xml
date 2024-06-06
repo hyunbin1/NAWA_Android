@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -13,6 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NAWA"
         tools:targetApi="31">
+        <!-- 카카오 SDK 초기화 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTask"
+            android:exported="true"
+            tools:replace="android:theme"/>
         <activity
             android:name=".activity.signUp.NicknameSignUpActivity"
             android:exported="true"/>
@@ -24,12 +40,17 @@
         <activity android:name=".ui.ClubDetailActivity"
             android:exported="true" />
         <activity android:name=".ui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" />
+        <activity android:name=".ui.MyPageActivity"
+            android:exported="true"/>
         <activity android:name=".ui.MyProfileActivity"
             android:exported="true"/>
         <activity android:name=".ui.NoticeListActivity"
             android:exported="true"/>
         <activity android:name=".ui.NoticeDetailActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.CreateClubActivity"
             android:exported="true"/>
         <activity android:name=".ui.MainActivity"
             android:exported="true">
@@ -37,6 +58,8 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+
             </intent-filter>
         </activity>
     </application>

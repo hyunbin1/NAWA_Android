@@ -1,18 +1,24 @@
 package com.example.myapplication.ui
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMyprofileBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.sql.DataSource
 
 class MyProfileActivity : AppCompatActivity() {
 
@@ -23,11 +29,27 @@ class MyProfileActivity : AppCompatActivity() {
         binding = ActivityMyprofileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupViewPagerWithTabs()
         fetchMemberInfo()
     }
 
-    
-    /** 로그인한 사용자 정보를 불러옴 */
+    private fun setupViewPagerWithTabs() {
+        val adapter = MyProfilePagerAdapter(this)
+        val viewPager = binding.viewpager
+        val tabLayout = binding.tab
+
+        // Set up ViewPager2 adapter
+        viewPager.adapter = adapter
+
+        // Set up TabLayout with ViewPager2
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "기본 정보"
+                1 -> tab.text = "소개"
+            }
+        }.attach()
+    }
+
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)

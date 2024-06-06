@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Club
+import com.example.myapplication.data.model.ClubDetail
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ListClubBinding
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,12 +39,30 @@ class ClubListActivity : AppCompatActivity() {
     }
 
     private fun fetchAllClubs() {
+        // Room 데이터베이스에서 클럽 데이터를 가져옴
+        val db = AppDatabase.getInstance(this)
+        lifecycleScope.launch {
+            val clubsFromDb = db.clubDao().getAllClubs()
+            clubAdapter.setClubs(clubsFromDb.map { Club(it.clubName, it.clubUUID, it.clubLogo) })
+
+            // 클럽 이름 로그로 출력
+            clubsFromDb.forEach { club ->
+                Log.d("ClubListActivity", "로컬 클럽: ${club.clubName}")
+            }
+        }
+
+        // API에서 클럽 데이터를 가져옴
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { clubs ->
-                        clubAdapter.setClubs(clubs)
+                    response.body()?.let { clubsFromApi ->
+                        clubAdapter.addClubs(clubsFromApi)
+
+                        // 클럽 이름 로그로 출력
+                        clubsFromApi.forEach { club ->
+                            Log.d("ClubListActivity", "API 클럽: ${club.clubName}")
+                        }
                     } ?: run {
                         Log.e("ClubListActivity", "클럽 응답이 없습니다.")
                     }
@@ -56,4 +78,7 @@ class ClubListActivity : AppCompatActivity() {
             }
         })
     }
+
+
+
 }
