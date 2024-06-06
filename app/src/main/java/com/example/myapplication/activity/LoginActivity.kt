@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.data.DTO.Request.InitSignUpRequest
 import com.example.myapplication.data.model.LoginRequest
 import com.example.myapplication.data.model.LoginResponse
+import com.example.myapplication.activity.signUp.InitSignUpActivity
+import com.example.myapplication.data.DTO.Request.LoginRequest
+import com.example.myapplication.data.DTO.Response.LoginResponse
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.kakao.sdk.user.UserApiClient
@@ -36,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
             }
         }
-
         binding.kakaologinButton.setOnClickListener {
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
@@ -79,6 +81,12 @@ class LoginActivity : AppCompatActivity() {
                     }
                 })
             }
+        }
+
+        binding.registration.setOnClickListener{
+            val intent = Intent(this, InitSignUpActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

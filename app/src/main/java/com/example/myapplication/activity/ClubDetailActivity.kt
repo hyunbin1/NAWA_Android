@@ -1,11 +1,11 @@
 
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.myapplication.data.model.ClubDetail
+import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityClubDetailBinding
 import retrofit2.Call
@@ -30,8 +30,8 @@ class ClubDetailActivity : AppCompatActivity() {
     /** api 요청을 통해서 클럽의 세부 정보를 가져옴 */
     private fun fetchClubDetail(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
-        call.enqueue(object : Callback<ClubDetail> {
-            override fun onResponse(call: Call<ClubDetail>, response: Response<ClubDetail>) {
+        call.enqueue(object : Callback<Club> {
+            override fun onResponse(call: Call<Club>, response: Response<Club>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         displayClubDetail(it)
@@ -41,18 +41,18 @@ class ClubDetailActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ClubDetail>, t: Throwable) {
+            override fun onFailure(call: Call<Club>, t: Throwable) {
                 Log.e("ClubDetailActivity", "Error: ${t.message}")
             }
         })
     }
 
-    private fun displayClubDetail(clubDetail: ClubDetail) {
-        binding.clubName.text = clubDetail.clubName
-        binding.clubIntro.text = clubDetail.clubIntro
-        binding.clubDescription.text = clubDetail.clubIntroduction
+    private fun displayClubDetail(club: Club) {
+        binding.clubName.text = club.clubName
+        binding.clubIntro.text = club.clubIntro
+        binding.clubDescription.text = club.clubIntroduction
         Glide.with(binding.clubLogo.context)
-            .load(clubDetail.clubLogo)
+            .load(club.clubLogo)
             .into(binding.clubLogo)
     }
 }

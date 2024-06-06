@@ -3,7 +3,7 @@ package com.example.myapplication.data.remote
 import com.example.myapplication.data.DTO.Request.InitSignUpRequest
 import com.example.myapplication.data.DTO.Request.MemberUpdateRequest
 import com.example.myapplication.data.DTO.Response.MemberResponse
-import com.example.myapplication.data.model.LoginResponse
+import com.example.myapplication.data.DTO.Response.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

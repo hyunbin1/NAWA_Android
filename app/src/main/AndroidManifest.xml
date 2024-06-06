@@ -35,31 +35,28 @@
         <activity
             android:name=".activity.signUp.InitSignUpActivity"
             android:exported="true"/>
-        <activity android:name=".ui.ClubListActivity"
+        <activity android:name=".activity.ClubListActivity"
             android:exported="true"/>
-        <activity android:name=".ui.ClubDetailActivity"
+        <activity android:name=".activity.ClubDetailActivity"
             android:exported="true" />
-        <activity android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        <activity android:name=".activity.LoginActivity"
             android:exported="true" />
-        <activity android:name=".ui.MyPageActivity"
+        <activity android:name=".activity.MyPageActivity"
             android:exported="true"/>
-        <activity android:name=".ui.MyProfileActivity"
+        <activity android:name=".activity.MyProfileActivity"
             android:exported="true"/>
-        <activity android:name=".ui.NoticeListActivity"
+        <activity android:name=".activity.NoticeListActivity"
             android:exported="true"/>
-        <activity android:name=".ui.NoticeDetailActivity"
+        <activity android:name=".activity.NoticeDetailActivity"
             android:exported="true"/>
-        <activity android:name=".ui.CreateClubActivity"
+        <activity android:name=".activity.CreateClubActivity"
             android:exported="true"/>
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
-
             </intent-filter>
         </activity>
     </application>

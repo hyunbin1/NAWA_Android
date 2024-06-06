@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.content.Context
 import android.content.Intent
@@ -12,12 +12,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.activity.signUp.InitSignUpActivity
 import com.example.myapplication.data.AppDatabase
-import com.example.myapplication.data.model.Club
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.model.Notice
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.adapter.ClubBannerAdapter
+import com.example.myapplication.adapter.LoginDialogFragment
+import com.example.myapplication.adapter.NoticeAdapter
+import com.example.myapplication.data.DTO.Request.ClubBannerDTO
+import com.example.myapplication.data.database.toClubBannerRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +33,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var clubAdapter: ClubAdapter
+    private lateinit var clubAdapter: ClubBannerAdapter
     private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var loginButton: Button
     private lateinit var createClubButton: Button
@@ -44,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupToolbar()
-        fetchClubs()
+        fetchClubBanners()
         fetchNotices()
 
         checkLoginStatus()
@@ -94,7 +99,9 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MyPageActivity::class.java)
                     startActivity(intent)
                 } else {
-                    showLoginDialog()
+                    val intent = Intent(this, InitSignUpActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 true
             }
@@ -108,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        clubAdapter = ClubAdapter()
+        clubAdapter = ClubBannerAdapter()
         noticeAdapter = NoticeAdapter()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -122,13 +129,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchClubs() {
+    private fun fetchClubBanners() {
         val db = AppDatabase.getInstance(this)
         val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-        val call = RetrofitClient.apiService.getClubs()
-        call.enqueue(object : Callback<List<Club>> {
-            override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
+        val call = RetrofitClient.apiService.getClubBanners()
+        call.enqueue(object : Callback<List<ClubBannerDTO>> {
+            override fun onResponse(call: Call<List<ClubBannerDTO>>, response: Response<List<ClubBannerDTO>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { clubsFromApi ->
                         val limitedClubsFromApi = clubsFromApi.take(5)
@@ -138,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                             coroutineScope.launch {
                                 val clubsFromDb = db.clubDao().getAllClubs()
                                 val neededClubs = 5 - limitedClubsFromApi.size
-                                val additionalClubs = clubsFromDb.take(neededClubs)
+                                val additionalClubs = clubsFromDb.take(neededClubs).map { it.toClubBannerRequest() }
                                 clubAdapter.addClubs(additionalClubs)
                             }
                         }
@@ -151,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Club>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ClubBannerDTO>>, t: Throwable) {
                 Log.e("MainActivity", "클럽을 가져오는 중 오류가 발생했습니다: ${t.message}")
             }
         })

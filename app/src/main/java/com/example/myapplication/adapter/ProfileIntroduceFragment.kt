@@ -1,22 +1,22 @@
-package com.example.myapplication.ui
+package com.example.myapplication.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myapplication.databinding.ProfileBasicinfoBinding
+import com.example.myapplication.databinding.ProfileIntroduceBinding
 
-class ProfileBasicInfoFragment : Fragment() {
+class ProfileIntroduceFragment : Fragment() {
 
-    private var _binding: ProfileBasicinfoBinding? = null
+    private var _binding: ProfileIntroduceBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ProfileBasicinfoBinding.inflate(inflater, container, false)
+        _binding = ProfileIntroduceBinding.inflate(inflater, container, false)
         return binding.root
     }
 

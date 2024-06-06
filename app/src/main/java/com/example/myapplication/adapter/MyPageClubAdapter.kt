@@ -1,10 +1,10 @@
-package com.example.myapplication.ui
+package com.example.myapplication.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.data.model.Club
+import com.example.myapplication.data.database.Club
 import com.example.myapplication.databinding.ListMypageclubBinding
 
 class MyPageClubAdapter : RecyclerView.Adapter<MyPageClubAdapter.ClubViewHolder>() {

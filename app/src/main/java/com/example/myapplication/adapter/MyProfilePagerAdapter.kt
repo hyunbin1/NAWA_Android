@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

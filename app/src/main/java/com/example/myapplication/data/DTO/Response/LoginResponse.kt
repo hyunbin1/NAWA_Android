@@ -1,5 +1,5 @@
 
-package com.example.myapplication.data.model
+package com.example.myapplication.data.DTO.Response
 
 data class LoginResponse(
     val data: Data
