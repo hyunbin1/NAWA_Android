@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
         <TextView
-            android:id="@+id/clubTitle"
+            android:id="@+id/newClubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@string/joinComplete"
+            android:text="@string/app_complete"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"/>
@@ -43,7 +43,7 @@
         android:textColor="@color/black"/>
 
     <Button
-        android:id="@+id/completeBtn"
+        android:id="@+id/clubCompleteBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/complete_button"

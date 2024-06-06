@@ -1,0 +1,296 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/backColor">
+
+            <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/moreClubToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backColor"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:title="@string/clubWithMe">
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:id="@+id/club1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_square"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/clubImage1"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/studio" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/clubTitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/club_name"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/member"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/memberCount1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/memberCount"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/clubIntroduce1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/simpleIntro"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/club2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_square"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/clubImage2"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/studio" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/clubTitle2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/club_name"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/member"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/memberCount2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/memberCount"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/clubIntroduce2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/simpleIntro"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/club3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_square"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/clubImage3"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/studio" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/clubTitle3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/club_name"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/member"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/memberCount3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/memberCount"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/clubIntroduce3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/simpleIntro"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/club4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_square"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/clubImage4"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/studio" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/clubTitle4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/club_name"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/member"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/memberCount4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/memberCount"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/clubIntroduce4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/simpleIntro"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

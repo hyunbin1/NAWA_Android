@@ -30,7 +30,7 @@
                 android:paddingRight="20dp"
                 android:layout_gravity="right"
                 android:background="@drawable/main_item_button"
-                android:text="후기작성"
+                android:text="@string/writeReview"
                 android:textSize="20dp"/>
         </LinearLayout>
     </ScrollView>
