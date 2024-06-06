@@ -95,7 +95,7 @@
             android:text="|"
             android:paddingRight="16dp"/>
         <TextView
-            android:id="@+id/joinMem"
+            android:id="@+id/registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/partition"
