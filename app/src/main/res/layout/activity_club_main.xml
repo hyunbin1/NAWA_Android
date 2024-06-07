@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:tabBackground="@color/backColor"
+                app:tabBackground="@color/background"
                 app:tabIndicatorColor="@android:color/black"
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@android:color/black"
