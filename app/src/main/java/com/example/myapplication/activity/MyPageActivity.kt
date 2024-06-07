@@ -23,6 +23,7 @@ class MyPageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMypageBinding
     private lateinit var myprofileButton: Button
     private lateinit var clubAdapter: MyPageClubAdapter
+    private var isLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,12 @@ class MyPageActivity : AppCompatActivity() {
 
         myprofileButton.setOnClickListener {
             val intent = Intent(this, MyProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            logout()
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -98,5 +105,14 @@ class MyPageActivity : AppCompatActivity() {
                 Log.e("MyPageActivity", "클럽을 가져오는 중 오류가 발생했습니다: ${t.message}")
             }
         })
+    }
+
+    private fun logout() {
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("ACCESS_TOKEN")
+        editor.apply()
+
+        isLoggedIn = false
     }
 }

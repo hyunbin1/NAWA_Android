@@ -45,9 +45,13 @@
             android:exported="true"/>
         <activity android:name=".activity.MyProfileActivity"
             android:exported="true"/>
+        <activity android:name=".activity.MyProfileFetchActivity"
+            android:exported="true"/>
         <activity android:name=".activity.NoticeListActivity"
             android:exported="true"/>
         <activity android:name=".activity.NoticeDetailActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.NoticeCreateActivity"
             android:exported="true"/>
         <activity android:name=".activity.CreateClubActivity"
             android:exported="true"/>

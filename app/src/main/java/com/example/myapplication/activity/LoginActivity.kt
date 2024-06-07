@@ -47,6 +47,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.registration.setOnClickListener {
+            val intent = Intent(this, InitSignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchKakaoUserInfo(kakaoToken: String) {

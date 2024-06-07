@@ -35,17 +35,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var clubAdapter: ClubBannerAdapter
     private lateinit var noticeAdapter: NoticeAdapter
-    private lateinit var loginButton: Button
-    private lateinit var createClubButton: Button
     private var isLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        loginButton = binding.loginButton
-        createClubButton = binding.createClubButton
 
         setupRecyclerView()
         setupToolbar()
@@ -54,14 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         checkLoginStatus()
 
-        loginButton.setOnClickListener {
-            if (isLoggedIn) {
-                logout()
-            } else {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-            }
-        }
 
         binding.moreBtn.setOnClickListener {
             val intent = Intent(this, ClubListActivity::class.java)
@@ -73,8 +60,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        createClubButton.setOnClickListener {
-            val intent = Intent(this, CreateClubActivity::class.java)
+        binding.writeNoticeBtn.setOnClickListener {
+            val intent = Intent(this, NoticeCreateActivity::class.java)
             startActivity(intent)
         }
 
@@ -99,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MyPageActivity::class.java)
                     startActivity(intent)
                 } else {
-                    val intent = Intent(this, InitSignUpActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
@@ -205,7 +192,8 @@ class MainActivity : AppCompatActivity() {
                         response.body()?.let { member ->
                             Log.d("MainActivity", "회원 정보: ${member.nickname}, 이메일: ${member.emailId}, 회원 상태: ${member.role}")
                             if (member.role == "admin") {
-                                binding.createClubButton.visibility = View.VISIBLE
+                                binding.addClubBtn.visibility = View.VISIBLE
+                                binding.writeNoticeBtn.visibility = View.VISIBLE
                             }
                         } ?: run {
                             Log.e("MainActivity", "회원 정보 응답이 없습니다.")
@@ -229,20 +217,5 @@ class MainActivity : AppCompatActivity() {
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
         isLoggedIn = !accessToken.isNullOrEmpty()
 
-        updateLoginButtonText()
-    }
-
-    private fun updateLoginButtonText() {
-        loginButton.text = if (isLoggedIn) "로그아웃" else "로그인(임시)"
-    }
-
-    private fun logout() {
-        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.remove("ACCESS_TOKEN")
-        editor.apply()
-
-        isLoggedIn = false
-        updateLoginButtonText()
     }
 }
