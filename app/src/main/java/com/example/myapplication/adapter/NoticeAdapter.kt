@@ -1,9 +1,10 @@
-package com.example.myapplication.ui
+package com.example.myapplication.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.activity.NoticeDetailActivity
 import com.example.myapplication.data.model.Notice
 import com.example.myapplication.databinding.ItemNoticeBinding
 
@@ -29,9 +30,10 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
 
     inner class NoticeViewHolder(private val binding: ItemNoticeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(notice: Notice) {
+            binding.noticeCategory.text = notice.category
             binding.title.text = if (notice.title.length > 20) notice.title.substring(0, 20) + "..." else notice.title
-            binding.createDate.text = notice.createAt.substring(0, 10) // Assuming the date format is "yyyy-MM-dd"
-            binding.viewCount.text = "조회수: ${notice.viewCount}"
+            binding.createDate.text = notice.createAt.substring(0, 10)
+            binding.viewCount.text = "${notice.viewCount}"
 
             binding.root.setOnClickListener {
                 val context = binding.root.context

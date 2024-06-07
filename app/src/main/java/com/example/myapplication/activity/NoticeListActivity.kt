@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.model.Notice
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ListNoticeBinding
+import com.example.myapplication.adapter.NoticeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

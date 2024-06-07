@@ -1,13 +1,18 @@
-package com.example.myapplication.ui
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.data.model.Club
+import com.example.myapplication.data.AppDatabase
+import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ListClubBinding
+import com.example.myapplication.adapter.ClubBannerAdapter
+import com.example.myapplication.data.database.toClubBannerRequest
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +20,7 @@ import retrofit2.Response
 class ClubListActivity : AppCompatActivity() {
 
     private lateinit var binding: ListClubBinding
-    private lateinit var clubAdapter: ClubAdapter
+    private lateinit var clubAdapter: ClubBannerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +32,7 @@ class ClubListActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        clubAdapter = ClubAdapter()
+        clubAdapter = ClubBannerAdapter()
         binding.clubRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@ClubListActivity)
             adapter = clubAdapter
@@ -35,12 +40,22 @@ class ClubListActivity : AppCompatActivity() {
     }
 
     private fun fetchAllClubs() {
+
+
+        // API에서 클럽 데이터를 가져옴
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { clubs ->
-                        clubAdapter.setClubs(clubs)
+                    response.body()?.let { clubsFromApi ->
+                        val clubBannerRequests = clubsFromApi.map { it.toClubBannerRequest() }
+                        clubAdapter.addClubs(clubBannerRequests)
+
+
+                        // 클럽 이름 로그로 출력
+                        clubsFromApi.forEach { club ->
+                            Log.d("ClubListActivity", "API 클럽: ${club.clubName}")
+                        }
                     } ?: run {
                         Log.e("ClubListActivity", "클럽 응답이 없습니다.")
                     }
@@ -56,4 +71,7 @@ class ClubListActivity : AppCompatActivity() {
             }
         })
     }
+
+
+
 }

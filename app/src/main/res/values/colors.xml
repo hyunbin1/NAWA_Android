@@ -6,6 +6,9 @@
     <color name="white">#FFFFFFFF</color>
     <!--회원 정보 수정 toolbar '저장' 글자 색-->
     <color name="orange">#F6963E</color>
+    <color name="darkGray">#676767</color>
+    <!--어두운 버튼 글자 색-->
+    <!--회원 정보 수정 toolbar '저장' 글자 색-->
     <!--앱 배경 색 / 자기소개 입력 텍스트 배경 색-->
     <color name="background">#F8F8F8</color>
     <!--경고 문구용 빨간 색-->
