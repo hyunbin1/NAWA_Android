@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.nawa.databinding.ActivityClubsDetailBinding
+import com.example.myapplication.databinding.ActivityClubsDetailBinding
 
 class ClubsDetailActivity : AppCompatActivity() {
     private lateinit var  binding : ActivityClubsDetailBinding

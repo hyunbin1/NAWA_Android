@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.nawa.databinding.ActivitySystemNoticeMainBinding
+import com.example.myapplication.databinding.ActivitySystemNoticeMainBinding
 
 class SystemNoticeMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySystemNoticeMainBinding

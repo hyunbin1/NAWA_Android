@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.nawa.databinding.ClubInfoBinding
+import com.example.myapplication.databinding.ClubInfoBinding
 
 class ClubInfoFragment : Fragment() {
     override fun onCreateView(

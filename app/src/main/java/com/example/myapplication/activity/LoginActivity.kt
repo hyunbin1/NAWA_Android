@@ -7,8 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.data.DTO.Request.InitSignUpRequest
-import com.example.myapplication.data.model.LoginRequest
-import com.example.myapplication.data.model.LoginResponse
 import com.example.myapplication.activity.signUp.InitSignUpActivity
 import com.example.myapplication.data.DTO.Request.LoginRequest
 import com.example.myapplication.data.DTO.Response.LoginResponse

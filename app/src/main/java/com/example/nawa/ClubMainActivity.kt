@@ -6,8 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.nawa.databinding.ActivityClubMainBinding
-import com.example.nawa.databinding.ActivityCompleteDialogBinding
+import com.example.myapplication.databinding.ActivityClubMainBinding
+import com.example.myapplication.databinding.ActivityCompleteDialogBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ClubMainActivity : AppCompatActivity() {
