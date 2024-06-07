@@ -6,6 +6,7 @@
   </component>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   <component name="ProjectType">
     <option name="id" value="Android" />
@@ -13,4 +14,9 @@
 >>>>>>> pkzi
 =======
 >>>>>>> 566bfe31a94a6af645f4230578f074354177a053
+=======
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+>>>>>>> origin/pkzi
 </project>

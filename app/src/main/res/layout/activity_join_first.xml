@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <!-- Include your toolbar here -->
     <include
         layout="@layout/toolbar_join"/>
     <TextView
@@ -82,12 +83,23 @@
             android:orientation="vertical"
             android:layout_marginTop="5dp">
             <TextView
+                android:id="@+id/passwordError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:paddingLeft="7dp"
+                android:text=""
+                android:textColor="@color/warn"
+                android:visibility="gone"
+                />
+
+            <TextView
                 android:id="@+id/passwordCheck1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center"
                 android:paddingLeft="7dp"
-                android:text="✓    8자 이상 16자 이하"
+                android:text="✓    비밀번호는 8자 이상 16자 이하입니다."
                 android:textColor="@color/invalid"/>
             <TextView
                 android:id="@+id/passwordCheck2"
@@ -95,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="left|center"
                 android:paddingLeft="7dp"
-                android:text="✓    영문 대소문자, 숫자"
+                android:text="✓    영문, 숫자, 특수문자가 각각 1개씩 포함되어야합니다."
                 android:textColor="@color/invalid"/>
             <TextView
                 android:id="@+id/passwordCheck3"
@@ -103,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="left|center"
                 android:paddingLeft="7dp"
-                android:text="✓    !@#$%^&amp;*()_+"
+                android:text="✓    사용 가능한 특수문자는 !@#$%^&amp;*()_+ 입니다."
                 android:textColor="@color/invalid"/>
         </LinearLayout>
     </LinearLayout>

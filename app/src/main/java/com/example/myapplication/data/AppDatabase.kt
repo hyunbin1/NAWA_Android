@@ -6,10 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.myapplication.data.dao.ClubDao
-import com.example.myapplication.data.model.Club
-import com.example.myapplication.data.model.ClubDetail
+import com.example.myapplication.data.database.Club
 
-@Database(entities = [Club::class, ClubDetail::class], version = 1)
+@Database(entities = [Club::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun clubDao(): ClubDao
