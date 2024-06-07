@@ -46,6 +46,8 @@
             android:exported="true"/>
         <activity android:name=".ui.MyProfileActivity"
             android:exported="true"/>
+        <activity android:name=".ui.MyProfileFetchActivity"
+            android:exported="true"/>
         <activity android:name=".ui.NoticeListActivity"
             android:exported="true"/>
         <activity android:name=".ui.NoticeDetailActivity"

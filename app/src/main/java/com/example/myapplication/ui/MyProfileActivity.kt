@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,12 @@ class MyProfileActivity : AppCompatActivity() {
 
         setupViewPagerWithTabs()
         fetchMemberInfo()
+
+        // 프로필 수정 버튼 클릭 시 MyProfileFetchActivity로 이동
+        binding.fetchProfileButton.setOnClickListener {
+            val intent = Intent(this, MyProfileFetchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupViewPagerWithTabs() {
