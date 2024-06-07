@@ -51,6 +51,8 @@
             android:exported="true"/>
         <activity android:name=".activity.NoticeDetailActivity"
             android:exported="true"/>
+        <activity android:name=".activity.NoticeCreateActivity"
+            android:exported="true"/>
         <activity android:name=".activity.CreateClubActivity"
             android:exported="true"/>
         <activity android:name=".activity.MainActivity"

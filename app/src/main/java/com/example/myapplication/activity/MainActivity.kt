@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.writeNoticeBtn.setOnClickListener {
+            val intent = Intent(this, NoticeCreateActivity::class.java)
+            startActivity(intent)
+        }
+
         if (isLoggedIn) {
             fetchMemberInfo()
         }
