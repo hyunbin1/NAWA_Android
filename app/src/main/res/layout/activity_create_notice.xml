@@ -18,20 +18,14 @@
             android:orientation="vertical"
             android:background="@color/backColor">
 
-            <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/clubMainToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/backColor"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:title="@string/newClub">
-            </androidx.appcompat.widget.Toolbar>
+            <include
+                layout="@layout/toolbar"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="@string/newClubText"
+                android:text="공지사항 작성"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
@@ -40,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:text="@string/clubName"
+                android:text="공지사항 제목"
                 android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/clubNameEditText"
@@ -53,25 +47,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="@string/clubIntro"
+                android:text="공지사항 내용"
                 android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/clubDescriptionEditText"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/background_square"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="@string/clubJoinCondition"
-                android:textColor="@color/black"/>
-            <EditText
-                android:id="@+id/newClubCondition"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:layout_margin="15dp"
                 android:background="@drawable/background_square"/>
 
