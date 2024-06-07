@@ -12,7 +12,6 @@ import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMyprofileBinding
 import com.example.myapplication.adapter.MyProfilePagerAdapter
-import com.example.myapplication.ui.MyProfileFetchActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,10 +41,8 @@ class MyProfileActivity : AppCompatActivity() {
         val viewPager = binding.viewpager
         val tabLayout = binding.tab
 
-        // Set up ViewPager2 adapter
         viewPager.adapter = adapter
 
-        // Set up TabLayout with ViewPager2
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "기본 정보"
