@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/joinBar"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:titleTextAppearance="@style/ActionBarTextColor">
