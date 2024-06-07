@@ -1,0 +1,131 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "00bf8b50e5f107a3f9a37d800fb9fb54",
+    "entities": [
+      {
+        "tableName": "club",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`club_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `clubUUID` TEXT NOT NULL, `clubName` TEXT NOT NULL, `clubIntro` TEXT NOT NULL, `clubLogo` TEXT, `clubIntroduction` TEXT, `clubQualification` TEXT, `clubRegisProcess` TEXT, `clubNotice` TEXT, `clubCancelIntroduction` TEXT, `clubPrice` INTEGER NOT NULL, `memberCount` INTEGER NOT NULL, `createAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "club_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clubUUID",
+            "columnName": "clubUUID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clubName",
+            "columnName": "clubName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clubIntro",
+            "columnName": "clubIntro",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clubLogo",
+            "columnName": "clubLogo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubIntroduction",
+            "columnName": "clubIntroduction",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubQualification",
+            "columnName": "clubQualification",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubRegisProcess",
+            "columnName": "clubRegisProcess",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubNotice",
+            "columnName": "clubNotice",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubCancelIntroduction",
+            "columnName": "clubCancelIntroduction",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clubPrice",
+            "columnName": "clubPrice",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memberCount",
+            "columnName": "memberCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createAt",
+            "columnName": "createAt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "club_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_club_clubUUID",
+            "unique": false,
+            "columnNames": [
+              "clubUUID"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_club_clubUUID` ON `${TABLE_NAME}` (`clubUUID`)"
+          },
+          {
+            "name": "index_club_clubName",
+            "unique": false,
+            "columnNames": [
+              "clubName"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_club_clubName` ON `${TABLE_NAME}` (`clubName`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00bf8b50e5f107a3f9a37d800fb9fb54')"
+    ]
+  }
+}

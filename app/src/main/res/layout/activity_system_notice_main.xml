@@ -13,7 +13,7 @@
         android:background="@color/background"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/noticeToolbar"
-        app:title="공지사항">
+        app:title="@string/notice">
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

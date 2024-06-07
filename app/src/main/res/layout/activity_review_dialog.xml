@@ -15,7 +15,7 @@
         android:background="@drawable/background_square"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:hint="후기를 작성해주세요."
+        android:hint="@string/reviewNewText"
         android:textColor="@color/black"
         android:gravity="top"
         android:textSize="20dp"
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="@drawable/background_square"
-            android:text="취소"
+            android:text="@string/cancel"
             android:textColor="@color/black"/>
         <Button
             android:id="@+id/submitBtn"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="@drawable/complete_button"
-            android:text="입력완료"
+            android:text="@string/writeComplete"
             android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>

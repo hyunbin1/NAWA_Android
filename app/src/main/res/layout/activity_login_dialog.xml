@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         android:layout_gravity="center"
-        android:text="회원가입 후 이용해보세요"
+        android:text="@string/loginCaution"
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="@color/black"
@@ -31,7 +31,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@drawable/background_square"
-            android:text="취소"
+            android:text="@string/cancel"
             android:textColor="@color/black"/>
         <Button
             android:id="@+id/goToJoin"
@@ -40,7 +40,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@drawable/complete_button"
-            android:text="회원가입하러 가기"
+            android:text="@string/goToJoin"
             android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>
