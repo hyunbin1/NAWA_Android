@@ -75,8 +75,8 @@
     <string name="reviewNewText">후기를 작성해주세요.</string>
     <string name="createClub">클럽 생성하기</string>
     <string name="moreNotice">공지 더보기</string>
-    <string name="loginCaution">회원가입 후 이용해보세요</string>
-    <string name="goToJoin">회원가입하러 가기</string>
+    <string name="loginCaution">로그인 후 이용해보세요</string>
+    <string name="goToJoin">로그인하러 가기</string>
     <string name="newClub">클럽 생성</string>
     <string name="newClubText">나와에 클럽을 등록해보세요!</string>
     <string name="clubName">클럽 이름</string>

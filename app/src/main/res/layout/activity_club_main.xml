@@ -15,15 +15,13 @@
             android:background="@color/background"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/clubMainToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:title="@string/club_name"
-                app:menu="@menu/menu_toolbar">
-            </androidx.appcompat.widget.Toolbar>
+                app:menu="@menu/menu_toolbar"
+                app:title="@string/club_name"></androidx.appcompat.widget.Toolbar>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -35,7 +33,7 @@
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ad"/>
+                    android:src="@drawable/banner"/>
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
@@ -113,6 +111,9 @@
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@android:color/black"
                 app:tabTextColor="@color/lightGray" />
+
+
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"

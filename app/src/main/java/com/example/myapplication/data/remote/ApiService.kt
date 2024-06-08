@@ -3,6 +3,7 @@ package com.example.myapplication.data.remote
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.data.DTO.Request.LoginRequest
 import com.example.myapplication.data.DTO.Response.LoginResponse
+import com.example.myapplication.data.DTO.Response.MembershipResponse
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.model.*
 import retrofit2.Call
@@ -41,4 +42,10 @@ interface ApiService {
     // 회원 정보를 가져오는 api
     @GET("api/v1/member/me")
     fun getMemberInfo(@Header("Authorization") token: String): Call<Member>
+
+    @GET("api/v1/join/club/{clubUUID}")
+    fun checkClubMembership(
+        @Header("Authorization") token: String,
+        @Path("clubUUID") clubUUID: String
+    ): Call<MembershipResponse>
 }
