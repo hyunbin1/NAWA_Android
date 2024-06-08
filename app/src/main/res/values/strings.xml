@@ -22,67 +22,12 @@
     <!--수정완료 Button(profile_fetch관련 xml)에 사용되는 @string-->
     <string name="fetchcomplete">수정완료</string>
     <!--취소 Button(profile_fetch관련 dialog xml)에 사용되는 @string-->
-    <string name="info">- 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.</string>
-    <string name="clubApplyBtnMessage">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
-    <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
-    <string name="club_name">{클럽이름}</string>
-    <string name="app_complete">" 신청 완료"</string>
-    <string name="completeInfo">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
-    <string name="noReview">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
-    <string name="check">확인</string>
-    <string name="member">멤버수</string>
-    <string name="memberCount">50</string>
-    <string name="simpleIntro">간단한 소개 한줄이 들어갑니다.</string>
-    <string name="clubJoin">가입신청</string>
-    <string name="clubWithMe">나와 함께 할 클럽</string>
-    <string name="joinComplete">" 가입신청 완료"</string>
-    <string name="complete">완료</string>
-    <string name="clubJoinCondition">클럽 가입조건</string>
-    <string name="clubIntroText">클럽 소개글</string>
-    <string name="notice">공지사항</string>
-    <string name="category">카테고리</string>
-    <string name="noticeTitle">공지사항이 들어갑니다.</string>
-    <string name="noticeDate">2024.01.01</string>
-    <string name="views">조회수</string>
-    <string name="viewsData">205</string>
-    <string name="noticeText">공지사항 글이 들어갑니다 공지사항 글이 들어갑니다...</string>
-    <string name="userName">{유저 닉네임}</string>
-    <string name="userLocation">강남</string>
-    <string name="block">|</string>
-    <string name="userAge">32살</string>
-    <string name="userGender">여</string>
-    <string name="days">2일전</string>
-    <string name="reviewText">댓글 내용이 들어갑니다.</string>
-    <string name="writeReview">후기작성</string>
-    <string name="introClub">클럽을 소개합니다!</string>
-    <string name="introClubText">클럽의 소개글이 들어갑니다.</string>
-    <string name="joinCondition">가입 조건</string>
-    <string name="joinCondText">- 가입 조건이 들어갑니다.</string>
-    <string name="regiStep">등록 절차</string>
-    <string name="regiStepText">등록절차가 들어갑니다.</string>
-    <string name="caution">유의사항</string>
-    <string name="cautionText">유의사항이 들어갑니다.</string>
-    <string name="refund">취소/환불 요청 안내</string>
-    <string name="refundInfo">- 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.</string>
-    <string name="more">더보기</string>
-    <string name="joinMemList">가입멤버 리스트</string>
-    <string name="clubPic">클럽 활동 사진</string>
-    <string name="writeNotice">공지사항 작성</string>
-    <string name="title">제목</string>
-    <string name="context">내용</string>
-    <string name="writeComplete">작성 완료</string>
     <string name="cancel">취소</string>
-    <string name="reviewNewText">후기를 작성해주세요.</string>
-    <string name="createClub">클럽 생성하기</string>
-    <string name="moreNotice">공지 더보기</string>
-    <string name="loginCaution">회원가입 후 이용해보세요</string>
-    <string name="goToJoin">회원가입하러 가기</string>
-    <string name="newClub">클럽 생성</string>
-    <string name="newClubText">나와에 클럽을 등록해보세요!</string>
-    <string name="clubName">클럽 이름</string>
-    <string name="clubIntro">클럽 소개</string>
+    <string name="info">- 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.</string>
+    <string name="complete">확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.</string>
+    <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
+    <string name="registration">회원가입</string>
 </resources>
-
 
 <!--
 <text>

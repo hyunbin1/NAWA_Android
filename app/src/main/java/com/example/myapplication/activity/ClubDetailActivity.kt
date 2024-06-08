@@ -8,17 +8,19 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityClubDetailBinding
+import com.example.myapplication.databinding.ClubInfoBinding
+import com.example.myapplication.databinding.ClubIntroBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ClubDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityClubDetailBinding
+    private lateinit var binding: ClubIntroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityClubDetailBinding.inflate(layoutInflater)
+        binding = ClubIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val clubUUID = intent.getStringExtra("CLUB_UUID")
@@ -48,11 +50,16 @@ class ClubDetailActivity : AppCompatActivity() {
     }
 
     private fun displayClubDetail(club: Club) {
-        binding.clubName.text = club.clubName
-        binding.clubIntro.text = club.clubIntro
-        binding.clubDescription.text = club.clubIntroduction
-        Glide.with(binding.clubLogo.context)
-            .load(club.clubLogo)
-            .into(binding.clubLogo)
+        binding.introduceClub.text = club.clubIntroduction
+        binding.clubRegisProcess.text = club.clubRegisProcess
+        binding.clubNotice.text = club.clubNotice
+        binding.clubRegisProcess.text = club.clubRegisProcess
+        val clubCancelIntroductionList = club.clubCancelIntroduction
+        if (clubCancelIntroductionList != null) {
+            val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = ", ")
+            binding.clubCancelIntroduction.text = clubCancelIntroductionText
+        } else {
+            binding.clubCancelIntroduction.text = "" // 또는 기본값 설정
+        }
     }
 }

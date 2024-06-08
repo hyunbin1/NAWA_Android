@@ -73,7 +73,7 @@
                 android:gravity="left|center"
                 android:paddingLeft="7dp"
                 android:layout_marginVertical="5dp"
-                android:text="✓    닉네임 중복 체크"
+                android:text="✓    한글과 영문만 입력 가능합니다."
                 android:textColor="@color/invalid"/>
         </LinearLayout>
     </LinearLayout>

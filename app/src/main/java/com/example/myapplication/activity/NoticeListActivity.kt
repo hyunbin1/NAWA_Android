@@ -5,13 +5,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.data.model.Notice
-import com.example.myapplication.data.remote.RetrofitClient
+import com.example.myapplication.data.database.Notification
+import com.example.myapplication.data.helper.NoticeDbHelper
 import com.example.myapplication.databinding.ListNoticeBinding
 import com.example.myapplication.adapter.NoticeAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.myapplication.data.database.enum.NotificationCategory
 
 class NoticeListActivity : AppCompatActivity() {
 
@@ -36,25 +34,49 @@ class NoticeListActivity : AppCompatActivity() {
     }
 
     private fun fetchAllNotices() {
-        val call = RetrofitClient.apiService.getNotices()
-        call.enqueue(object : Callback<List<Notice>> {
-            override fun onResponse(call: Call<List<Notice>>, response: Response<List<Notice>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { notices ->
-                        noticeAdapter.setNotices(notices)
-                    } ?: run {
-                        Log.e("NoticeListActivity", "공지사항 응답이 없습니다.")
-                    }
-                } else {
-                    Log.e("NoticeListActivity", "공지사항을 가져오지 못했습니다: ${response.code()} - ${response.message()}")
-                    Toast.makeText(this@NoticeListActivity, "공지사항을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
+        val dbHelper = NoticeDbHelper(this)
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            NoticeDbHelper.TABLE_NAME,
+            null, // 모든 열을 선택
+            null, // 조건 없음
+            null, // 조건 값 없음
+            null, // 그룹핑하지 않음
+            null, // 그룹핑 조건 값 없음
+            "${NoticeDbHelper.COLUMN_CREATE_AT} DESC" // 최신 순으로 정렬
+        )
 
-            override fun onFailure(call: Call<List<Notice>>, t: Throwable) {
-                Log.e("NoticeListActivity", "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}")
-                Toast.makeText(this@NoticeListActivity, "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
+        val notices = mutableListOf<Notification>()
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_ID))
+                val noticeUUID = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_NOTICE_UUID))
+                val category = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CATEGORY))
+                val title = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_TITLE))
+                val content = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CONTENT))
+                val pinned = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED)) > 0
+                val pinnedAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED_AT))
+                val viewCount = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_VIEW_COUNT))
+                val createAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CREATE_AT))
+                val updatedAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_UPDATED_AT))
+
+                val notice = Notification(
+                    id,
+                    noticeUUID,
+                    NotificationCategory.valueOf(category),
+                    title,
+                    content,
+                    pinned,
+                    pinnedAt,
+                    viewCount,
+                    createAt,
+                    updatedAt
+                )
+                notices.add(notice)
             }
-        })
+        }
+        cursor.close()
+
+        noticeAdapter.setNotices(notices)
     }
 }
