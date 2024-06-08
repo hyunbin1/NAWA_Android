@@ -10,10 +10,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Member
-import com.example.myapplication.data.model.Notice
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.adapter.ClubBannerAdapter
@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clubAdapter: ClubBannerAdapter
     private lateinit var noticeAdapter: NoticeAdapter
     private var isLoggedIn = false
+    private var profileImageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         fetchNotices()
 
         checkLoginStatus()
-
 
         binding.moreBtn.setOnClickListener {
             val intent = Intent(this, ClubListActivity::class.java)
@@ -77,6 +77,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
+        val userProfileItem = menu?.findItem(R.id.myPage)
+        userProfileItem?.let {
+            Glide.with(this)
+                .load(profileImageUrl)
+                .circleCrop()
+                .placeholder(R.drawable.my)
+                .error(R.drawable.my)
+                .into(object : com.bumptech.glide.request.target.CustomTarget<android.graphics.drawable.Drawable>() {
+                    override fun onResourceReady(
+                        resource: android.graphics.drawable.Drawable,
+                        transition: com.bumptech.glide.request.transition.Transition<in android.graphics.drawable.Drawable>?
+                    ) {
+                        it.icon = resource
+                    }
+
+                    override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
+                        it.icon = placeholder
+                    }
+                })
+        }
         return true
     }
 
@@ -208,7 +228,6 @@ class MainActivity : AppCompatActivity() {
         noticeAdapter.setNotices(limitedNotices)
     }
 
-
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -220,6 +239,8 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
                             Log.d("MainActivity", "회원 정보: ${member.nickname}, 이메일: ${member.emailId}, 회원 상태: ${member.role}")
+                            profileImageUrl = member.profileImage
+                            invalidateOptionsMenu()
                             if (member.role == "admin") {
                                 binding.addClubBtn.visibility = View.VISIBLE
                                 binding.writeNoticeBtn.visibility = View.VISIBLE

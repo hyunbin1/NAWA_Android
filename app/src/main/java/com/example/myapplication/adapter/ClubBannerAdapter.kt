@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.activity.ClubDetailActivity
 import com.example.myapplication.activity.ClubMainActivity
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.databinding.ItemClubBinding
