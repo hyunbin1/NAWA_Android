@@ -81,9 +81,8 @@
     <string name="newClubText">나와에 클럽을 등록해보세요!</string>
     <string name="clubName">클럽 이름</string>
     <string name="clubIntro">클럽 소개</string>
+    <string name="registration">회원가입</string>
 </resources>
-
-
 <!--
 <text>
 1. club_name : {클럽이름}

@@ -76,7 +76,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/regiPro"
+                android:id="@+id/clubRegisProcess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -92,7 +92,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/notice"
+                android:id="@+id/clubNotice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -108,6 +108,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/clubCancelIntroduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
