@@ -7,12 +7,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.activity.signUp.InitSignUpActivity
 import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.model.Notice
@@ -22,7 +20,10 @@ import com.example.myapplication.adapter.ClubBannerAdapter
 import com.example.myapplication.adapter.LoginDialogFragment
 import com.example.myapplication.adapter.NoticeAdapter
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
+import com.example.myapplication.data.database.Notification
+import com.example.myapplication.data.database.enum.NotificationCategory
 import com.example.myapplication.data.database.toClubBannerRequest
+import com.example.myapplication.data.helper.NoticeDbHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,17 +36,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var clubAdapter: ClubBannerAdapter
     private lateinit var noticeAdapter: NoticeAdapter
-    private lateinit var loginButton: Button
-    private lateinit var createClubButton: Button
     private var isLoggedIn = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        loginButton = binding.loginButton
-        createClubButton = binding.createClubButton
 
         setupRecyclerView()
         setupToolbar()
@@ -54,14 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         checkLoginStatus()
 
-        loginButton.setOnClickListener {
-            if (isLoggedIn) {
-                logout()
-            } else {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-            }
-        }
 
         binding.moreBtn.setOnClickListener {
             val intent = Intent(this, ClubListActivity::class.java)
@@ -73,8 +61,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        createClubButton.setOnClickListener {
-            val intent = Intent(this, CreateClubActivity::class.java)
+        binding.writeNoticeBtn.setOnClickListener {
+            val intent = Intent(this, NoticeCreateActivity::class.java)
             startActivity(intent)
         }
 
@@ -99,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MyPageActivity::class.java)
                     startActivity(intent)
                 } else {
-                    val intent = Intent(this, InitSignUpActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
@@ -165,33 +153,61 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchNotices() {
-        val call = RetrofitClient.apiService.getNotices()
-        call.enqueue(object : Callback<List<Notice>> {
-            override fun onResponse(call: Call<List<Notice>>, response: Response<List<Notice>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { notices ->
-                        val limitedNotices = if (notices.size > 5) notices.take(5) else notices
+        val dbHelper = NoticeDbHelper(this)
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            NoticeDbHelper.TABLE_NAME,
+            null, // 모든 열을 선택
+            null, // 조건 없음
+            null, // 조건 값 없음
+            null, // 그룹핑하지 않음
+            null, // 그룹핑 조건 값 없음
+            "${NoticeDbHelper.COLUMN_CREATE_AT} DESC" // 최신 순으로 정렬
+        )
 
-                        limitedNotices.forEach { notice ->
-                            Log.d("MainActivity", "공지사항 ID: ${notice.id}")
-                        }
+        val notices = mutableListOf<Notification>()
+        with(cursor) {
+            while (moveToNext()) {
+                val id = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_ID))
+                val noticeUUID = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_NOTICE_UUID))
+                val category = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CATEGORY))
+                val title = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_TITLE))
+                val content = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CONTENT))
+                val pinned = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED)) > 0
+                val pinnedAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED_AT))
+                val viewCount = getInt(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_VIEW_COUNT))
+                val createAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CREATE_AT))
+                val updatedAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_UPDATED_AT))
 
-                        noticeAdapter.setNotices(limitedNotices)
-                    } ?: run {
-                        Log.e("MainActivity", "공지사항 응답이 없습니다.")
-                    }
-                } else {
-                    Log.e("MainActivity", "공지사항을 가져오지 못했습니다: ${response.code()} - ${response.message()}")
-                    Toast.makeText(this@MainActivity, "공지사항을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                try {
+                    val notificationCategory = NotificationCategory.valueOf(category)
+                    val notice = Notification(
+                        id,
+                        noticeUUID,
+                        notificationCategory,
+                        title,
+                        content,
+                        pinned,
+                        pinnedAt,
+                        viewCount,
+                        createAt,
+                        updatedAt
+                    )
+                    notices.add(notice)
+                } catch (e: IllegalArgumentException) {
+                    Log.e("MainActivity", "Invalid category value: $category")
                 }
             }
+        }
+        cursor.close()
 
-            override fun onFailure(call: Call<List<Notice>>, t: Throwable) {
-                Log.e("MainActivity", "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}")
-                Toast.makeText(this@MainActivity, "공지사항을 가져오는 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        val limitedNotices = if (notices.size > 5) notices.take(5) else notices
+        limitedNotices.forEach { notice ->
+            Log.d("MainActivity", "공지사항 ID: ${notice.id}")
+        }
+        noticeAdapter.setNotices(limitedNotices)
     }
+
 
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
@@ -205,7 +221,8 @@ class MainActivity : AppCompatActivity() {
                         response.body()?.let { member ->
                             Log.d("MainActivity", "회원 정보: ${member.nickname}, 이메일: ${member.emailId}, 회원 상태: ${member.role}")
                             if (member.role == "admin") {
-                                binding.createClubButton.visibility = View.VISIBLE
+                                binding.addClubBtn.visibility = View.VISIBLE
+                                binding.writeNoticeBtn.visibility = View.VISIBLE
                             }
                         } ?: run {
                             Log.e("MainActivity", "회원 정보 응답이 없습니다.")
@@ -229,20 +246,5 @@ class MainActivity : AppCompatActivity() {
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
         isLoggedIn = !accessToken.isNullOrEmpty()
 
-        updateLoginButtonText()
-    }
-
-    private fun updateLoginButtonText() {
-        loginButton.text = if (isLoggedIn) "로그아웃" else "로그인(임시)"
-    }
-
-    private fun logout() {
-        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.remove("ACCESS_TOKEN")
-        editor.apply()
-
-        isLoggedIn = false
-        updateLoginButtonText()
     }
 }

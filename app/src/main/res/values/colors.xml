@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--기본 글자 색-->
     <color name="black">#FF000000</color>
-    <!--어두운 버튼 글자 색-->
     <color name="white">#FFFFFFFF</color>
-    <!--회원 정보 수정 toolbar '저장' 글자 색-->
+    <color name="lightGray">#EDEDED</color>
     <color name="orange">#F6963E</color>
+    <color name="darkGray">#676767</color>
+    <!--어두운 버튼 글자 색-->
+    <!--회원 정보 수정 toolbar '저장' 글자 색-->
     <!--앱 배경 색 / 자기소개 입력 텍스트 배경 색-->
     <color name="background">#F8F8F8</color>
+    <color name="backColor">#F8F8F8</color>
     <!--경고 문구용 빨간 색-->
     <color name="warn">#EF2424</color>
     <color name="completeColor">#ED22DD00</color>
@@ -15,5 +17,86 @@
     <color name="nonselect">#727174</color>
     <!--회원가입 시 비밀번호 조건 충족 못할 시 활성화되는 글자 색-->
     <color name="invalid">#C1C1C1</color>
-    <color name="gray1">#EDEDED</color>
 </resources>
+
+<!--
+1. #EDEDED (@color/lightGray)
+/drawable/background.square.xml
+/layout/acitivity_club_main.xml -> tabTextColor
+
+
+2. #FFFFFF (@color/white)
+/drawable/background_square_white.xml
+/drawable/notice_button.xml
+/layout/activity_club_complete_dialog.xml -> TextView’s textColor
+/layout/activity_complete_dialog.xml 52
+/layout/activity_complete_dialog.xml 86
+/layout/activity_create_club.xml 86
+/layout/activity_login_dialog.xml 8, 44
+/layout/activity_main.xml 70,323
+/layout/activity_review_dialog.xml 8, 44
+/layout/club_no_reviews.xml
+/layout/activity_write_notice.xml
+/layout/activity_review_dialog.xml
+/layout/activity_main.xml
+/layout/activity_login_dialog.xml
+/layout/activity_create_club.xml
+
+
+3. #F6963E (@color/orange)
+/drawable/complete_button.xml
+/drawable/main_item_button.xml
+/layout/system_notice_detail.xml 24
+/layout/list_notice.xml
+
+
+4. #FF000000 (@color/black)
+/layout/activity_club_complete_dialog.xml -> TextView’s textColor
+/layout/activity_club_complete_dialog.xml -> TextView’s textColor
+/layout/activity_complete_dialog.xml 22
+/layout/activity_complete_dialog.xml 30
+/layout/activity_complete_dialog.xml 43
+/layout/activity_create_club.xml 44,57, 70
+/layout/activity_login_dialog.xml 20, 35
+/layout/activity_main.xml 56,345
+/layout/activity_review_dialog.xml 19, 35
+/layout/system_notice_detail.xml 84
+/layout/list_review.xml
+/layout/club_no_reviews.xml
+/layout/club_info.xml
+/layout/activity_write_notice.xml
+/layout/activity_review_dialog.xml
+/layout/activity_main.xml
+/layout/activity_login_dialog.xml
+/layout/activity_create_club.xml
+
+
+
+5. #F8F8F8 (@color/backColor)
+/layout/activity_club_main/xml -> Linearlayout’s background
+/layout/activity_club_main/xml -> Toolbar’s background
+/layout/activity_clubs_detail.xml -> linearlayout’s background
+/layout/activity_clubs_detail.xml -> Toolbar’s background
+/layout/activity_create_club.xml 19, 25
+/layout/activity_main.xml 19, 57
+/layout/activity_system_notice_main.xml 7,13
+/layout/toolbar.xml 5
+/layout/system_notice_detail.xml 11
+/layout/list_review.xml
+/layout/clubtoolbar.xml
+/layout/club_review.xml
+/layout/club_intro.xml
+/layout/club_info.xml
+/layout/club_info.xml
+/layout/activity_write_notice.xml
+/layout/activity_system_notice_main.xml
+/layout/activity_main.xml
+/layout/activity_create_club.xml
+
+
+6. #676767 (@color/darkGray)
+/layout/system_notice_detail.xml 49, 57, 66
+/layout/list_review.xml
+/layout/list_notice.xml
+-->
+    <!--기본 글자 색-->

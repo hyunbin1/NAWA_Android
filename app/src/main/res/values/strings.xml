@@ -28,3 +28,200 @@
     <string name="noreivew">아직 후기가 없어요.\n후기를 작성해볼까요?</string>
     <string name="registration">회원가입</string>
 </resources>
+
+<!--
+<text>
+1. club_name : {클럽이름}
+/layout/activity_club_complete_dialog.xml -> TextView’s text
+/layout/activity_club_main.xml -> Toolbar’s title
+/layout/activity_club_main.xml -> TextView’s text
+/layout/activity_clubs_detail.xml 61
+/layout/activity_complete_dialog.xml 21
+/layout/clubtoolbar.xml
+/layout/activity_main.xml
+
+
+2. app_complete : “ 신청 완료”
+/layout/activity_club_complete_dialog.xml -> TextView’s text
+
+3. complete : 확인절차까지 최소 2일~ 14일이 소요됩니다. \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다.
+/layout/activity_club_complete_dialog.xml -> TextView’s text
+/layout/activity_complete_dialog.xml 41
+
+4. check : 확인
+/layout/activity_club_complete_dialog.xml -> button’s text
+/layout/activity_complete_dialog.xml 50
+
+
+5. member : 멤버수
+/layout/activity_club_main.xml -> TextView’s text
+/layout/activity_clubs_detail.xml 72
+/layout/activity_main.xml
+
+6. memberCount : 50
+/layout/activity_club_main.xml -> TextView’s text
+/layout/activity_clubs_detail.xml 79
+/layout/activity_main.xml
+
+7. simpleIntro : 간단한 소개 한줄이 들어갑니다.
+/layout/activity_club_main.xml -> TextView’s text
+/layout/activity_clubs_detail.xml 90
+
+8. clubJoin : 가입신청
+/layout/activity_club_main.xml -> Button’s text
+
+9. clubWthMe : 나와 함께 할 클럽
+/layout/activity_clubs_detail.xml -> Toolbar’s title
+/layout/activity_main.xml
+
+10. joinComplete : “ 가입신청 완료”
+/layout/activity_complete_dialog.xml 29
+
+11.complete : 완료
+/layout/activity_create_club.xml 85
+
+12. clubJoinCondition : 클럽 가입조건
+/layout/activity_create_club.xml 69
+
+13. clubIntroText : 클럽 소개글
+/layout/activity_create_club.xml 56
+
+14. notice : 공지사항
+/layout/system_notice_detail.xml
+/layout/club_info.xml
+/layout/activity_system_notice_main.xml
+/layout/activity_main.xml
+
+15. category : 카테고리
+/layout/system_notice_detail.xml
+/layout/list_notice.xml
+/layout/activity_write_notice.xml
+
+16. noticeTitle : 공지사항이 들어갑니다.
+/layout/system_notice_detail.xml
+/layout/list_notice.xml
+
+17. noticeDate : 2024.01.01
+/layout/system_notice_detail.xml
+/layout/list_notice.xml
+
+18. views : 조회수
+/layout/system_notice_detail.xml
+/layout/list_notice.xml
+
+19. viewsData : 205
+/layout/system_notice_detail.xml
+/layout/list_notice.xml
+
+20. noticeText : 공지사항…
+/layout/system_notice_detail.xml
+
+21. userName : {유저 닉네임}
+/layout/list_review.xml
+/layout/club_info.xml
+
+22. userLocation : 강남
+/layout/list_review.xml
+
+23. block : |
+/layout/list_review.xml
+
+24. userAge : 32살
+/layout/list_review.xml
+
+25. userGender : 여
+/layout/list_review.xml
+
+26. days : 2일전
+/layout/list_review.xml
+
+27. reviewText : 댓글 내용이 들어갑니다.
+/layout/list_review.xml
+
+28. writeReview : 후기작성
+/layout/clubtoolbar.xml
+/layout/club_no_reviews.xml
+
+29. noReview : 아직 후기가 없어요.\n후기를 작성해볼까요?
+/layout/club_no_reviews.xml
+
+30. introClub : 클럽을 소개합니다!
+/layout/club_intro.xml
+
+31. introClubText : 클럽의 소개글이 들어갑니다.
+/layout/club_intro.xml
+
+32. joinCondition : 가입 조건
+/layout/club_intro.xml
+
+33. joinCondText : 가입 조건이 들어갑니다.
+/layout/club_intro.xml
+
+34. regiStep : 등록 절차
+/layout/club_intro.xml
+
+35. regiStepText : 등록 절차가 들어갑니다.
+/layout/club_intro.xml
+
+36. caution : 유의사항
+/layout/club_intro.xml
+
+37. cautionText : 유의사항이 들어갑니다.
+/layout/club_intro.xml
+
+38. refund : 취소/환불 요청 안내
+/layout/club_intro.xml
+
+39. refundInfo : - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요. \n\n - 이용내역은 최근 5년간의 내역까지 표시됩니다. 5년이 지난 내역을 확인하고 싶으시다면 메일을 통해 문의주세요.
+/layout/club_intro.xml
+
+40. more : 더보기
+/layout/club_info.xml
+/layout/activity_main.xml
+
+41. joinMemList : 가입멤버 리스트
+/layout/club_info.xml
+
+42. clubPic : 클럽 활동 사진
+/layout/club_info.xml
+
+43. writeNotice : 공지사항 작성
+/layout/activity_write_notice.xml
+
+44. title : 제목
+/layout/activity_write_notice.xml
+
+45. context : 내용
+/layout/activity_write_notice.xml
+
+46. writeComplete : 입력 완료
+/layout/activity_review_dialog.xml
+
+47. cancel : 취소
+/layout/activity_review_dialog.xml
+/layout/activity_login_dialog.xml
+
+48. reviewNewText : 후기를 작성해주세요.
+/layout/activity_review_dialog.xml
+
+49. moreNotice : 공지 더보기
+/layout/activity_main.xml
+
+50. loginCaution : 회원가입 후 이용해보세요
+/layout/activity_login_dialog.xml
+
+51. goToJoin : 회원가입하러 가기
+/layout/activity_login_dialog.xml
+
+52. newClub : 클럽 생성
+/layout/activity_create_club.xml
+
+53. newClubText : 나와에 클럽을 등록해보세요!
+/layout/activity_create_club.xml
+
+54. clubName : 클럽 이름
+/layout/activity_create_club.xml
+
+55. clubIntro : 클럽 소개
+/layout/activity_create_club.xml
+-->

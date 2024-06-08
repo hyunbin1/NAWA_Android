@@ -42,9 +42,9 @@ class ClubBannerAdapter : RecyclerView.Adapter<ClubBannerAdapter.ClubViewHolder>
     class ClubViewHolder(private val binding: ItemClubBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(club: ClubBannerDTO) {
             binding.clubName.text = club.clubName
-            // Glide를 사용하여 clubLogo 이미지 로드
             Glide.with(binding.root.context)
                 .load(club.clubLogo)
+                .circleCrop() // 이미지 모양 원형
                 .placeholder(R.drawable.ic_launcher_background) // 기본 이미지 설정
                 .error(R.drawable.ic_launcher_background) // 오류 발생 시 기본 이미지 설정
                 .into(binding.clubLogo)

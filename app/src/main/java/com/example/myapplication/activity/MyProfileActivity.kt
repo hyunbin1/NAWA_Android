@@ -1,6 +1,7 @@
 package com.example.myapplication.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -27,6 +28,12 @@ class MyProfileActivity : AppCompatActivity() {
 
         setupViewPagerWithTabs()
         fetchMemberInfo()
+
+        // 프로필 수정 버튼 클릭 시 MyProfileFetchActivity로 이동
+        binding.fetchProfileButton.setOnClickListener {
+            val intent = Intent(this, MyProfileFetchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupViewPagerWithTabs() {
@@ -34,10 +41,8 @@ class MyProfileActivity : AppCompatActivity() {
         val viewPager = binding.viewpager
         val tabLayout = binding.tab
 
-        // Set up ViewPager2 adapter
         viewPager.adapter = adapter
 
-        // Set up TabLayout with ViewPager2
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "기본 정보"

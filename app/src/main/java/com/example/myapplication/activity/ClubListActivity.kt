@@ -40,17 +40,7 @@ class ClubListActivity : AppCompatActivity() {
     }
 
     private fun fetchAllClubs() {
-        // Room 데이터베이스에서 클럽 데이터를 가져옴
-        val db = AppDatabase.getInstance(this)
-        lifecycleScope.launch {
-            val clubsFromDb = db.clubDao().getAllClubBanners()
-            clubAdapter.setClubs(clubsFromDb)
 
-            // 클럽 이름 로그로 출력
-            clubsFromDb.forEach { club ->
-                Log.d("ClubListActivity", "로컬 클럽: ${club.clubName}")
-            }
-        }
 
         // API에서 클럽 데이터를 가져옴
         val call = RetrofitClient.apiService.getClubs()
