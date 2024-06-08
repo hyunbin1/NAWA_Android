@@ -141,11 +141,6 @@ class MyProfileFetchActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMyProfile() {
-        val intent = Intent(this, MyProfileActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.save_toolbar, menu)
