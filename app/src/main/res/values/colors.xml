@@ -12,6 +12,7 @@
     <color name="backColor">#F8F8F8</color>
     <!--경고 문구용 빨간 색-->
     <color name="warn">#EF2424</color>
+    <color name="completeColor">#ED22DD00</color>
     <!--프로필 수정 시 선택되지 않는 버튼 글자 색(dialog_fetch, profile_fetch_basicinfo.xml)-->
     <color name="nonselect">#727174</color>
     <!--회원가입 시 비밀번호 조건 충족 못할 시 활성화되는 글자 색-->
