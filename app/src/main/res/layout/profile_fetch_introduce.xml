@@ -7,8 +7,9 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -22,7 +23,9 @@
         <EditText
             android:id="@+id/introduce"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
             android:background="@color/background"
             android:padding="10dp"
             android:hint="답변을 자유롭게 작성하세요."

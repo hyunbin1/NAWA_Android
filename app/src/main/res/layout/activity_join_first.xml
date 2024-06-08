@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="left|center"
                 android:paddingLeft="7dp"
-                android:text="✓    사용 가능한 특수문자는 !@#$%^&amp;*()_+ 입니다."
+                android:text="✓    사용 가능한 특수문자는 !@#$%^&amp;*()_+-= 입니다."
                 android:textColor="@color/invalid"/>
         </LinearLayout>
     </LinearLayout>
