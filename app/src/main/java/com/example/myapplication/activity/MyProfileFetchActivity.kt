@@ -1,6 +1,7 @@
 package com.example.myapplication.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -24,6 +25,7 @@ import retrofit2.Response
 class MyProfileFetchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyprofileFetchBinding
+    private var currentNickname: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,12 +68,12 @@ class MyProfileFetchActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
-                            binding.username.text = "${member.nickname}"
+                            currentNickname = member.nickname
+                            binding.username.text = member.nickname
                             Glide.with(this@MyProfileFetchActivity)
                                 .load(member.profileImage)
                                 .placeholder(R.drawable.ic_launcher_background)
                                 .into(binding.userImage)
-                            // 다른 사용자 정보 설정
                         } ?: run {
                             Log.e("MyProfileActivity", "회원 정보 응답이 없습니다.")
                         }
@@ -116,10 +118,12 @@ class MyProfileFetchActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<MemberResponse>, response: Response<MemberResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            binding.username.text = it.nickname
+                            currentNickname = newNickname
+                            binding.username.text = newNickname
                             binding.username.visibility = View.VISIBLE
                             binding.editUsername.visibility = View.INVISIBLE
                             Toast.makeText(this@MyProfileFetchActivity, "닉네임이 업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
+
                         }
                     } else {
                         Log.e("MyProfileFetchActivity", "닉네임 업데이트 실패: ${response.code()} - ${response.message()}")
@@ -135,6 +139,12 @@ class MyProfileFetchActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToMyProfile() {
+        val intent = Intent(this, MyProfileActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
