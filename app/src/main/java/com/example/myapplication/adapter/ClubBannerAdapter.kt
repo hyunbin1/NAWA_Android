@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.activity.ClubDetailActivity
+import com.example.myapplication.activity.ClubMainActivity
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.databinding.ItemClubBinding
 
@@ -51,7 +52,7 @@ class ClubBannerAdapter : RecyclerView.Adapter<ClubBannerAdapter.ClubViewHolder>
 
             binding.root.setOnClickListener {
                 val context = binding.root.context
-                val intent = Intent(context, ClubDetailActivity::class.java)
+                val intent = Intent(context, ClubMainActivity::class.java)
                 intent.putExtra("CLUB_UUID", club.clubUUID)
                 context.startActivity(intent)
             }

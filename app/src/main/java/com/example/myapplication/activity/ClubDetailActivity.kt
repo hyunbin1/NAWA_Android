@@ -28,7 +28,7 @@ class ClubDetailActivity : AppCompatActivity() {
             fetchClubDetail(it)
         }
     }
-    
+
     /** api 요청을 통해서 클럽의 세부 정보를 가져옴 */
     private fun fetchClubDetail(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
@@ -50,13 +50,19 @@ class ClubDetailActivity : AppCompatActivity() {
     }
 
     private fun displayClubDetail(club: Club) {
-        binding.introduceClub.text = club.clubIntroduction
-        binding.clubRegisProcess.text = club.clubRegisProcess
-        binding.clubNotice.text = club.clubNotice
-        binding.clubRegisProcess.text = club.clubRegisProcess
+        binding.introduceClub.text = club.clubIntroduction // 클럽 소개
+        val clubQualificationList = club.clubQualification // 가입 조건
+        if (clubQualificationList != null) {
+            val clubQualificationText = clubQualificationList.joinToString(separator = "\n")
+            binding.joinCondition.text = clubQualificationText
+        } else {
+            binding.joinCondition.text = "" // 또는 기본값 설정
+        }
+        binding.clubRegisProcess.text = club.clubRegisProcess //등록 절차
+        binding.clubNotice.text = club.clubNotice /// 유의사항
         val clubCancelIntroductionList = club.clubCancelIntroduction
         if (clubCancelIntroductionList != null) {
-            val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = ", ")
+            val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = "\n")
             binding.clubCancelIntroduction.text = clubCancelIntroductionText
         } else {
             binding.clubCancelIntroduction.text = "" // 또는 기본값 설정

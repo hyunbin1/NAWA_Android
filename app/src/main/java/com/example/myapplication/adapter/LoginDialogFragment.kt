@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.activity.LoginActivity
-import com.example.myapplication.databinding.ActivityLoginDialogBinding
+import com.example.myapplication.databinding.DialogSignupRequestBinding
 
 class LoginDialogFragment : DialogFragment() {
 
-    private lateinit var binding: ActivityLoginDialogBinding
+    private lateinit var binding: DialogSignupRequestBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = ActivityLoginDialogBinding.inflate(inflater, container, false)
+        binding = DialogSignupRequestBinding.inflate(inflater, container, false)
         return binding.root
     }
 

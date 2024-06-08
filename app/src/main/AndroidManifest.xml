@@ -37,6 +37,8 @@
             android:exported="true"/>
         <activity android:name=".activity.ClubListActivity"
             android:exported="true"/>
+        <activity android:name=".activity.ClubMainActivity"
+            android:exported="true"/>
         <activity android:name=".activity.ClubDetailActivity"
             android:exported="true" />
         <activity android:name=".activity.LoginActivity"

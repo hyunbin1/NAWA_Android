@@ -132,7 +132,8 @@ class NicknameSignUpActivity : AppCompatActivity() {
             val updateRequest = MemberUpdateRequest(
                 nickname = nickname,
                 signUpStep = "COMPLETE",
-                role = "USER"
+                role = "USER",
+                profileImage = "https://nawakr.com/resource/images/profiles/CEO.png"
             )
 
             val call = RetrofitClient.memberAPIService.updateMember("Bearer $token", updateRequest)
