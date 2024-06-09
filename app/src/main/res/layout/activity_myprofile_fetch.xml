@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include
-        layout="@layout/toolbar_myprofile_fetch"/>
+        layout="@layout/toolbar_myprofile_fetch"
+        android:id="@+id/toolbar_myprofile_fetch"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +35,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:visibility="invisible"
-                        android:text="{유저닉네임}"
                         android:textColor="@color/black"
                         android:textSize="20sp"/>
                     <TextView
@@ -44,7 +44,6 @@
                         android:layout_gravity="center_vertical"
                         android:padding="3dp"
                         android:visibility="visible"
-                        android:text="{유저닉네임}"
                         android:textColor="@color/black"
                         android:textSize="20sp"/>
                 </FrameLayout>
