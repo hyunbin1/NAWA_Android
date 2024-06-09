@@ -1,4 +1,4 @@
-package com.example.nawa
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
