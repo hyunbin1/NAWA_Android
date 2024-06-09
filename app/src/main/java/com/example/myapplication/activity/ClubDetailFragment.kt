@@ -1,6 +1,7 @@
 package com.example.myapplication.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +73,7 @@ class ClubDetailFragment : Fragment() {
         })
     }
 
-    private fun displayClubDetail(club: Club) {
+    fun displayClubDetail(club: Club) {
         binding.introduceClub.text = club.clubIntroduction // 클럽 소개
         val clubQualificationList = club.clubQualification // 가입 조건
         if (clubQualificationList != null) {
@@ -83,10 +84,12 @@ class ClubDetailFragment : Fragment() {
         }
         binding.clubRegisProcess.text = club.clubRegisProcess // 등록 절차
         binding.clubNotice.text = club.clubNotice // 유의사항
+
         val clubCancelIntroductionList = club.clubCancelIntroduction
         if (clubCancelIntroductionList != null) {
             val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = "\n")
             binding.clubCancelIntroduction.text = clubCancelIntroductionText
+            Log.d("ClubDetailFragment", "클럽 소개 바인딩 성공")
         } else {
             binding.clubCancelIntroduction.text = "" // 기본값 설정
         }
