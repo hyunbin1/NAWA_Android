@@ -47,8 +47,8 @@ class ClubMainActivity : AppCompatActivity() {
         isSqlite = intent.getBooleanExtra("IS_SQLITE", false)
         jwtToken = intent.getStringExtra("JWT_TOKEN")
 
-        val toolbar: Toolbar = binding.clubMainToolbar
-        setSupportActionBar(toolbar)
+//        val toolbar: Toolbar = binding.clubMainToolbar
+//        setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -342,6 +342,8 @@ class ClubMainActivity : AppCompatActivity() {
         // 클럽 이미지 설정
         Glide.with(this)
             .load(club.clubLogo)
+            .placeholder(R.drawable.ic_launcher_background) // 기본 이미지 설정
+            .error(R.drawable.ic_launcher_background) // 오류 발생 시 기본 이미지 설정
             .into(binding.clubImage)
 
         // 회원 수 설정
