@@ -23,6 +23,7 @@ import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.data.database.Notification
 import com.example.myapplication.data.database.enum.NotificationCategory
 import com.example.myapplication.data.database.toClubBannerRequest
+import com.example.myapplication.data.helper.ClubDbHelper
 import com.example.myapplication.data.helper.NoticeDbHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -65,6 +66,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, NoticeCreateActivity::class.java)
             startActivity(intent)
         }
+
+        binding.addClubBtn.setOnClickListener {
+            val intent = Intent(this, CreateClubActivity::class.java)
+            startActivity(intent)
+        }
+
 
         if (isLoggedIn) {
             fetchMemberInfo()
@@ -138,25 +145,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchClubBanners() {
-        val db = AppDatabase.getInstance(this)
-        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        val dbHelper = ClubDbHelper(this)
+        val db = dbHelper.readableDatabase
 
+        val cursor = db.query(
+            ClubDbHelper.TABLE_NAME,
+            arrayOf(
+                ClubDbHelper.COLUMN_CLUB_UUID,
+                ClubDbHelper.COLUMN_CLUB_NAME,
+                ClubDbHelper.COLUMN_CLUB_LOGO
+            ),
+            null, null, null, null, null
+        )
+
+        val clubsFromDb = mutableListOf<ClubBannerDTO>()
+        while (cursor.moveToNext()) {
+            val clubUUID = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_UUID))
+            val clubName = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NAME))
+            val clubLogo = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_LOGO))
+            clubsFromDb.add(ClubBannerDTO(clubUUID, clubName, clubLogo))
+        }
+        cursor.close()
+
+        if (clubsFromDb.size >= 5) {
+            clubAdapter.setClubs(clubsFromDb.take(5))
+        } else {
+            fetchExternalClubs(clubsFromDb)
+        }
+    }
+
+    private fun fetchExternalClubs(clubsFromDb: List<ClubBannerDTO>) {
+        val neededClubs = 5 - clubsFromDb.size
         val call = RetrofitClient.apiService.getClubBanners()
         call.enqueue(object : Callback<List<ClubBannerDTO>> {
             override fun onResponse(call: Call<List<ClubBannerDTO>>, response: Response<List<ClubBannerDTO>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { clubsFromApi ->
-                        val limitedClubsFromApi = clubsFromApi.take(5)
-                        clubAdapter.setClubs(limitedClubsFromApi)
-
-                        if (limitedClubsFromApi.size < 5) {
-                            coroutineScope.launch {
-                                val clubsFromDb = db.clubDao().getAllClubs()
-                                val neededClubs = 5 - limitedClubsFromApi.size
-                                val additionalClubs = clubsFromDb.take(neededClubs).map { it.toClubBannerRequest() }
-                                clubAdapter.addClubs(additionalClubs)
-                            }
-                        }
+                        val limitedClubsFromApi = clubsFromApi.take(neededClubs)
+                        clubAdapter.setClubs(clubsFromDb + limitedClubsFromApi)
                     } ?: run {
                         Log.e("MainActivity", "클럽 응답이 없습니다.")
                     }

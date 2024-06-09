@@ -1,8 +1,9 @@
-// ClubDetail.kt
 package com.example.myapplication.data.database
+
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.*
+import androidx.room.TypeConverters
 import com.example.myapplication.data.Converters
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import java.time.LocalDateTime

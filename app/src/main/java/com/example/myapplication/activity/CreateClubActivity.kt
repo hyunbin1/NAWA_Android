@@ -1,18 +1,20 @@
 package com.example.myapplication.activity
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.data.AppDatabase
+import com.example.myapplication.R
 import com.example.myapplication.data.database.Club
+import com.example.myapplication.data.helper.ClubDbHelper
 import com.example.myapplication.databinding.ActivityCreateClubBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.util.UUID
+import java.util.*
 
 class CreateClubActivity : AppCompatActivity() {
 
+    private lateinit var dbHelper: ClubDbHelper
     private lateinit var binding: ActivityCreateClubBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,42 +22,64 @@ class CreateClubActivity : AppCompatActivity() {
         binding = ActivityCreateClubBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        dbHelper = ClubDbHelper(this)
+
         binding.createClubButton.setOnClickListener {
             val clubName = binding.clubNameEditText.text.toString()
-            val clubDescription = binding.clubDescriptionEditText.text.toString()
+            val clubIntroduce = binding.clubDescriptionEditText.text.toString()
+            val clubJoinCondition = binding.newClubCondition.text.toString()
 
-            if (clubName.isNotEmpty() && clubDescription.isNotEmpty()) {
-                createClub(clubName, clubDescription)
+            if (clubName.isEmpty() || clubIntroduce.isEmpty() || clubJoinCondition.isEmpty()) {
+                Toast.makeText(this, "모든 필드를 작성해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "모든 필드를 채워주세요", Toast.LENGTH_SHORT).show()
+                val club = Club(
+                    id = 0,
+                    clubUUID = UUID.randomUUID().toString(),
+                    clubName = clubName,
+                    clubIntro = clubIntroduce,
+                    clubQualification = listOf(clubJoinCondition),
+                    clubLogo = R.drawable.ic_launcher_background.toString(),
+                    clubIntroduction = "",
+                    clubRegisProcess = "",
+                    clubNotice = "",
+                    clubCancelIntroduction = listOf(),
+                    clubPrice = 0,
+                    memberCount = 0
+                )
+                saveClubToDatabase(club)
             }
         }
     }
 
-    private fun createClub(clubName: String, clubDescription: String) {
-        val clubUUID = UUID.randomUUID().toString()
-        val club = Club(
-            clubRegisProcess = "등록 절차",
-            clubCancelIntroduction = listOf("취소 소개"),
-            clubQualification = listOf("자격 요건"),
-            clubIntroduction = clubDescription,
-            clubName = clubName,
-            clubIntro = "클럽 소개",
-            clubUUID = clubUUID,
-            clubNotice = "공지사항",
-            clubLogo = "http://example.com/logo.png", // 유효한 URL을 제공하거나 기본 URL 설정
-            clubPrice = 0,
-            memberCount = 0
-        )
+    private fun saveClubToDatabase(club: Club) {
+        val db = dbHelper.writableDatabase
 
-        val db = AppDatabase.getInstance(this)
-        CoroutineScope(Dispatchers.IO).launch {
-            db.clubDao().insertClub(club)
-            runOnUiThread {
-                Toast.makeText(this@CreateClubActivity, "클럽이 성공적으로 생성되었습니다", Toast.LENGTH_SHORT).show()
-                finish()
-            }
+        val values = ContentValues().apply {
+            put(ClubDbHelper.COLUMN_CLUB_UUID, club.clubUUID)
+            put(ClubDbHelper.COLUMN_CLUB_NAME, club.clubName)
+            put(ClubDbHelper.COLUMN_CLUB_INTRO, club.clubIntro)
+            put(ClubDbHelper.COLUMN_CLUB_LOGO, club.clubLogo)
+            put(ClubDbHelper.COLUMN_CLUB_INTRODUCTION, club.clubIntroduction)
+            put(ClubDbHelper.COLUMN_CLUB_QUALIFICATION, club.clubQualification?.joinToString(","))
+            put(ClubDbHelper.COLUMN_CLUB_REGIS_PROCESS, club.clubRegisProcess)
+            put(ClubDbHelper.COLUMN_CLUB_NOTICE, club.clubNotice)
+            put(ClubDbHelper.COLUMN_CLUB_CANCEL_INTRODUCTION, club.clubCancelIntroduction?.joinToString(","))
+            put(ClubDbHelper.COLUMN_CLUB_PRICE, club.clubPrice)
+            put(ClubDbHelper.COLUMN_MEMBER_COUNT, club.memberCount)
+            put(ClubDbHelper.COLUMN_CREATE_AT, club.createAt.toString())
+            put(ClubDbHelper.COLUMN_UPDATED_AT, club.updatedAt.toString())
+        }
+
+        val newRowId = db.insert(ClubDbHelper.TABLE_NAME, null, values)
+
+        if (newRowId != -1L) {
+            Toast.makeText(this, "클럽이 생성되었습니다.", Toast.LENGTH_SHORT).show()
+            Log.d("CreateClubActivity", "클럽 생성 성공: ID = $newRowId")
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "클럽 생성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            Log.d("CreateClubActivity", "클럽 생성 실패")
         }
     }
-
 }
