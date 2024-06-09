@@ -1,14 +1,15 @@
 package com.example.myapplication.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.myapplication.data.DTO.Response.MembershipResponse
 import com.example.myapplication.data.database.Club
@@ -22,9 +23,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.view.Menu
-import android.widget.ImageView
 import com.example.myapplication.R
+import android.widget.ImageView
+import android.widget.LinearLayout
 
 class ClubMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClubMainBinding
@@ -32,6 +33,8 @@ class ClubMainActivity : AppCompatActivity() {
     private var isSqlite: Boolean = false
     private var jwtToken: String? = null
     private var userEmail: String? = null
+    private var isMember: Boolean = false
+    private var isAdmin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +43,12 @@ class ClubMainActivity : AppCompatActivity() {
 
         // MainActivity에서 전달된 clubUUID와 JWT 토큰, isSqlite 여부를 받아옴
         clubUUID = intent.getStringExtra("CLUB_UUID") ?: ""
+
         isSqlite = intent.getBooleanExtra("IS_SQLITE", false)
         jwtToken = intent.getStringExtra("JWT_TOKEN")
 
-        val toolbar: Toolbar = binding.clubMainToolbar
-        setSupportActionBar(toolbar)
+//        val toolbar: Toolbar = binding.clubMainToolbar
+//        setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -57,31 +61,22 @@ class ClubMainActivity : AppCompatActivity() {
             }
         }
 
-        val viewPager = binding.viewPager
-        val tabLayout = binding.tabLayout
+        val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
+        jwtToken = sharedPreferences.getString("ACCESS_TOKEN", null)
 
-        val adapter = ViewPagerAdapter(this)
-        viewPager.adapter = adapter
+        Log.d("ClubMainActivity", "JWT Token: $jwtToken")
 
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "클럽 소개"
-                1 -> "후기"
-                else -> null
-            }
-        }.attach()
+        setupProfileImage()
+        setupJoinButton()
+        setupViewPagerAndTabs()
 
         // 클럽 세부 정보와 가입 여부를 확인
         fetchClubDetail()
-        getUserInfoAndCheckMembership()
+        checkMembership()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+    private fun setupProfileImage() {
+        val profileImageView = binding.profileImage
         jwtToken?.let { token ->
             val call = RetrofitClient.apiService.getMemberInfo("Bearer $token")
             call.enqueue(object : Callback<Member> {
@@ -89,11 +84,10 @@ class ClubMainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
                             val profileImage = member.profileImage
-                            val menuItem = menu?.findItem(R.id.myPage)
                             Glide.with(this@ClubMainActivity)
                                 .load(profileImage)
                                 .circleCrop()
-                                .into(menuItem?.actionView as ImageView)
+                                .into(profileImageView)
                         }
                     } else {
                         showToast("회원 정보를 가져오는 데 실패했습니다.")
@@ -105,16 +99,51 @@ class ClubMainActivity : AppCompatActivity() {
                 }
             })
         }
-        return super.onPrepareOptionsMenu(menu)
+
+        profileImageView.setOnClickListener {
+            handleMyPageClick()
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
+    private fun setupJoinButton() {
+        binding.clubJoinBtn.setOnClickListener {
+            if (jwtToken.isNullOrEmpty()) {
+                // 로그인하지 않은 경우 로그인 다이얼로그를 보여줌
+                showLoginDialog()
+            } else if (isMember) {
+                // 이미 클럽에 가입한 경우
+                showToast("이미 클럽에 가입되어 있습니다.")
+            } else {
+                // 클럽에 가입되지 않은 경우
+                showCompletionDialog(binding.clubTitle.text.toString())
             }
-            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setupViewPagerAndTabs() {
+        val viewPager = binding.viewPager
+        val tabLayout = binding.tabLayout
+
+        val adapter = ViewPagerAdapter(this, clubUUID)
+        viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "클럽 소개"
+                1 -> "후기"
+                else -> null
+            }
+        }.attach()
+    }
+
+    private fun handleMyPageClick() {
+        if (jwtToken.isNullOrEmpty()) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -158,6 +187,7 @@ class ClubMainActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
+    // 클럽 세부 정보를 API를 통해 가져옴
     private fun fetchClubDetail() {
         if (isSqlite) {
             fetchClubDetailFromDb()
@@ -245,16 +275,23 @@ class ClubMainActivity : AppCompatActivity() {
 
     // 클럽 가입 여부 확인(신청 버튼)
     private fun checkMembership() {
+
         jwtToken?.let { token ->
-            val call = RetrofitClient.apiService.checkClubMembership("Bearer $token", clubUUID)
-            call.enqueue(object : Callback<MembershipResponse> {
-                override fun onResponse(call: Call<MembershipResponse>, response: Response<MembershipResponse>) {
+            val callMember = RetrofitClient.apiService.getMemberInfo("Bearer $token")
+            callMember.enqueue(object : Callback<Member> {
+                override fun onResponse(call: Call<Member>, response: Response<Member>) {
+
+                    Log.d("유저 role", response.body()?.role.toString())
+
                     if (response.isSuccessful) {
-                        response.body()?.let {
-                            if (it.data.any { member -> member.emailId == userEmail }) { // 로그인 회원과 클럽 join 회원 비교
+                        response.body()?.let { member ->
+                            userEmail = member.emailId
+                            isAdmin = member.role == "admin"
+
+                            if (isAdmin) {
                                 binding.clubJoinBtn.visibility = View.GONE
                             } else {
-                                binding.clubJoinBtn.visibility = View.VISIBLE
+                                checkClubMembership()
                             }
                         }
                     } else {
@@ -262,7 +299,7 @@ class ClubMainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<MembershipResponse>, t: Throwable) {
+                override fun onFailure(call: Call<Member>, t: Throwable) {
                     showToast("회원 정보를 확인하는 중 오류가 발생했습니다.")
                 }
             })
@@ -272,37 +309,41 @@ class ClubMainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserInfoAndCheckMembership() {
+    private fun checkClubMembership() {
         jwtToken?.let { token ->
-            val call = RetrofitClient.apiService.getMemberInfo("Bearer $token")
-            call.enqueue(object : Callback<Member> {
-                override fun onResponse(call: Call<Member>, response: Response<Member>) {
+            val callIsJoin = RetrofitClient.apiService.checkClubMembership("Bearer $token", clubUUID)
+            callIsJoin.enqueue(object : Callback<MembershipResponse> {
+                override fun onResponse(call: Call<MembershipResponse>, response: Response<MembershipResponse>) {
                     if (response.isSuccessful) {
-                        response.body()?.let { member ->
-                            userEmail = member.emailId
-                            checkMembership()
+                        response.body()?.let { membershipResponse ->
+                            isMember = membershipResponse.isMember(userEmail ?: "")
+                            if (isMember) {
+                                binding.clubJoinBtn.visibility = View.GONE
+                            } else {
+                                binding.clubJoinBtn.visibility = View.VISIBLE
+                            }
                         }
                     } else {
-                        showToast("회원 정보를 가져오는데 실패했습니다.")
+                        showToast("회원 정보를 확인하는 데 실패했습니다다.")
                     }
                 }
 
-                override fun onFailure(call: Call<Member>, t: Throwable) {
-                    showToast("회원 정보를 가져오는 중 오류가 발생했습니다.")
+                override fun onFailure(call: Call<MembershipResponse>, t: Throwable) {
+                    showToast("회원 정보를 확인하는 중 오류가 발생했습니다다.")
                 }
             })
-        } ?: run {
-            // 비회원인 경우 가입하기 버튼 보이기
-            binding.clubJoinBtn.visibility = View.VISIBLE
         }
     }
 
     private fun displayClubDetail(club: Club) {
+        binding.clubBannerTitle.text = club.clubName // 클럽 배너 제목
         binding.clubTitle.text = club.clubName
         binding.clubIntroduce.text = club.clubIntroduction // 클럽 한줄 소개
         // 클럽 이미지 설정
         Glide.with(this)
             .load(club.clubLogo)
+            .placeholder(R.drawable.ic_launcher_background) // 기본 이미지 설정
+            .error(R.drawable.ic_launcher_background) // 오류 발생 시 기본 이미지 설정
             .into(binding.clubImage)
 
         // 회원 수 설정

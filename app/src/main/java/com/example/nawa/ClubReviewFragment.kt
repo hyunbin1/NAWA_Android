@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ClubReviewBinding
+import com.example.myapplication.fragment.ClubDetailFragment
 
 class ClubReviewFragment : Fragment() {
     override fun onCreateView(
@@ -14,5 +15,15 @@ class ClubReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return ClubReviewBinding.inflate(inflater, container, false).root
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(clubUUID: String) =
+            ClubDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString("CLUB_UUID", clubUUID)
+                }
+            }
     }
 }

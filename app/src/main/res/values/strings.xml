@@ -36,7 +36,8 @@
     <string name="clubJoin">가입신청</string>
     <string name="clubWithMe">나와 함께 할 클럽</string>
     <string name="joinComplete">" 가입신청 완료"</string>
-    <string name="complete">완료</string>
+    <string name="complete">"완료"</string>
+    <string name="joinCompleteMessage">클럽 가입 신청이 되었습니다.\n 발송된 email을 통해서 가입신청서를 작성해 주시고 \n nawa.mail.com 으로 신청서를 발송해주시면,  \n 운영진이 꼼꼼하게 확인한 후 메세지로 \n 연락드리도록 하겠습니다. 감사합니다 :)</string>
     <string name="clubJoinCondition">클럽 가입조건</string>
     <string name="clubIntroText">클럽 소개글</string>
     <string name="notice">공지사항</string>
