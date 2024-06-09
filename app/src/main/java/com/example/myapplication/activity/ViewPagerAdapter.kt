@@ -3,20 +3,18 @@ package com.example.myapplication.activity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.nawa.ClubInfoFragment
-import com.example.nawa.ClubIntroFragment
+import com.example.myapplication.fragment.ClubDetailFragment
 import com.example.nawa.ClubReviewFragment
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val clubUUID: String) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> ClubIntroFragment()
-//            1 -> ClubInfoFragment()
-            1 -> ClubReviewFragment()
-            else -> ClubInfoFragment()
+            0 -> ClubDetailFragment.newInstance(clubUUID)
+            1 -> ClubReviewFragment.newInstance(clubUUID)
+            else -> ClubDetailFragment.newInstance(clubUUID)
         }
     }
 }
