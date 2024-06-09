@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.database.Club
+import com.example.myapplication.data.helper.ClubDbHelper
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ClubIntroBinding
 import retrofit2.Call
@@ -18,11 +19,13 @@ class ClubDetailFragment : Fragment() {
     private var _binding: ClubIntroBinding? = null
     private val binding get() = _binding!!
     private lateinit var clubUUID: String
+    private var isSqlite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             clubUUID = it.getString("CLUB_UUID") ?: ""
+            isSqlite = it.getBoolean("IS_SQLITE", false)
         }
     }
 
@@ -36,7 +39,7 @@ class ClubDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchClubDetail(clubUUID)
+        fetchClubDetail(clubUUID, isSqlite)
     }
 
     override fun onDestroyView() {
@@ -46,15 +49,82 @@ class ClubDetailFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(clubUUID: String) =
+        fun newInstance(clubUUID: String, isSqlite: Boolean) =
             ClubDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString("CLUB_UUID", clubUUID)
+                    putBoolean("IS_SQLITE", isSqlite)
                 }
             }
     }
 
-    private fun fetchClubDetail(clubUUID: String) {
+    private fun fetchClubDetail(clubUUID: String, isSqlite: Boolean) {
+        if (isSqlite) {
+            fetchClubDetailFromDb(clubUUID)
+        } else {
+            fetchClubDetailFromApi(clubUUID)
+        }
+    }
+
+    private fun fetchClubDetailFromDb(clubUUID: String) {
+        val dbHelper = ClubDbHelper(requireContext())
+        val db = dbHelper.readableDatabase
+
+        val cursor = db.query(
+            ClubDbHelper.TABLE_NAME,
+            arrayOf(
+                ClubDbHelper.COLUMN_CLUB_UUID,
+                ClubDbHelper.COLUMN_CLUB_NAME,
+                ClubDbHelper.COLUMN_CLUB_INTRO,
+                ClubDbHelper.COLUMN_CLUB_LOGO,
+                ClubDbHelper.COLUMN_CLUB_INTRODUCTION,
+                ClubDbHelper.COLUMN_CLUB_QUALIFICATION,
+                ClubDbHelper.COLUMN_CLUB_REGIS_PROCESS,
+                ClubDbHelper.COLUMN_CLUB_NOTICE,
+                ClubDbHelper.COLUMN_CLUB_CANCEL_INTRODUCTION,
+                ClubDbHelper.COLUMN_CLUB_PRICE,
+                ClubDbHelper.COLUMN_MEMBER_COUNT,
+                ClubDbHelper.COLUMN_CREATE_AT,
+                ClubDbHelper.COLUMN_UPDATED_AT
+            ),
+            "${ClubDbHelper.COLUMN_CLUB_UUID} = ?",
+            arrayOf(clubUUID),
+            null, null, null
+        )
+
+        if (cursor.moveToFirst()) {
+            val clubUUID = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_UUID))
+            val clubName = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NAME))
+            val clubIntro = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_INTRO))
+            val clubLogo = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_LOGO))
+            val clubIntroduction = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_INTRODUCTION))
+            val clubQualification = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_QUALIFICATION))?.split(",")
+            val clubRegisProcess = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_REGIS_PROCESS))
+            val clubNotice = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NOTICE))
+            val clubCancelIntroduction = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_CANCEL_INTRODUCTION))?.split(",")
+            val clubPrice = cursor.getInt(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_PRICE))
+            val memberCount = cursor.getInt(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_MEMBER_COUNT))
+
+            val club = Club(
+                id = 0,
+                clubUUID = clubUUID,
+                clubName = clubName,
+                clubIntro = clubIntro,
+                clubLogo = clubLogo,
+                clubIntroduction = clubIntroduction,
+                clubQualification = clubQualification,
+                clubRegisProcess = clubRegisProcess,
+                clubNotice = clubNotice,
+                clubCancelIntroduction = clubCancelIntroduction,
+                clubPrice = clubPrice,
+                memberCount = memberCount
+            )
+            displayClubDetail(club)
+        }
+        cursor.close()
+    }
+
+    private fun fetchClubDetailFromApi(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
         call.enqueue(object : Callback<Club> {
             override fun onResponse(call: Call<Club>, response: Response<Club>) {

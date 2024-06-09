@@ -373,7 +373,7 @@ class ClubMainActivity : AppCompatActivity() {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> ClubDetailFragment.newInstance(clubUUID)
+                0 -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
                 1 -> ClubReviewFragment.newInstance(clubUUID)
                 else -> throw IllegalStateException("Unexpected position $position")
             }
