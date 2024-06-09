@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include
-        layout="@layout/toolbar_myprofile_fetch"/>
+        layout="@layout/toolbar_myprofile_fetch"
+        android:id="@+id/toolbar_myprofile_fetch"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,20 +17,58 @@
             android:layout_height="80dp"
             android:src="@drawable/ic_launcher_background"
             android:layout_marginRight="15dp"/>
-        <EditText
-            android:id="@+id/username"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_gravity="center_vertical"
-            android:text="{유저닉네임}님"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/editUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:visibility="invisible"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:padding="3dp"
+                        android:visibility="visible"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:text="님"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/nicknameErr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="동일한 닉네임이 있습니다"
+                android:textColor="@color/warn"/>
+        </LinearLayout>
         <Button
             android:id="@+id/fetchNicknameButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/button_mypage"
             android:text="✐"
             android:textColor="@color/white"

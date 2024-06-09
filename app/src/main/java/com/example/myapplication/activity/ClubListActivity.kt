@@ -6,12 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ListClubBinding
 import com.example.myapplication.adapter.ClubBannerAdapter
+import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.data.database.toClubBannerRequest
+import com.example.myapplication.data.helper.ClubDbHelper
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,9 +41,41 @@ class ClubListActivity : AppCompatActivity() {
     }
 
     private fun fetchAllClubs() {
+        val dbHelper = ClubDbHelper(this)
+        val db = dbHelper.readableDatabase
 
+        val cursor = db.query(
+            ClubDbHelper.TABLE_NAME,
+            arrayOf(
+                ClubDbHelper.COLUMN_CLUB_UUID,
+                ClubDbHelper.COLUMN_CLUB_NAME,
+                ClubDbHelper.COLUMN_CLUB_LOGO,
+                ClubDbHelper.COLUMN_IS_SQLITE
+            ),
+            null, null, null, null, null
+        )
 
-        // API에서 클럽 데이터를 가져옴
+        val clubsFromDb = mutableListOf<ClubBannerDTO>()
+        while (cursor.moveToNext()) {
+            val clubUUID = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_UUID))
+            val clubName = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NAME))
+            val clubLogo = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_LOGO))
+            val isSqlite = cursor.getInt(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_IS_SQLITE)) == 1 // boolean 타입으로 변경
+            clubsFromDb.add(ClubBannerDTO(clubUUID, clubName, clubLogo, isSqlite))
+        }
+        cursor.close()
+
+        if (clubsFromDb.isNotEmpty()) {
+            clubAdapter.addClubs(clubsFromDb)
+            clubsFromDb.forEach { club ->
+                Log.d("ClubListActivity", "SQLite 클럽: ${club.clubName}")
+            }
+        }
+
+        fetchClubsFromApi()
+    }
+
+    private fun fetchClubsFromApi() {
         val call = RetrofitClient.apiService.getClubs()
         call.enqueue(object : Callback<List<Club>> {
             override fun onResponse(call: Call<List<Club>>, response: Response<List<Club>>) {
@@ -51,8 +84,6 @@ class ClubListActivity : AppCompatActivity() {
                         val clubBannerRequests = clubsFromApi.map { it.toClubBannerRequest() }
                         clubAdapter.addClubs(clubBannerRequests)
 
-
-                        // 클럽 이름 로그로 출력
                         clubsFromApi.forEach { club ->
                             Log.d("ClubListActivity", "API 클럽: ${club.clubName}")
                         }
@@ -71,7 +102,4 @@ class ClubListActivity : AppCompatActivity() {
             }
         })
     }
-
-
-
 }

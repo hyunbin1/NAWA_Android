@@ -6,7 +6,8 @@
     android:padding="8dp">
 
     <include
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar_clublist"
+        android:id="@+id/mainToolBar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/clubRecyclerView"

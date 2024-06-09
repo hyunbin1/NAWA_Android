@@ -19,7 +19,7 @@
             android:background="@color/background">
 
             <include
-                layout="@layout/toolbar"/>
+                layout="@layout/toolbar_write_notice"/>
 
             <TextView
                 android:layout_width="wrap_content"

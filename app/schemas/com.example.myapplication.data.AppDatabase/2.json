@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "00bf8b50e5f107a3f9a37d800fb9fb54",
+    "identityHash": "d0dbe9ce2a92cc87fb97e23a3cdbe34c",
     "entities": [
       {
         "tableName": "club",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`club_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `clubUUID` TEXT NOT NULL, `clubName` TEXT NOT NULL, `clubIntro` TEXT NOT NULL, `clubLogo` TEXT, `clubIntroduction` TEXT, `clubQualification` TEXT, `clubRegisProcess` TEXT, `clubNotice` TEXT, `clubCancelIntroduction` TEXT, `clubPrice` INTEGER NOT NULL, `memberCount` INTEGER NOT NULL, `createAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`club_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `clubUUID` TEXT NOT NULL, `clubName` TEXT NOT NULL, `clubIntro` TEXT NOT NULL, `clubLogo` TEXT, `clubIntroduction` TEXT, `clubQualification` TEXT, `clubRegisProcess` TEXT, `clubNotice` TEXT, `clubCancelIntroduction` TEXT, `clubPrice` INTEGER NOT NULL, `memberCount` INTEGER NOT NULL, `createAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, `isSqlite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -91,6 +91,12 @@
             "columnName": "updatedAt",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "isSqlite",
+            "columnName": "isSqlite",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -125,7 +131,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '00bf8b50e5f107a3f9a37d800fb9fb54')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0dbe9ce2a92cc87fb97e23a3cdbe34c')"
     ]
   }
 }

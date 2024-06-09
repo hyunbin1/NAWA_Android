@@ -1,35 +1,58 @@
-
-package com.example.myapplication.activity
+package com.example.myapplication.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
-import com.example.myapplication.databinding.ActivityClubDetailBinding
-import com.example.myapplication.databinding.ClubInfoBinding
 import com.example.myapplication.databinding.ClubIntroBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ClubDetailActivity : AppCompatActivity() {
+class ClubDetailFragment : Fragment() {
 
-    private lateinit var binding: ClubIntroBinding
+    private var _binding: ClubIntroBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var clubUUID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ClubIntroBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val clubUUID = intent.getStringExtra("CLUB_UUID")
-        clubUUID?.let {
-            fetchClubDetail(it)
+        arguments?.let {
+            clubUUID = it.getString("CLUB_UUID") ?: ""
         }
     }
 
-    /** api 요청을 통해서 클럽의 세부 정보를 가져옴 */
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = ClubIntroBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fetchClubDetail(clubUUID)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(clubUUID: String) =
+            ClubDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString("CLUB_UUID", clubUUID)
+                }
+            }
+    }
+
     private fun fetchClubDetail(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
         call.enqueue(object : Callback<Club> {
@@ -39,12 +62,12 @@ class ClubDetailActivity : AppCompatActivity() {
                         displayClubDetail(it)
                     }
                 } else {
-                    Log.e("ClubDetailActivity", "Failed to fetch club detail: ${response.code()} - ${response.message()}")
+                    // Log error
                 }
             }
 
             override fun onFailure(call: Call<Club>, t: Throwable) {
-                Log.e("ClubDetailActivity", "Error: ${t.message}")
+                // Log error
             }
         })
     }
@@ -56,16 +79,16 @@ class ClubDetailActivity : AppCompatActivity() {
             val clubQualificationText = clubQualificationList.joinToString(separator = "\n")
             binding.joinCondition.text = clubQualificationText
         } else {
-            binding.joinCondition.text = "" // 또는 기본값 설정
+            binding.joinCondition.text = "" // 기본값 설정
         }
-        binding.clubRegisProcess.text = club.clubRegisProcess //등록 절차
-        binding.clubNotice.text = club.clubNotice /// 유의사항
+        binding.clubRegisProcess.text = club.clubRegisProcess // 등록 절차
+        binding.clubNotice.text = club.clubNotice // 유의사항
         val clubCancelIntroductionList = club.clubCancelIntroduction
         if (clubCancelIntroductionList != null) {
             val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = "\n")
             binding.clubCancelIntroduction.text = clubCancelIntroductionText
         } else {
-            binding.clubCancelIntroduction.text = "" // 또는 기본값 설정
+            binding.clubCancelIntroduction.text = "" // 기본값 설정
         }
     }
 }

@@ -97,7 +97,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -114,34 +113,6 @@
                 android:background="@null"
                 android:hint="취미를 입력해주세요"
                 android:textSize="15sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/openButton"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_sex_select"
-                android:layout_marginRight="15dp"
-                android:text="보이기"
-                android:textColor="@color/white"/>
-            <Button
-                android:id="@+id/hideButton"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_sex"
-                android:layout_marginRight="15dp"
-                android:text="숨기기"
-                android:textColor="@color/nonselect"/>
-            <Button
-                android:id="@+id/nonselectButton"
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_sex"
-                android:text="선택 안함"
-                android:textColor="@color/nonselect"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -165,4 +136,13 @@
             android:hint="직업을 입력해주세요"
             android:textSize="15sp"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:onClick="updateMemberInfo"/>
 </LinearLayout>
