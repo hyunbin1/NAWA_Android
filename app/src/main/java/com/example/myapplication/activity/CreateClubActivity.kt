@@ -44,7 +44,8 @@ class CreateClubActivity : AppCompatActivity() {
                     clubNotice = "",
                     clubCancelIntroduction = listOf(),
                     clubPrice = 0,
-                    memberCount = 0
+                    memberCount = 0,
+                    isSqlite = true
                 )
                 saveClubToDatabase(club)
             }
@@ -68,6 +69,7 @@ class CreateClubActivity : AppCompatActivity() {
             put(ClubDbHelper.COLUMN_MEMBER_COUNT, club.memberCount)
             put(ClubDbHelper.COLUMN_CREATE_AT, club.createAt.toString())
             put(ClubDbHelper.COLUMN_UPDATED_AT, club.updatedAt.toString())
+            put(ClubDbHelper.COLUMN_IS_SQLITE, if (club.isSqlite) 1 else 0)
         }
 
         val newRowId = db.insert(ClubDbHelper.TABLE_NAME, null, values)

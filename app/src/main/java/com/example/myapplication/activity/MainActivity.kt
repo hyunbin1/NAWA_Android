@@ -153,7 +153,8 @@ class MainActivity : AppCompatActivity() {
             arrayOf(
                 ClubDbHelper.COLUMN_CLUB_UUID,
                 ClubDbHelper.COLUMN_CLUB_NAME,
-                ClubDbHelper.COLUMN_CLUB_LOGO
+                ClubDbHelper.COLUMN_CLUB_LOGO,
+                ClubDbHelper.COLUMN_IS_SQLITE
             ),
             null, null, null, null, null
         )
@@ -163,7 +164,8 @@ class MainActivity : AppCompatActivity() {
             val clubUUID = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_UUID))
             val clubName = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NAME))
             val clubLogo = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_LOGO))
-            clubsFromDb.add(ClubBannerDTO(clubUUID, clubName, clubLogo))
+            val isSqlite = cursor.getInt(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_IS_SQLITE)) == 1 // boolean 타입으로 변경
+            clubsFromDb.add(ClubBannerDTO(clubUUID, clubName, clubLogo, isSqlite))
         }
         cursor.close()
 

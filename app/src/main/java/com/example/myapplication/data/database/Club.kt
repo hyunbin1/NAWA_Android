@@ -52,13 +52,16 @@ data class Club(
     val createAt: LocalDateTime = LocalDateTime.now(),
 
     @ColumnInfo(name = "updatedAt")
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
+
+    val isSqlite: Boolean = false
 )
 
 fun Club.toClubBannerRequest(): ClubBannerDTO {
     return ClubBannerDTO(
         clubUUID = this.clubUUID,
         clubName = this.clubName,
-        clubLogo = this.clubLogo
+        clubLogo = this.clubLogo,
+        isSqlite = this.isSqlite
     )
 }
