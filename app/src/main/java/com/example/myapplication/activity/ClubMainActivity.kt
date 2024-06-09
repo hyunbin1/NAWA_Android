@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -24,8 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.myapplication.R
-import android.widget.ImageView
-import android.widget.LinearLayout
+import com.example.myapplication.adapter.ClubMainPagerAdapter
 
 class ClubMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClubMainBinding
@@ -124,7 +122,7 @@ class ClubMainActivity : AppCompatActivity() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
 
-        val adapter = ViewPagerAdapter(this, clubUUID)
+        val adapter = ClubMainPagerAdapter(this, clubUUID)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

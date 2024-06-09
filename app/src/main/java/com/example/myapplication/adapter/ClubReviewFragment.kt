@@ -1,4 +1,4 @@
-package com.example.myapplication.fragment
+package com.example.myapplication.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,37 +7,32 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.remote.RetrofitClient
-import com.example.myapplication.databinding.ClubIntroBinding
+import com.example.myapplication.databinding.ClubReviewBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ClubDetailFragment : Fragment() {
-
-    private var _binding: ClubIntroBinding? = null
+class ClubReviewFragment : Fragment() {
+    private var _binding: ClubReviewBinding? = null
     private val binding get() = _binding!!
     private lateinit var clubUUID: String
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             clubUUID = it.getString("CLUB_UUID") ?: ""
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ClubIntroBinding.inflate(inflater, container, false)
+        _binding = ClubReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchClubDetail(clubUUID)
+        fetchClubReview(clubUUID)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -52,14 +47,13 @@ class ClubDetailFragment : Fragment() {
                 }
             }
     }
-
-    private fun fetchClubDetail(clubUUID: String) {
+    private fun fetchClubReview(clubUUID: String) {
         val call = RetrofitClient.apiService.getClubDetail(clubUUID)
         call.enqueue(object : Callback<Club> {
             override fun onResponse(call: Call<Club>, response: Response<Club>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        displayClubDetail(it)
+                        displayClubReview(it)
                     }
                 } else {
                     // Log error
@@ -72,23 +66,6 @@ class ClubDetailFragment : Fragment() {
         })
     }
 
-    private fun displayClubDetail(club: Club) {
-        binding.introduceClub.text = club.clubIntroduction // 클럽 소개
-        val clubQualificationList = club.clubQualification // 가입 조건
-        if (clubQualificationList != null) {
-            val clubQualificationText = clubQualificationList.joinToString(separator = "\n")
-            binding.joinCondition.text = clubQualificationText
-        } else {
-            binding.joinCondition.text = "" // 기본값 설정
-        }
-        binding.clubRegisProcess.text = club.clubRegisProcess // 등록 절차
-        binding.clubNotice.text = club.clubNotice // 유의사항
-        val clubCancelIntroductionList = club.clubCancelIntroduction
-        if (clubCancelIntroductionList != null) {
-            val clubCancelIntroductionText = clubCancelIntroductionList.joinToString(separator = "\n")
-            binding.clubCancelIntroduction.text = clubCancelIntroductionText
-        } else {
-            binding.clubCancelIntroduction.text = "" // 기본값 설정
-        }
+    private fun displayClubReview(club: Club) {
     }
 }
