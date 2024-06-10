@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
         <item name="colorPrimary">@color/background</item>
         <item name="toolbarNavigationButtonStyle">@style/AppTheme.Actionbar</item>
         <item name="android:actionMenuTextColor">@color/orange</item>
@@ -18,13 +19,6 @@
     <style name="CustomButtonStyle">
         <item name="android:background">@drawable/complete_button</item>
         <item name="android:textColor">@color/white</item>
-    </style>
-    <!-- splash Screen Theme -->
-    <style name="AppTheme.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/orange</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
-        <item name="postSplashScreenTheme">@style/Theme.NAWA</item>
     </style>
     <style name="Theme.NAWA" parent="Base.Theme.NAWA" />
 </resources>
