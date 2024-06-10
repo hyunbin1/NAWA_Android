@@ -50,11 +50,11 @@ class NoticeDetailActivity : AppCompatActivity() {
         val cursor = db.query(
             NoticeDbHelper.TABLE_NAME,
             null, // 모든 열을 선택
-            "${NoticeDbHelper.COLUMN_ID} = ?", // 조건
-            arrayOf(noticeId.toString()), // 조건 값
-            null, // 그룹핑하지 않음
-            null, // 그룹핑 조건 값 없음
-            null // 정렬 조건 없음
+            "${NoticeDbHelper.COLUMN_ID} = ?",
+            arrayOf(noticeId.toString()),
+            null,
+            null,
+            "${NoticeDbHelper.COLUMN_CREATE_AT} DESC"
         )
 
         if (cursor.moveToFirst()) {
@@ -64,9 +64,13 @@ class NoticeDetailActivity : AppCompatActivity() {
             val content = cursor.getString(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CONTENT))
             val pinned = cursor.getInt(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED)) > 0
             val pinnedAt = cursor.getString(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_PINNED_AT))
-            val viewCount = cursor.getInt(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_VIEW_COUNT))
+            var viewCount = cursor.getInt(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_VIEW_COUNT))
             val createAt = cursor.getString(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CREATE_AT))
             val updatedAt = cursor.getString(cursor.getColumnIndexOrThrow(NoticeDbHelper.COLUMN_UPDATED_AT))
+
+            // 조회수 증가
+            viewCount++
+            updateViewCount(noticeId, viewCount)
 
             val notice = Notification(
                 noticeId,
@@ -84,6 +88,19 @@ class NoticeDetailActivity : AppCompatActivity() {
             bindNoticeDetails(notice)
         }
         cursor.close()
+    }
+
+    private fun updateViewCount(noticeId: Int, viewCount: Int) {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put(NoticeDbHelper.COLUMN_VIEW_COUNT, viewCount)
+        }
+        db.update(
+            NoticeDbHelper.TABLE_NAME,
+            values,
+            "${NoticeDbHelper.COLUMN_ID} = ?",
+            arrayOf(noticeId.toString())
+        )
     }
 
     private fun bindNoticeDetails(notice: Notification) {
