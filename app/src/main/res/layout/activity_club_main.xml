@@ -135,16 +135,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:tabBackground="@color/backColor"
+                app:tabBackground="@color/background"
                 app:tabIndicatorColor="@android:color/black"
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@android:color/black"
-                app:tabTextColor="@color/lightGray" />
+                app:tabTextColor="@color/darkGray" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginBottom="10dp"
                 />
             <Button

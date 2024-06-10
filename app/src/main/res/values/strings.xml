@@ -84,6 +84,7 @@
     <string name="clubIntro">클럽 소개</string>
     <string name="registration">회원가입</string>
 </resources>
+
 <!--
 <text>
 1. club_name : {클럽이름}

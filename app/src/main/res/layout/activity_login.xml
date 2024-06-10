@@ -12,7 +12,7 @@
         android:gravity="center_horizontal"
         android:layout_weight="1">
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="20dp"
@@ -53,8 +53,20 @@
             android:textSize="15sp"
             android:hint="@string/passwordHint"
             android:inputType="textPassword"/>
-
-
+        <TextView
+            android:id="@+id/loginErr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="이메일을 다시 입력해주세요"
+            android:textColor="@color/warn"
+            android:paddingBottom="20dp"/>
+        <Button
+            android:id="@+id/kakaologinButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/kakao_login_medium_wide"/>
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
@@ -79,7 +91,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:background="@drawable/button_round"
-            android:textColor="@color/backColor"
+            android:textColor="@color/lightGray"
             android:text="@string/registration"
             android:textStyle="bold"
             android:layout_marginLeft="35dp"
