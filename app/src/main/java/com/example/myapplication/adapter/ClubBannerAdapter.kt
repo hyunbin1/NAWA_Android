@@ -53,6 +53,7 @@ class ClubBannerAdapter : RecyclerView.Adapter<ClubBannerAdapter.ClubViewHolder>
                 val context = binding.root.context
                 val intent = Intent(context, ClubMainActivity::class.java)
                 intent.putExtra("CLUB_UUID", club.clubUUID)
+                intent.putExtra("IS_SQLITE", club.isSqlite)
                 context.startActivity(intent)
             }
         }

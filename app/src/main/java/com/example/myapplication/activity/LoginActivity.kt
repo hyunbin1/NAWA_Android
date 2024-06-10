@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 login(email, password)
             } else {
-                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "이메일 혹은 패스워드를 확인해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 //        binding.kakaologinButton.setOnClickListener {
@@ -116,13 +116,13 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Log.e("LoginActivity", "Login failed: ${response.code()} - ${response.message()}")
                     Log.e("LoginActivity", "Error body: ${response.errorBody()?.string()}")
-                    Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "아이디 혹은 패스워드가 잘못되었습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("LoginActivity", "Login error: ${t.message}")
-                Toast.makeText(this@LoginActivity, "Login error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "시스템 로그인 에러: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

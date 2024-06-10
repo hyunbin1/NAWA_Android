@@ -1,8 +1,9 @@
-// ClubDetail.kt
 package com.example.myapplication.data.database
+
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.*
+import androidx.room.TypeConverters
 import com.example.myapplication.data.Converters
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import java.time.LocalDateTime
@@ -54,13 +55,16 @@ data class Club(
     val createAt: LocalDateTime = LocalDateTime.now(),
 
     @ColumnInfo(name = "updatedAt")
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
+
+    val isSqlite: Boolean = false
 )
 
 fun Club.toClubBannerRequest(): ClubBannerDTO {
     return ClubBannerDTO(
         clubUUID = this.clubUUID,
         clubName = this.clubName,
-        clubLogo = this.clubLogo
+        clubLogo = this.clubLogo,
+        isSqlite = this.isSqlite
     )
 }

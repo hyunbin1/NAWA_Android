@@ -10,10 +10,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Member
-import com.example.myapplication.data.model.Notice
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.adapter.ClubBannerAdapter
@@ -23,6 +23,7 @@ import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.data.database.Notification
 import com.example.myapplication.data.database.enum.NotificationCategory
 import com.example.myapplication.data.database.toClubBannerRequest
+import com.example.myapplication.data.helper.ClubDbHelper
 import com.example.myapplication.data.helper.NoticeDbHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var clubAdapter: ClubBannerAdapter
     private lateinit var noticeAdapter: NoticeAdapter
     private var isLoggedIn = false
+    private var profileImageUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         fetchNotices()
 
         checkLoginStatus()
-
 
         binding.moreBtn.setOnClickListener {
             val intent = Intent(this, ClubListActivity::class.java)
@@ -66,6 +67,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.addClubBtn.setOnClickListener {
+            val intent = Intent(this, CreateClubActivity::class.java)
+            startActivity(intent)
+        }
+
+
         if (isLoggedIn) {
             fetchMemberInfo()
         }
@@ -77,6 +84,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
+        val userProfileItem = menu?.findItem(R.id.myPage)
+        userProfileItem?.let {
+            Glide.with(this)
+                .load(profileImageUrl)
+                .circleCrop()
+                .placeholder(R.drawable.my)
+                .error(R.drawable.my)
+                .into(object : com.bumptech.glide.request.target.CustomTarget<android.graphics.drawable.Drawable>() {
+                    override fun onResourceReady(
+                        resource: android.graphics.drawable.Drawable,
+                        transition: com.bumptech.glide.request.transition.Transition<in android.graphics.drawable.Drawable>?
+                    ) {
+                        it.icon = resource
+                    }
+
+                    override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
+                        it.icon = placeholder
+                    }
+                })
+        }
         return true
     }
 
@@ -118,25 +145,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchClubBanners() {
-        val db = AppDatabase.getInstance(this)
-        val coroutineScope = CoroutineScope(Dispatchers.Main)
+        val dbHelper = ClubDbHelper(this)
+        val db = dbHelper.readableDatabase
 
+        val cursor = db.query(
+            ClubDbHelper.TABLE_NAME,
+            arrayOf(
+                ClubDbHelper.COLUMN_CLUB_UUID,
+                ClubDbHelper.COLUMN_CLUB_NAME,
+                ClubDbHelper.COLUMN_CLUB_LOGO,
+                ClubDbHelper.COLUMN_IS_SQLITE
+            ),
+            null, null, null, null, null
+        )
+
+        val clubsFromDb = mutableListOf<ClubBannerDTO>()
+        while (cursor.moveToNext()) {
+            val clubUUID = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_UUID))
+            val clubName = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_NAME))
+            val clubLogo = cursor.getString(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_CLUB_LOGO))
+            val isSqlite = cursor.getInt(cursor.getColumnIndexOrThrow(ClubDbHelper.COLUMN_IS_SQLITE)) == 1 // boolean 타입으로 변경
+            clubsFromDb.add(ClubBannerDTO(clubUUID, clubName, clubLogo, isSqlite))
+        }
+        cursor.close()
+
+        if (clubsFromDb.size >= 5) {
+            clubAdapter.setClubs(clubsFromDb.take(5))
+        } else {
+            fetchExternalClubs(clubsFromDb)
+        }
+    }
+
+    private fun fetchExternalClubs(clubsFromDb: List<ClubBannerDTO>) {
+        val neededClubs = 5 - clubsFromDb.size
         val call = RetrofitClient.apiService.getClubBanners()
         call.enqueue(object : Callback<List<ClubBannerDTO>> {
             override fun onResponse(call: Call<List<ClubBannerDTO>>, response: Response<List<ClubBannerDTO>>) {
                 if (response.isSuccessful) {
                     response.body()?.let { clubsFromApi ->
-                        val limitedClubsFromApi = clubsFromApi.take(5)
-                        clubAdapter.setClubs(limitedClubsFromApi)
-
-                        if (limitedClubsFromApi.size < 5) {
-                            coroutineScope.launch {
-                                val clubsFromDb = db.clubDao().getAllClubs()
-                                val neededClubs = 5 - limitedClubsFromApi.size
-                                val additionalClubs = clubsFromDb.take(neededClubs).map { it.toClubBannerRequest() }
-                                clubAdapter.addClubs(additionalClubs)
-                            }
-                        }
+                        val limitedClubsFromApi = clubsFromApi.take(neededClubs)
+                        clubAdapter.setClubs(clubsFromDb + limitedClubsFromApi)
                     } ?: run {
                         Log.e("MainActivity", "클럽 응답이 없습니다.")
                     }
@@ -208,7 +256,6 @@ class MainActivity : AppCompatActivity() {
         noticeAdapter.setNotices(limitedNotices)
     }
 
-
     private fun fetchMemberInfo() {
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -220,6 +267,8 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         response.body()?.let { member ->
                             Log.d("MainActivity", "회원 정보: ${member.nickname}, 이메일: ${member.emailId}, 회원 상태: ${member.role}")
+                            profileImageUrl = member.profileImage
+                            invalidateOptionsMenu()
                             if (member.role == "admin") {
                                 binding.addClubBtn.visibility = View.VISIBLE
                                 binding.writeNoticeBtn.visibility = View.VISIBLE

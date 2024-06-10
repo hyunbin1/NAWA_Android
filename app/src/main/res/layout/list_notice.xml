@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar_noticelist"/>
 
 <!-- 필요시 사용할 것-->
     <androidx.recyclerview.widget.RecyclerView
