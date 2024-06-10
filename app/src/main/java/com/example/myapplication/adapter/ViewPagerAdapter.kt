@@ -3,8 +3,6 @@ package com.example.myapplication.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.myapplication.fragment.ClubDetailFragment
-import com.example.nawa.ClubReviewFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val clubUUID: String, private val isSqlite: Boolean) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
