@@ -38,7 +38,7 @@
         android:layout_marginBottom="20dp"
         android:textAlignment="center"
         android:gravity="center"
-        android:text="@string/complete"
+        android:text="@string/joinCompleteMessage"
         android:textSize="14dp"
         android:textColor="@color/black"/>
 
