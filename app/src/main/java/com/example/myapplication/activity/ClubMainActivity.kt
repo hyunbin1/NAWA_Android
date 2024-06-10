@@ -2,10 +2,10 @@ package com.example.myapplication.activity
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +30,7 @@ import retrofit2.Response
 import com.example.myapplication.R
 import com.example.nawa.ClubReviewFragment
 
+
 class ClubMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClubMainBinding
     private lateinit var clubUUID: String
@@ -38,6 +39,7 @@ class ClubMainActivity : AppCompatActivity() {
     private var userEmail: String? = null
     private var isMember: Boolean = false
     private var isAdmin: Boolean = false
+    private var googleFormLink: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +67,12 @@ class ClubMainActivity : AppCompatActivity() {
 
         Log.d("ClubMainActivity", "JWT Token: $jwtToken")
 
-        setupProfileImage()
-        setupJoinButton()
-        setupViewPagerAndTabs()
-
         // 클럽 세부 정보와 가입 여부를 확인
         fetchClubDetail()
         checkMembership()
+        setupProfileImage()
+        setupJoinButton()
+        setupViewPagerAndTabs()
     }
 
     private fun setupProfileImage() {
@@ -89,7 +90,7 @@ class ClubMainActivity : AppCompatActivity() {
                                 .into(profileImageView)
                         }
                     } else {
-                        showToast("회원 정보를 가져오는 데 실패했습니다.")
+                        showToast("회원 프로필 정보를 가져오는 데 실패했습니다.")
                     }
                 }
 
@@ -114,7 +115,11 @@ class ClubMainActivity : AppCompatActivity() {
                 showToast("이미 클럽에 가입되어 있습니다.")
             } else {
                 // 클럽에 가입되지 않은 경우
-                showCompletionDialog(binding.clubTitle.text.toString())
+                googleFormLink?.let { link ->
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                    startActivity(intent)
+                } ?: showToast("가입 신청 링크를 불러오는 데 실패했습니다.")
+                Log.d("ClubMainActivity", "Google Form Link: $googleFormLink")
             }
         }
     }
@@ -129,7 +134,6 @@ class ClubMainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "클럽 소개"
-                1 -> "후기"
                 else -> null
             }
         }.attach()
@@ -146,7 +150,7 @@ class ClubMainActivity : AppCompatActivity() {
         }
     }
 
-    //클럽 가입 신청 완료
+    // 클럽 가입 신청 완료
     private fun showCompletionDialog(clubTitle: String) {
         val dialogBinding = DialogCompleteClubJoinRegistrationBinding.inflate(LayoutInflater.from(this))
 
@@ -259,7 +263,14 @@ class ClubMainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Club>, response: Response<Club>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
+                        Log.d("ClubMainActivity", "Club Name: ${it.clubName}")
+                        Log.d("ClubMainActivity", "Club Introduction: ${it.clubIntroduction}")
+                        Log.d("ClubMainActivity", "Club Logo: ${it.clubLogo}")
+                        Log.d("ClubMainActivity", "Member Count: ${it.memberCount}")
+                        Log.d("ClubMainActivity", "Google Form Link: ${it.googleForm}")
                         displayClubDetail(it)
+                        googleFormLink = it.googleForm // Google Forms 링크 저장
+                        Log.d("ClubMainActivity", "Google Form Link: $googleFormLink")
                     }
                 } else {
                     showToast("클럽 세부 정보를 가져오는 데 실패했습니다.")
@@ -274,32 +285,42 @@ class ClubMainActivity : AppCompatActivity() {
 
     // 클럽 가입 여부 확인(신청 버튼)
     private fun checkMembership() {
-
         jwtToken?.let { token ->
             val callMember = RetrofitClient.apiService.getMemberInfo("Bearer $token")
             callMember.enqueue(object : Callback<Member> {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
-
-                    Log.d("유저 role", response.body()?.role.toString())
+                    Log.d("ClubMainActivity", "Response Code: ${response.code()}")
+                    Log.d("ClubMainActivity", "Response Message: ${response.message()}")
 
                     if (response.isSuccessful) {
-                        response.body()?.let { member ->
+                        val member = response.body()
+                        if (member != null) {
+                            Log.d("ClubMainActivity", "User Email: ${member.emailId}")
+                            Log.d("ClubMainActivity", "User Role: ${member.role}")
+
                             userEmail = member.emailId
                             isAdmin = member.role == "admin"
+
+                            Log.d("ClubMainActivity", "Is Admin: $isAdmin")
 
                             if (isAdmin) {
                                 binding.clubJoinBtn.visibility = View.GONE
                             } else {
                                 checkClubMembership()
                             }
+                        } else {
+                            Log.e("ClubMainActivity", "회원 정보가 null입니다.")
+                            showToast("회원 정보를 확인하는 데 실패했습니다.")
                         }
                     } else {
+                        Log.e("ClubMainActivity", "응답 실패: ${response.code()} ${response.message()}")
                         showToast("회원 정보를 확인하는 데 실패했습니다.")
                     }
                 }
 
                 override fun onFailure(call: Call<Member>, t: Throwable) {
-                    showToast("회원 정보를 확인하는 중 오류가 발생했습니다.")
+                    Log.e("ClubMainActivity", "네트워크12 오류: ${t.message}")
+                    showToast("회원 정보를 확인하는는 중 오류가 발생했습니다.")
                 }
             })
         } ?: run {
@@ -311,24 +332,36 @@ class ClubMainActivity : AppCompatActivity() {
     private fun checkClubMembership() {
         jwtToken?.let { token ->
             val callIsJoin = RetrofitClient.apiService.checkClubMembership("Bearer $token", clubUUID)
-            callIsJoin.enqueue(object : Callback<MembershipResponse> {
-                override fun onResponse(call: Call<MembershipResponse>, response: Response<MembershipResponse>) {
+            callIsJoin.enqueue(object : Callback<List<MembershipResponse>> {
+                override fun onResponse(call: Call<List<MembershipResponse>>, response: Response<List<MembershipResponse>>) {
+                    Log.d("ClubMainActivity", "Response Code: ${response.code()}")
+                    Log.d("ClubMainActivity", "Response Message: ${response.message()}")
+
                     if (response.isSuccessful) {
-                        response.body()?.let { membershipResponse ->
-                            isMember = membershipResponse.isMember(userEmail ?: "")
+                        val membershipResponseList = response.body()
+                        if (membershipResponseList != null && membershipResponseList.isNotEmpty()) {
+                            // 이메일을 비교하여 해당 사용자가 회원인지 확인
+                            isMember = membershipResponseList.any { it.isMember(userEmail ?: "") }
+                            Log.d("ClubMainActivity", "Is Member: $isMember")
+
                             if (isMember) {
                                 binding.clubJoinBtn.visibility = View.GONE
                             } else {
                                 binding.clubJoinBtn.visibility = View.VISIBLE
                             }
+                        } else {
+                            Log.e("ClubMainActivity", "회원 응답 정보가 null이거나 빈 배열입니다.")
+                            showToast("회원 정보를 확인하는 데 실패했습니다.")
                         }
                     } else {
-                        showToast("회원 정보를 확인하는 데 실패했습니다다.")
+                        Log.e("ClubMainActivity", "응답 실패: ${response.code()} ${response.message()}")
+                        showToast("회원 정보를 확인하는 데 실패했습니다.")
                     }
                 }
 
-                override fun onFailure(call: Call<MembershipResponse>, t: Throwable) {
-                    showToast("회원 정보를 확인하는 중 오류가 발생했습니다다.")
+                override fun onFailure(call: Call<List<MembershipResponse>>, t: Throwable) {
+                    Log.e("ClubMainActivity", "네트워크 오류: ${t.message}")
+                    showToast("회원 정보를 확인하는 중 오류가 발생했습니다.")
                 }
             })
         }

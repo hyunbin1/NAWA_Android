@@ -141,8 +141,8 @@
             android:layout_marginTop="5dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="17dp"
-            android:textSize="15sp"
-            android:hint="2차 비밀번호를 입력해주세요"
+            android:textSize="14sp"
+            android:hint="확인을 위해 비밀번호를 재입력해주세요"
             android:inputType="textPassword"/>
         <TextView
             android:id="@+id/passwordAgainErr"

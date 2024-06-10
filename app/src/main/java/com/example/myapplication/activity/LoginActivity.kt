@@ -37,16 +37,16 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "이메일 혹은 패스워드를 확인해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.kakaologinButton.setOnClickListener {
-            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
-                if (error != null) {
-                    Toast.makeText(this, "로그인 실패: ${error.message}", Toast.LENGTH_SHORT).show()
-                } else if (token != null) {
-                    // 로그인 성공 시 처리
-                    fetchKakaoUserInfo(token.accessToken)
-                }
-            }
-        }
+//        binding.kakaologinButton.setOnClickListener {
+//            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+//                if (error != null) {
+//                    Toast.makeText(this, "로그인 실패: ${error.message}", Toast.LENGTH_SHORT).show()
+//                } else if (token != null) {
+//                    // 로그인 성공 시 처리
+//                    fetchKakaoUserInfo(token.accessToken)
+//                }
+//            }
+//        }
         binding.registration.setOnClickListener {
             val intent = Intent(this, InitSignUpActivity::class.java)
             startActivity(intent)

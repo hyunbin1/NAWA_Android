@@ -47,5 +47,13 @@ interface ApiService {
     fun checkClubMembership(
         @Header("Authorization") token: String,
         @Path("clubUUID") clubUUID: String
-    ): Call<MembershipResponse>
+    ): Call<List<MembershipResponse>>
+
+    @POST("/review/{clubUUID}/create")
+    fun createReviewWithLoginToken(
+        @Header("Authorization") token: String,
+        @Path("clubUUID") clubUUID: String,
+        @Body review: String
+    ): Call<String>
+
 }

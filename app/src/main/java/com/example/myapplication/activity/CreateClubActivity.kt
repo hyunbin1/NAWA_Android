@@ -45,7 +45,8 @@ class CreateClubActivity : AppCompatActivity() {
                     clubCancelIntroduction = listOf(),
                     clubPrice = 0,
                     memberCount = 0,
-                    isSqlite = true
+                    isSqlite = true,
+                    googleForm = "https://forms.gle/9d6rS5fFnPL8aUmY9"
                 )
                 saveClubToDatabase(club)
             }
@@ -84,4 +85,5 @@ class CreateClubActivity : AppCompatActivity() {
             Log.d("CreateClubActivity", "클럽 생성 실패")
         }
     }
+
 }
