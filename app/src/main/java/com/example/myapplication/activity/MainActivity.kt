@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.mainToolBar.mainToolBar)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         binding.mainToolBar.logo.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
