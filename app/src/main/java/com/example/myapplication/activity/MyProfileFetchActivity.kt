@@ -44,6 +44,7 @@ class MyProfileFetchActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbarMyprofileFetch.myprofileBar)
+        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
     }
 
     private fun setupViewPager() {
