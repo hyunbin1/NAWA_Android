@@ -1,8 +1,10 @@
-package com.example.myapplication.adapter
+package com.example.myapplication.activity
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.myapplication.adapter.ClubDetailFragment
+
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val clubUUID: String, private val isSqlite: Boolean) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
