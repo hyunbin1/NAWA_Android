@@ -47,6 +47,9 @@ data class Club(
     @ColumnInfo(name = "memberCount")
     val memberCount: Int,
 
+    @ColumnInfo(name = "googleForm")
+    val googleForm: String? = null,
+
     @ColumnInfo(name = "createAt")
     val createAt: LocalDateTime = LocalDateTime.now(),
 

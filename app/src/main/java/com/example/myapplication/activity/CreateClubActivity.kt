@@ -45,7 +45,8 @@ class CreateClubActivity : AppCompatActivity() {
             clubNotice = "공지사항",
             clubLogo = "http://example.com/logo.png", // 유효한 URL을 제공하거나 기본 URL 설정
             clubPrice = 0,
-            memberCount = 0
+            memberCount = 0,
+            googleForm = "https://forms.gle/9d6rS5fFnPL8aUmY9"
         )
 
         val db = AppDatabase.getInstance(this)

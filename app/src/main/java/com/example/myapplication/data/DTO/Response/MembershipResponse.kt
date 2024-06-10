@@ -10,7 +10,7 @@ data class MembershipResponse(
 ) {
     // 추가적으로 유저가 클럽에 가입되어 있는지 확인하는 메서드
     fun isMember(email: String): Boolean {
-        return data.any { it.emailID == email }
+        return data?.any { it.emailID == email } ?: false
     }
 }
 
