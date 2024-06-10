@@ -401,13 +401,12 @@ class ClubMainActivity : AppCompatActivity() {
         FragmentStateAdapter(activity) {
 
         override fun getItemCount(): Int {
-            return 2
+            return 1
         }
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
-                1 -> ClubReviewFragment.newInstance(clubUUID)
                 else -> throw IllegalStateException("Unexpected position $position")
             }
         }
