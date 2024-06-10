@@ -62,12 +62,6 @@
             android:textColor="@color/warn"
             android:paddingBottom="20dp"/>
         <Button
-            android:id="@+id/kakaologinButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/kakao_login_medium_wide"/>
-        <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
