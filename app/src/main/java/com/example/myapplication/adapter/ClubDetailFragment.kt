@@ -1,4 +1,4 @@
-package com.example.myapplication.fragment
+package com.example.myapplication.adapter
 
 import android.os.Bundle
 import android.util.Log

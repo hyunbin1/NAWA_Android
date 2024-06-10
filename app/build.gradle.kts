@@ -63,4 +63,5 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation ("com.kakao.sdk:v2-user:2.20.1") // 카카오 로그인 API 모듈
+    implementation ("androidx.core:core-splashscreen:1.0.1") // splash
 }

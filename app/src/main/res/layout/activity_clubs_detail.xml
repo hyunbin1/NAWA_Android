@@ -15,13 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/backColor">
+            android:background="@color/background">
 
             <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/moreClubToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/backColor"
+                android:background="@color/background"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 app:title="@string/clubWithMe">
             </androidx.appcompat.widget.Toolbar>

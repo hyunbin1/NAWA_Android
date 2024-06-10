@@ -5,7 +5,8 @@
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainToolBar"
-    app:menu="@menu/menu_toolbar">
+    app:menu="@menu/menu_toolbar"
+    app:titleTextAppearance="@style/ActionBarTextColor">
 
     <ImageView
         android:id="@+id/logo"
