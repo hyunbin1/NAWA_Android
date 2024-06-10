@@ -10,9 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
 import com.example.myapplication.data.DTO.Response.MembershipResponse
 import com.example.myapplication.data.database.Club
@@ -22,14 +19,10 @@ import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityClubMainBinding
 import com.example.myapplication.databinding.DialogCompleteClubJoinRegistrationBinding
 import com.example.myapplication.databinding.DialogSignupRequestBinding
-import com.example.myapplication.fragment.ClubDetailFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.example.myapplication.R
-import com.example.nawa.ClubReviewFragment
-
 
 class ClubMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClubMainBinding
@@ -46,21 +39,9 @@ class ClubMainActivity : AppCompatActivity() {
         binding = ActivityClubMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // MainActivity에서 전달된 clubUUID와 JWT 토큰, isSqlite 여부를 받아옴
+        // MainActivity에서 전달된 clubUUID와 JWT 토큰을 받아옴
         clubUUID = intent.getStringExtra("CLUB_UUID") ?: ""
         isSqlite = intent.getBooleanExtra("IS_SQLITE", false)
-        jwtToken = intent.getStringExtra("JWT_TOKEN")
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        binding.clubJoinBtn.setOnClickListener {
-            if (jwtToken.isNullOrEmpty()) {
-                showLoginDialog()
-            } else {
-                showCompletionDialog(binding.clubTitle.text.toString())
-            }
-        }
 
         val sharedPreferences = getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         jwtToken = sharedPreferences.getString("ACCESS_TOKEN", null)
@@ -283,6 +264,7 @@ class ClubMainActivity : AppCompatActivity() {
         })
     }
 
+
     // 클럽 가입 여부 확인(신청 버튼)
     private fun checkMembership() {
         jwtToken?.let { token ->
@@ -374,41 +356,15 @@ class ClubMainActivity : AppCompatActivity() {
         // 클럽 이미지 설정
         Glide.with(this)
             .load(club.clubLogo)
-            .placeholder(R.drawable.ic_launcher_background) // 기본 이미지 설정
-            .error(R.drawable.ic_launcher_background) // 오류 발생 시 기본 이미지 설정
             .into(binding.clubImage)
 
         // 회원 수 설정
         binding.memberCount.text = club.memberCount.toString()
-
-        // ViewPager의 Fragment에 클럽 정보 전달
-        val fragments = supportFragmentManager.fragments
-        for (fragment in fragments) {
-            if (fragment is ClubDetailFragment) {
-                fragment.displayClubDetail(club)
-                Log.d("ClubMainActivity", "클럽 바인딩 불러옴")
-            }
-        }
 
         // 추가적인 클럽 세부 정보 설정
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    inner class ViewPagerAdapter(activity: AppCompatActivity, private val clubUUID: String, private val isSqlite: Boolean) :
-        FragmentStateAdapter(activity) {
-
-        override fun getItemCount(): Int {
-            return 1
-        }
-
-        override fun createFragment(position: Int): Fragment {
-            return when (position) {
-                0 -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
-                else -> throw IllegalStateException("Unexpected position $position")
-            }
-        }
     }
 }
