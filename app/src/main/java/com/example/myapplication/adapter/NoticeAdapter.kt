@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.activity.NoticeDetailActivity
 import com.example.myapplication.data.database.Notification
 import com.example.myapplication.databinding.ItemNoticeBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
 
@@ -32,7 +35,13 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
         fun bind(notice: Notification) {
             binding.noticeCategory.text = notice.category.name
             binding.title.text = if (notice.title.length > 20) notice.title.substring(0, 20) + "..." else notice.title
-            binding.createDate.text = notice.createAt.substring(0, 10)
+
+            // createAt 날짜 포맷팅
+            val date = Date(notice.createAt.toLong())
+            val outputFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+            val formattedDate = outputFormat.format(date)
+            binding.createDate.text = formattedDate
+
             binding.viewCount.text = "${notice.viewCount}"
 
             binding.root.setOnClickListener {
