@@ -10,6 +10,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
 import com.example.myapplication.data.DTO.Response.MembershipResponse
 import com.example.myapplication.data.database.Club
@@ -19,11 +22,14 @@ import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityClubMainBinding
 import com.example.myapplication.databinding.DialogCompleteClubJoinRegistrationBinding
 import com.example.myapplication.databinding.DialogSignupRequestBinding
+import com.example.myapplication.fragment.ClubDetailFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.example.myapplication.R
+import com.example.nawa.ClubReviewFragment
+
 
 class ClubMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClubMainBinding
@@ -42,12 +48,8 @@ class ClubMainActivity : AppCompatActivity() {
 
         // MainActivity에서 전달된 clubUUID와 JWT 토큰, isSqlite 여부를 받아옴
         clubUUID = intent.getStringExtra("CLUB_UUID") ?: ""
-
         isSqlite = intent.getBooleanExtra("IS_SQLITE", false)
         jwtToken = intent.getStringExtra("JWT_TOKEN")
-
-//        val toolbar: Toolbar = binding.clubMainToolbar
-//        setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -126,7 +128,7 @@ class ClubMainActivity : AppCompatActivity() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
 
-        val adapter = ViewPagerAdapter(this, clubUUID)
+        val adapter = ViewPagerAdapter(this, clubUUID, isSqlite)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -379,10 +381,35 @@ class ClubMainActivity : AppCompatActivity() {
         // 회원 수 설정
         binding.memberCount.text = club.memberCount.toString()
 
+        // ViewPager의 Fragment에 클럽 정보 전달
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments) {
+            if (fragment is ClubDetailFragment) {
+                fragment.displayClubDetail(club)
+                Log.d("ClubMainActivity", "클럽 바인딩 불러옴")
+            }
+        }
+
         // 추가적인 클럽 세부 정보 설정
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    inner class ViewPagerAdapter(activity: AppCompatActivity, private val clubUUID: String, private val isSqlite: Boolean) :
+        FragmentStateAdapter(activity) {
+
+        override fun getItemCount(): Int {
+            return 2
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
+                1 -> ClubReviewFragment.newInstance(clubUUID)
+                else -> throw IllegalStateException("Unexpected position $position")
+            }
+        }
     }
 }

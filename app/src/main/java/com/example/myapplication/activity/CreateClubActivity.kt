@@ -39,7 +39,7 @@ class CreateClubActivity : AppCompatActivity() {
                     clubIntro = clubIntroduce,
                     clubQualification = listOf(clubJoinCondition),
                     clubLogo = R.drawable.ic_launcher_background.toString(),
-                    clubIntroduction = "",
+                    clubIntroduction = clubIntroduce,
                     clubRegisProcess = "",
                     clubNotice = "",
                     clubCancelIntroduction = listOf(),

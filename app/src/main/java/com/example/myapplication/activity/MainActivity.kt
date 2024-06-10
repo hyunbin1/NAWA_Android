@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noticeAdapter: NoticeAdapter
     private var isLoggedIn = false
     private var profileImageUrl: String? = null
+    private val NOTICE_DETAIL_REQUEST_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         if (isLoggedIn) {
             fetchMemberInfo()
         }
@@ -80,6 +80,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.mainToolBar.mainToolBar)
+        binding.mainToolBar.logo.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -156,7 +160,8 @@ class MainActivity : AppCompatActivity() {
                 ClubDbHelper.COLUMN_CLUB_LOGO,
                 ClubDbHelper.COLUMN_IS_SQLITE
             ),
-            null, null, null, null, null
+            null, null, null, null,
+            "${ClubDbHelper.COLUMN_CREATE_AT} DESC"
         )
 
         val clubsFromDb = mutableListOf<ClubBannerDTO>()
@@ -205,11 +210,11 @@ class MainActivity : AppCompatActivity() {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             NoticeDbHelper.TABLE_NAME,
-            null, // 모든 열을 선택
-            null, // 조건 없음
-            null, // 조건 값 없음
-            null, // 그룹핑하지 않음
-            null, // 그룹핑 조건 값 없음
+            null,
+            null,
+            null,
+            null,
+            null,
             "${NoticeDbHelper.COLUMN_CREATE_AT} DESC" // 최신 순으로 정렬
         )
 
@@ -227,27 +232,24 @@ class MainActivity : AppCompatActivity() {
                 val createAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_CREATE_AT))
                 val updatedAt = getString(getColumnIndexOrThrow(NoticeDbHelper.COLUMN_UPDATED_AT))
 
-                try {
-                    val notificationCategory = NotificationCategory.valueOf(category)
-                    val notice = Notification(
-                        id,
-                        noticeUUID,
-                        notificationCategory,
-                        title,
-                        content,
-                        pinned,
-                        pinnedAt,
-                        viewCount,
-                        createAt,
-                        updatedAt
-                    )
-                    notices.add(notice)
-                } catch (e: IllegalArgumentException) {
-                    Log.e("MainActivity", "Invalid category value: $category")
-                }
+                val notice = Notification(
+                    id,
+                    noticeUUID,
+                    NotificationCategory.valueOf(category),
+                    title,
+                    content,
+                    pinned,
+                    pinnedAt,
+                    viewCount,
+                    createAt,
+                    updatedAt
+                )
+                notices.add(notice)
             }
         }
         cursor.close()
+
+        noticeAdapter.setNotices(notices)
 
         val limitedNotices = if (notices.size > 5) notices.take(5) else notices
         limitedNotices.forEach { notice ->
@@ -295,5 +297,18 @@ class MainActivity : AppCompatActivity() {
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
         isLoggedIn = !accessToken.isNullOrEmpty()
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == NOTICE_DETAIL_REQUEST_CODE && resultCode == RESULT_OK) {
+            fetchNotices()
+        }
+    }
+
+    private fun openNoticeDetail(noticeId: Int) {
+        val intent = Intent(this, NoticeDetailActivity::class.java)
+        intent.putExtra("NOTICE_ID", noticeId)
+        startActivityForResult(intent, NOTICE_DETAIL_REQUEST_CODE)
     }
 }
