@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.myapplication.adapter.ViewPagerAdapter
 import com.example.myapplication.data.DTO.Response.MembershipResponse
 import com.example.myapplication.data.database.Club
 import com.example.myapplication.data.helper.ClubDbHelper

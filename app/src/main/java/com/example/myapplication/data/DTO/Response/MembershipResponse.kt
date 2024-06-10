@@ -1,7 +1,5 @@
 package com.example.myapplication.data.DTO.Response
 
-import com.example.myapplication.data.model.Member
-
 data class MembershipResponse(
     val data: List<JoinedMemberDTO>,
     val total: Int,

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.model.Member
 import com.example.myapplication.data.remote.RetrofitClient
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -22,12 +21,8 @@ import com.example.myapplication.adapter.NoticeAdapter
 import com.example.myapplication.data.DTO.Request.ClubBannerDTO
 import com.example.myapplication.data.database.Notification
 import com.example.myapplication.data.database.enum.NotificationCategory
-import com.example.myapplication.data.database.toClubBannerRequest
 import com.example.myapplication.data.helper.ClubDbHelper
 import com.example.myapplication.data.helper.NoticeDbHelper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
