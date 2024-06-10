@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "d0dbe9ce2a92cc87fb97e23a3cdbe34c",
+    "identityHash": "71459e9b096979e2670a61a77594b80f",
     "entities": [
       {
         "tableName": "club",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`club_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `clubUUID` TEXT NOT NULL, `clubName` TEXT NOT NULL, `clubIntro` TEXT NOT NULL, `clubLogo` TEXT, `clubIntroduction` TEXT, `clubQualification` TEXT, `clubRegisProcess` TEXT, `clubNotice` TEXT, `clubCancelIntroduction` TEXT, `clubPrice` INTEGER NOT NULL, `memberCount` INTEGER NOT NULL, `createAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, `isSqlite` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`club_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `clubUUID` TEXT NOT NULL, `clubName` TEXT NOT NULL, `clubIntro` TEXT NOT NULL, `clubLogo` TEXT, `clubIntroduction` TEXT, `clubQualification` TEXT, `clubRegisProcess` TEXT, `clubNotice` TEXT, `clubCancelIntroduction` TEXT, `clubPrice` INTEGER NOT NULL, `memberCount` INTEGER NOT NULL, `googleForm` TEXT, `createAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, `isSqlite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -81,6 +81,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "googleForm",
+            "columnName": "googleForm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "createAt",
             "columnName": "createAt",
             "affinity": "TEXT",
@@ -131,7 +137,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0dbe9ce2a92cc87fb97e23a3cdbe34c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '71459e9b096979e2670a61a77594b80f')"
     ]
   }
 }

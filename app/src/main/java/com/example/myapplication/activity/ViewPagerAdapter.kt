@@ -13,7 +13,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity, private val clubUUID:
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
-            else -> ClubDetailFragment.newInstance(clubUUID)
+            else -> ClubDetailFragment.newInstance(clubUUID, isSqlite)
         }
     }
 }
