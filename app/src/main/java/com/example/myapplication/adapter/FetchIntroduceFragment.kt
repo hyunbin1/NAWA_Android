@@ -93,7 +93,7 @@ class FetchIntroduceFragment : Fragment() {
                     } else {
                         Log.e("FetchIntroduceFragment", "Update failed: ${response.code()} - ${response.message()}")
                         Log.e("FetchIntroduceFragment", "Response body: ${response.errorBody()?.string()}")
-                        Toast.makeText(requireContext(), "업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "20자 이상 입력해주세요", Toast.LENGTH_SHORT).show()
                     }
                 }
 
