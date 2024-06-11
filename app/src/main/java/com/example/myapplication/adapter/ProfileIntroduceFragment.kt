@@ -45,7 +45,7 @@ class ProfileIntroduceFragment : Fragment() {
                         Log.d("ProfileIntroduceFragment", "유저 접근 성공")
                         Toast.makeText(requireContext(), "유저 접근 성공", Toast.LENGTH_SHORT)
                         response.body()?.let { member ->
-                            binding.introduceText.text = member.answer1
+                            binding.introduceText.text = member.introduce
                         }
                     } else {
                         Toast.makeText(requireContext(), "회원 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
