@@ -38,7 +38,7 @@ class FetchIntroduceFragment : Fragment() {
 
         binding.fetchButton2.setOnClickListener {
             Log.d("FetchIntroduceFragment", "버튼 클릭")
-            updateAnswer1()
+            updateMemberIntro()
         }
 
         fetchMemberInfo()
@@ -53,9 +53,10 @@ class FetchIntroduceFragment : Fragment() {
             call.enqueue(object : Callback<Member> {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if (response.isSuccessful) {
+                        Log.d("FetchIntroduceFragment", "회원 조회 성공")
                         response.body()?.let { member ->
-                            currentAnswer1 = member.introduce
-                            binding.introduce.setText(member.introduce)
+                            currentAnswer1 = member.answer1.toString()
+                            binding.introduce.setText(member.answer1)
                         }
                     } else {
                         Toast.makeText(requireContext(), "회원 정보를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
@@ -69,42 +70,45 @@ class FetchIntroduceFragment : Fragment() {
         }
     }
 
-    fun updateAnswer1() {
-        Log.d("FetchIntroduceFragment", "updateAnswer1 실행")
-        val newAnswer1 = if (binding.introduce.text.isNullOrEmpty()) currentAnswer1 else binding.introduce.text.toString()
+    private fun updateMemberIntro() {
+        val answer1 = if (binding.introduce.text.isNullOrEmpty()) currentAnswer1 else binding.introduce.text.toString()
+
 
         val sharedPreferences = requireActivity().getSharedPreferences("MyAppPreferences", Context.MODE_PRIVATE)
         val accessToken = sharedPreferences.getString("ACCESS_TOKEN", null)
 
         if (accessToken != null) {
-            val request = MemberUpdateRequest(answer1 = newAnswer1)
+            val request = MemberUpdateRequest(
+                answer1 = answer1,
+            )
             val call = RetrofitClient.memberAPIService.updateMember("Bearer $accessToken", request)
 
             call.enqueue(object : Callback<MemberResponse> {
                 override fun onResponse(call: Call<MemberResponse>, response: Response<MemberResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            Log.d("FetchIntroduceFragment", "updateAnswer1 성공")
                             Toast.makeText(requireContext(), "정보가 업데이트 되었습니다.", Toast.LENGTH_SHORT).show()
-                            // MyProfileActivity로 이동
-                            val intent = Intent(activity, MyProfileActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            navigateToMyProfile()
                         }
                     } else {
-                        Log.e("FetchIntroduceFragment", "updateAnswer1 실패: ${response.code()} - ${response.message()}")
+                        Log.e("FetchIntroduceFragment", "응답을 제대로 받지 못함")
                         Toast.makeText(requireContext(), "업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<MemberResponse>, t: Throwable) {
-                    Log.e("FetchIntroduceFragment", "updateAnswer1 실패: ${t.message}")
                     Toast.makeText(requireContext(), "업데이트 중 오류가 발생했습니다: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
             Toast.makeText(requireContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToMyProfile() {
+        val intent = Intent(requireContext(), MyProfileActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {

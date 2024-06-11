@@ -3,7 +3,6 @@ package com.example.myapplication.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.myapplication.activity.FetchIntroduce
 
 class MyProfileFetchPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
@@ -13,7 +12,7 @@ class MyProfileFetchPagerAdapter(activity: AppCompatActivity) : FragmentStateAda
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> FetchBasicInfoFragment()
-            1 -> FetchIntroduce()
+            1 -> FetchIntroduceFragment()
             else -> throw IllegalStateException("Unexpected position $position")
         }
     }
