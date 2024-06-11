@@ -61,7 +61,6 @@ class FetchBasicInfoFragment : Fragment() {
             updateMemberInfo()
         }
 
-        // Fetch current member info and set it to fields
         fetchMemberInfo()
     }
 

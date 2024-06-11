@@ -2,6 +2,7 @@ package com.example.myapplication.adapter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,8 @@ class ProfileIntroduceFragment : Fragment() {
             call.enqueue(object : Callback<Member> {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if (response.isSuccessful) {
+                        Log.d("ProfileIntroduceFragment", "유저 접근 성공")
+                        Toast.makeText(requireContext(), "유저 접근 성공", Toast.LENGTH_SHORT)
                         response.body()?.let { member ->
                             binding.introduceText.text = member.introduce
                         }
