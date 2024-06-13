@@ -1,4 +1,4 @@
-﻿# NAWA_Android
+# NAWA_Android
 
 ## Commit Convention
 
