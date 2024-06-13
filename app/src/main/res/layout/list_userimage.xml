@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+    <ImageView
+        android:id="@+id/imageSample"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:src="@drawable/ic_launcher_background"/>
+    <Button
+        android:id="@+id/imageCheck"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:visibility="invisible"
+        android:background="@drawable/button_userimage_check"
+        android:gravity="center"
+        android:text="✓"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
+</FrameLayout>

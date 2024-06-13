@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- 인터넷 권한 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:name=".GlobalApplication"
+        android:allowBackup="true"
+        android:usesCleartextTraffic="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/nawa_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/nawa_icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NAWA"
+        tools:targetApi="31">
+        <!-- 카카오 SDK 초기화 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTask"
+            android:exported="true"
+            tools:replace="android:theme"/>
+        <activity
+            android:name=".activity.signUp.NicknameSignUpActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.signUp.InitSignUpActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.ClubListActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.ClubMainActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.LoginActivity"
+            android:exported="true" />
+        <activity android:name=".activity.MyPageActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.MyProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.MyProfileFetchActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.NoticeListActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.NoticeDetailActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.NoticeCreateActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.CreateClubActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.MainActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.EntranceActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
