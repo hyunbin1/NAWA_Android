@@ -1,3 +1,4 @@
+
 *.iml
 .gradle
 /.idea
@@ -16,3 +17,6 @@
 .cxx
 local.properties
 app/src/main/res/values/apikey.xml
+=======
+/.idea
+
