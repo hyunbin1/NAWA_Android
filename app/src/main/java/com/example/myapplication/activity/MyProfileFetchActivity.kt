@@ -103,6 +103,7 @@ class MyProfileFetchActivity : AppCompatActivity() {
             binding.username.visibility = View.VISIBLE
             binding.editUsername.visibility = View.INVISIBLE
             binding.username.text = binding.editUsername.text
+            updateNickname()
         }
     }
 
