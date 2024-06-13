@@ -1,4 +1,7 @@
-# NAWA_Android
+﻿# NAWA_Android
+
+![main](https://github.com/hyunbin1/NAWA_Android/blob/main/imgs/main.png?raw=true)
+![main2](https://github.com/hyunbin1/NAWA_Android/blob/main/imgs/main2.png?raw=true)
 
 ## Commit Convention
 
